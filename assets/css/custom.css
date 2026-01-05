@@ -1,0 +1,95 @@
+
+/* =========================================
+   修复顶部导航栏与轮播图之间的空白
+   ========================================= */
+
+/* 移除首页主要容器的顶部内边距 */
+body.page-type-home .page-wrapper,
+body.page-type-home main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 确保 Slider Section 没有默认的外边距 */
+#section-slider-tw {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 如果您的导航栏是白色的，且希望轮播图无缝衔接在导航栏下方，
+   上面的代码通常就够了。
+   如果依然有细微白线，可能是 line-height 或 vertical-align 问题，
+   通常由 block.html 中的 flex 布局解决。
+*/
+
+
+/* =========================================
+   Navbar 最终修正
+   ========================================= */
+
+/* 1. 强制箭头不换行 */
+.navbar-nav .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+}
+
+/* 2. 颜色一致性强制覆盖 */
+/* 使用 var(--color-primary-700) 确保背景色与 Home 菜单的文字色完全一致 */
+.navbar-nav .group ul li a:hover {
+    background-color: var(--color-primary-700) !important;
+    color: #ffffff !important;
+}
+
+/* 3. 深色模式下的微调 */
+/* 深色模式下，背景仍使用 700 号色，保证白色文字的高对比度 */
+.dark .navbar-nav .group ul li a:hover {
+    background-color: var(--color-primary-700) !important;
+    color: #ffffff !important;
+}
+
+/* 4. 确保下拉菜单背景有毛玻璃效果 */
+.navbar-nav .group ul div {
+    background-color: rgba(255, 255, 255, 0.70) !important; 
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+}
+.dark .navbar-nav .group ul div {
+    background-color: rgba(15, 23, 42, 0.8) !important; 
+}
+
+/* =========================================
+   Logo 放大优化
+   ========================================= */
+
+/* 1. 针对 SVG Logo */
+.navbar-brand svg {
+  height: 3.5rem !important;      /* 原来是 1em，改为 3.5rem (约56px)，可根据需要调整为 4rem */
+  width: auto !important;
+  max-height: none !important;    /* 移除最大高度限制 */
+  vertical-align: middle;
+}
+
+/* 2. 针对图片 Logo (PNG/JPG) */
+.navbar-brand img {
+  height: 3.5rem !important;      /* 同样设置为 3.5rem */
+  width: auto !important;
+  max-height: none !important;
+}
+
+/* 3. 调整导航栏文字的对齐 */
+/* Logo 变大后，导航栏会被撑高，我们需要确保右侧的菜单文字依然垂直居中 */
+.navbar-nav .nav-link {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;        /* 充满高度 */
+}
+
+/* 4. 移动端 Logo 尺寸适配 */
+/* 在手机上 3.5rem 可能太大，稍微缩小一点 */
+@media (max-width: 768px) {
+  .navbar-brand svg,
+  .navbar-brand img {
+    height: 2.5rem !important;    /* 手机端约 40px */
+  }
+}

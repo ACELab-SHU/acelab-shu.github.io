@@ -1,0 +1,298 @@
+{{/* ================= 初始化与参数读取 ================= */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{/* 读取配置参数 */}}
+{{ $showToolbar := default true $block.content.filters.show_toolbar }}
+{{ $filterAuthor := default "" $block.content.filters.author }}
+{{ $sortOrder := default "year_type" $block.design.sort_order }}
+
+{{/* ================= 数据获取与预处理 ================= */}}
+{{ $query := site.RegularPages }}
+{{ $query = where $query "Type" "publication" }}
+
+{{/* 1. 作者筛选 */}}
+{{ if $filterAuthor }}
+  {{ $query = where $query "Params.authors" "intersect" (slice $filterAuthor) }}
+{{ end }}
+
+{{/* 按日期降序排列 */}}
+{{ $query = sort $query "Date" "desc" }}
+
+<section id="pub-collection" class="w-full max-w-[1200px] mx-auto px-4 py-8" data-sort-order="{{ $sortOrder }}">
+  
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold uppercase tracking-widest text-black dark:text-white">
+      {{ $block.content.title | default "PUBLICATIONS" }}
+    </h1>
+    <div class="h-1 w-16 bg-primary-700 mx-auto mt-2"></div>
+  </div>
+
+  {{ if $showToolbar }}
+  <div id="filter-toolbar" class="bg-[#00509e] dark:bg-slate-800 p-4 rounded-sm shadow-md mb-8 text-sm transition-colors duration-200">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+      
+      <div class="md:col-span-4 flex flex-col">
+        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">Search (Title/Author/Venue)</label>
+        <input type="text" id="pub-search-input" placeholder="Type keywords..." 
+               class="w-full px-3 py-2 rounded border-none focus:ring-2 focus:ring-blue-300 
+                      bg-white text-black placeholder-gray-500
+                      dark:bg-slate-700 dark:text-white dark:placeholder-gray-400 dark:focus:ring-primary-500">
+      </div>
+
+      <div class="md:col-span-2 flex flex-col">
+        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">Year</label>
+        <select id="pub-filter-year" class="w-full px-3 py-2 rounded border-none cursor-pointer
+                      bg-white text-black
+                      dark:bg-slate-700 dark:text-white">
+          <option value="all">All year</option>
+          {{ range ($query.GroupByDate "2006") }}
+            <option value="{{ .Key }}">{{ .Key }}</option>
+          {{ end }}
+        </select>
+      </div>
+
+      <div class="md:col-span-2 flex flex-col">
+        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">Type</label>
+        <select id="pub-filter-type" class="w-full px-3 py-2 rounded border-none cursor-pointer
+                      bg-white text-black
+                      dark:bg-slate-700 dark:text-white">
+          <option value="all">All type</option>
+          <option value="1">Conference Papers</option> 
+          <option value="2">Journal Articles</option>   
+          <option value="3">Preprint / Other</option>
+        </select>
+      </div>
+      
+      <div class="md:col-span-2">
+        <button onclick="filterPublications()" class="w-full font-bold py-2 rounded transition shadow
+                       bg-white text-[#00509e] hover:bg-gray-100
+                       dark:bg-primary-600 dark:text-white dark:hover:bg-primary-500">
+          Filter
+        </button>
+      </div>
+
+      <div class="md:col-span-2">
+        <button onclick="resetFilters()" class="w-full bg-transparent border border-white text-white font-bold py-2 rounded 
+                       hover:bg-white/10 dark:hover:bg-white/5 transition">
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+
+  <div id="pub-list-container">
+
+    {{/* ====== 模式 A: 先年份，再类型 (Year -> Type) ====== */}}
+    {{ if eq $sortOrder "year_type" }}
+      
+      {{ range $query.GroupByDate "2006" }}
+        {{ $thisYear := .Key }}
+        
+        <div class="js-group-main mb-8" data-group-type="year" data-value="{{ $thisYear }}">
+          
+          <h2 class="text-2xl font-normal text-black dark:text-white border-b border-gray-300 dark:border-gray-700 mb-4 pb-1">
+            {{ $thisYear }}
+          </h2>
+
+          {{ $confs := where .Pages "Params.publication_types" "intersect" (slice "1" "paper-conference") }}
+          {{ if len $confs }}
+          <div class="js-group-sub mb-6" data-group-type="type" data-value="1">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Conference Papers</h3>
+            {{/* 关键修改：传递 target_author 参数 */}}
+            {{ range $confs }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+
+          {{ $journals := where .Pages "Params.publication_types" "intersect" (slice "2" "article-journal") }}
+          {{ if len $journals }}
+          <div class="js-group-sub mb-6" data-group-type="type" data-value="2">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Journal Articles</h3>
+            {{ range $journals }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+
+          {{ $preprints := where .Pages "Params.publication_types" "intersect" (slice "3" "article-preprint") }}
+          {{ if len $preprints }}
+          <div class="js-group-sub mb-6" data-group-type="type" data-value="3">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Preprints</h3>
+            {{ range $preprints }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+
+          {{ $others := where .Pages "Params.publication_types" "intersect" (slice "0" "4" "5" "6" "report" "thesis" "book" "chapter" "book-section" "manuscript" "speech" "patent") }}
+          {{ if len $others }}
+          <div class="js-group-sub mb-6" data-group-type="type" data-value="3">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Other Publications</h3>
+            {{ range $others }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+
+        </div>
+      {{ end }}
+
+    {{/* ====== 模式 B: 先类型，再年份 (Type -> Year) ====== */}}
+    {{ else }}
+      
+      {{/* --- Block 1: Conference Papers --- */}}
+      {{ $allConfs := where $query "Params.publication_types" "intersect" (slice "1" "paper-conference") }}
+      {{ if len $allConfs }}
+        <div class="js-group-main mb-10" data-group-type="type" data-value="1">
+          <div class="flex items-center mb-6">
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Conference Papers</h2>
+          </div>
+          {{ range $allConfs.GroupByDate "2006" }}
+          <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
+             <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">{{ .Key }}</h3>
+             {{ range .Pages }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{/* --- Block 2: Journal Articles --- */}}
+      {{ $allJournals := where $query "Params.publication_types" "intersect" (slice "2" "article-journal") }}
+      {{ if len $allJournals }}
+        <div class="js-group-main mb-10" data-group-type="type" data-value="2">
+          <div class="flex items-center mb-6">
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Journal Articles</h2>
+          </div>
+          {{ range $allJournals.GroupByDate "2006" }}
+          <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
+             <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">{{ .Key }}</h3>
+             {{ range .Pages }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{/* --- Block 3: Preprints --- */}}
+      {{ $allPreprints := where $query "Params.publication_types" "intersect" (slice "3" "article-preprint") }}
+      {{ if len $allPreprints }}
+        <div class="js-group-main mb-10" data-group-type="type" data-value="3">
+          <div class="flex items-center mb-6">
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Preprints</h2>
+          </div>
+          {{ range $allPreprints.GroupByDate "2006" }}
+          <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
+             <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">{{ .Key }}</h3>
+             {{ range .Pages }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{/* --- Block 4: Others --- */}}
+      {{ $allOthers := where $query "Params.publication_types" "intersect" (slice "0" "4" "5" "6" "report" "thesis" "book" "chapter" "book-section" "manuscript" "speech" "patent") }}
+      {{ if len $allOthers }}
+        <div class="js-group-main mb-10" data-group-type="type" data-value="3">
+           <div class="flex items-center mb-6">
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Other Publications</h2>
+          </div>
+          {{ range $allOthers.GroupByDate "2006" }}
+          <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
+             <h3 class="text-lg font-semibold text-gray-600 dark:text-gray-400 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">{{ .Key }}</h3>
+             {{ range .Pages }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+    {{ end }}
+  </div>
+
+  <div id="no-results" class="hidden text-center text-gray-500 mt-10 text-xl">
+    No publications found matching your criteria.
+  </div>
+
+</section>
+
+<script>
+function filterPublications() {
+  const searchEl = document.getElementById('pub-search-input');
+  const yearEl = document.getElementById('pub-filter-year');
+  const typeEl = document.getElementById('pub-filter-type');
+
+  const searchText = searchEl ? searchEl.value.toLowerCase() : "";
+  const filterYear = yearEl ? yearEl.value : "all";
+  const filterType = typeEl ? typeEl.value : "all";
+
+  const mainGroups = document.querySelectorAll('.js-group-main');
+  let hasAnyVisible = false;
+
+  mainGroups.forEach(mainGroup => {
+    const subGroups = mainGroup.querySelectorAll('.js-group-sub');
+    let hasVisibleSub = false;
+
+    subGroups.forEach(subGroup => {
+      const items = subGroup.querySelectorAll('.view-pub-item');
+      let hasVisibleItem = false;
+
+      items.forEach(item => {
+        const textMatch = item.innerText.toLowerCase().includes(searchText);
+        if (textMatch) {
+          item.style.display = 'block';
+          hasVisibleItem = true;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      const subType = subGroup.getAttribute('data-group-type'); 
+      const subValue = subGroup.getAttribute('data-value');
+      
+      let subMatch = true;
+      if (subType === 'year' && filterYear !== 'all' && subValue !== filterYear) subMatch = false;
+      if (subType === 'type' && filterType !== 'all' && subValue !== filterType) subMatch = false;
+
+      if (subMatch && hasVisibleItem) {
+        subGroup.style.display = 'block';
+        hasVisibleSub = true;
+      } else {
+        subGroup.style.display = 'none';
+      }
+    });
+
+    const mainType = mainGroup.getAttribute('data-group-type');
+    const mainValue = mainGroup.getAttribute('data-value');
+
+    let mainMatch = true;
+    if (mainType === 'year' && filterYear !== 'all' && mainValue !== filterYear) mainMatch = false;
+    if (mainType === 'type' && filterType !== 'all' && mainValue !== filterType) mainMatch = false;
+
+    if (mainMatch && hasVisibleSub) {
+      mainGroup.style.display = 'block';
+      hasAnyVisible = true;
+    } else {
+      mainGroup.style.display = 'none';
+    }
+  });
+
+  const noResultsMsg = document.getElementById('no-results');
+  if (noResultsMsg) {
+      noResultsMsg.style.display = hasAnyVisible ? 'none' : 'block';
+  }
+}
+
+function resetFilters() {
+  const searchEl = document.getElementById('pub-search-input');
+  const yearEl = document.getElementById('pub-filter-year');
+  const typeEl = document.getElementById('pub-filter-type');
+
+  if(searchEl) searchEl.value = '';
+  if(yearEl) yearEl.value = 'all';
+  if(typeEl) typeEl.value = 'all';
+  
+  filterPublications();
+}
+
+const searchInput = document.getElementById('pub-search-input');
+if(searchInput) {
+    searchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          filterPublications();
+        }
+    });
+}
+</script>

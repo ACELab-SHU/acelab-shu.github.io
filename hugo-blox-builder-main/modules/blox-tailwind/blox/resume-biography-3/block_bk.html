@@ -1,0 +1,250 @@
+{{/* Hugo Blox: Biography 3 (With Wide Blurred Tech Grid) */}}
+{{/* Documentation: https://hugoblox.com/blocks/ */}}
+
+{{/* Initialise */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $author := $block.content.username | default "admin" }}
+{{ $person_page_path := (printf "/authors/%s" $author) }}
+{{ $person_page := site.GetPage $person_page_path }}
+{{ if not $person_page }}
+  {{ errorf "Could not find an author page at `%s`..." $person_page_path }}
+{{end}}
+{{ $person := $person_page.Params }}
+{{ $avatar := ($person_page.Resources.ByType "image").GetMatch "*avatar*" }}
+
+{{/* --- 样式判断 --- */}}
+{{/* 读取 design.bg_style 参数 */}}
+{{ $bg_style := $block.design.bg_style | default "default" }}
+{{ $is_grid := eq $bg_style "tech-grid" }}
+
+{{/* Avatar settings */}}
+{{ $avatar_size := $block.design.avatar.size | default "large" }}
+{{ $avatar_shape := $block.design.avatar.shape | default "circle" }}
+{{ $size_map := dict "small" (slice "150" "300") "medium" (slice "250" "400") "large" (slice "320" "640") "xl" (slice "400" "800") "xxl" (slice "500" "1000") }}
+{{ $size_config := index $size_map $avatar_size | default (index $size_map "large") }}
+{{ $display_size := index $size_config 0 }}
+{{ $generation_size := index $size_config 1 }}
+{{ $shape_classes := dict "circle" "rounded-full" "square" "rounded-none" "rounded" "rounded-lg" }}
+{{ $shape_class := index $shape_classes $avatar_shape | default "rounded-full" }}
+
+<div class="resume-biography py-8 px-4 relative overflow-hidden">
+  
+  {{/* --- 核心修改：蓝色科技网格背景 (更大模糊范围) --- */}}
+  {{ if $is_grid }}
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_80%)]">
+      
+      {{/* 小网格 (24px) - 保持蓝色系 */}}
+      <div class="absolute inset-0 h-full w-full 
+          bg-[linear-gradient(to_right,#3b82f626_1px,transparent_1px),linear-gradient(to_bottom,#3b82f626_1px,transparent_1px)] 
+          dark:bg-[linear-gradient(to_right,#22d3ee1a_1px,transparent_1px),linear-gradient(to_bottom,#22d3ee1a_1px,transparent_1px)] 
+          bg-[size:24px_24px]">
+      </div>
+
+      {{/* 大网格 (96px) - 保持蓝色系 */}}
+      <div class="absolute inset-0 h-full w-full 
+          bg-[linear-gradient(to_right,#3b82f64d_1px,transparent_1px),linear-gradient(to_bottom,#3b82f64d_1px,transparent_1px)] 
+          dark:bg-[linear-gradient(to_right,#22d3ee33_1px,transparent_1px),linear-gradient(to_bottom,#22d3ee33_1px,transparent_1px)] 
+          bg-[size:96px_96px]">
+      </div>
+    </div>
+  </div>
+  {{ end }}
+
+  {{/* 内容层 */}}
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start">
+      
+      {{/* Left Column */}}
+      <div class="md:col-span-4 flex flex-col items-center text-center space-y-6 md:space-y-8">
+        
+        {{/* Banner Image */}}
+        {{ $img := "" }}
+        {{with $block.design.banner.filename}}
+        {{- $img = resources.Get (path.Join "media" .) -}}
+        {{ if $img }}
+          <div class="relative w-full h-64 rounded-2xl overflow-hidden shadow-xl mb-8">
+            {{ if ne $img.MediaType.SubType "gif" }}
+              {{ $responsive := partial "functions/process_responsive_image.html" (dict "image" $img "mode" "fill" "aspect_ratio" "16:9" "sizes" (slice 768 1024)) }}
+              <img class="absolute inset-0 w-full h-full object-cover" srcset="{{ $responsive.srcset }}" src="{{ $responsive.fallback.RelPermalink }}" alt="" />
+            {{ else }}
+              {{- $img = $img.Process "webp" -}}
+              <img class="absolute inset-0 w-full h-full object-cover" src="{{$img.RelPermalink}}" alt="" />
+            {{ end }}
+          </div>
+        {{ end }}
+        {{ end }}
+
+        {{/* Avatar */}}
+        <div class="avatar-wrapper mt-10 {{ if $img }}-mt-24{{else}}mb-4{{end}}" style="width: {{$display_size}}px; height: {{$display_size}}px;">
+          {{ if $avatar }}
+            {{ $avatar_image := $avatar.Fill (printf "%sx%s Center" $generation_size $generation_size) }}
+            <img class="avatar {{$shape_class}} border-4 border-white dark:border-gray-800 shadow-2xl" 
+                 src="{{ $avatar_image.RelPermalink }}" 
+                 alt="{{$person_page.Title}}"
+                 width="{{$display_size}}" 
+                 height="{{$display_size}}"
+                 style="width: {{$display_size}}px; height: {{$display_size}}px; object-fit: cover;">
+          {{ else }}
+            <div class="avatar {{$shape_class}} border-4 border-white dark:border-gray-800 shadow-2xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-400"
+                 style="width: {{$display_size}}px; height: {{$display_size}}px;">
+              <svg class="w-1/2 h-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+          {{ end }}
+        </div>
+
+        {{/* Name and Role */}}
+        <div class="space-y-3">
+          <h1 class="text-4xl lg:text-4xl text-gray-900 dark:text-white leading-tight">
+            {{ $person_page.Title }}
+          </h1>
+          {{ with $person.role }}
+            <p class="text-xl text-gray-700 dark:text-gray-300">{{ . | markdownify | emojify }}</p>
+          {{ end }}
+          {{ range $person.organizations }}
+            <p class="text-lg text-gray-700 dark:text-gray-300">
+              {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{ end }}
+              {{ .name }}
+              {{ if .url }}</a>{{ end }}
+            </p>
+          {{ end }}
+        </div>
+
+        {{/* Social Icons */}}
+        <div class="flex flex-wrap justify-center gap-4">
+          {{ range $person.profiles }}
+          {{ $link := .url | default .link }}
+          <a href="{{ $link | safeURL }}" target="_blank" rel="noopener"
+             class="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 
+                    shadow-md hover:shadow-xl hover:scale-110 hover:-translate-y-1 
+                    transition-all duration-300 border border-gray-200 dark:border-gray-700">
+            {{ partial "functions/get_icon" (dict "name" .icon "attributes" "class=\"w-6 h-6\"")  }}
+          </a>
+          {{ end }}
+        </div>
+      </div>
+
+      {{/* Right Column */}}
+      <div class="md:col-span-8">
+        
+        {{/* Bio Section */}}
+        {{ with ($block.content.text | emojify | $page.RenderString) | default $person_page.Content }}
+        <div class="mb-12">
+          <div class="flex items-center gap-4 mb-4">
+            {{ $about_heading := $block.content.headings.about | default "Biography" }}
+            <h2 class="text-4xl sm:text-3xl lg:text-4xl text-gray-900 dark:text-white tracking-tight">{{ $about_heading }}</h2>
+          </div>
+          <div class="prose prose-lg dark:prose-invert text-gray-800 dark:text-gray-200 text-base sm:text-lg leading-relaxed text-justify">
+            {{ . }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* Button */}}
+        {{ with $block.content.button }}
+        <div class="mb-16">
+          <a href="{{.url}}" target="_blank" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300">
+            {{.text}}
+          </a>
+        </div>
+        {{ end }}
+
+        {{/* WORK Section */}}
+        {{ with $person.work }}
+        <div class="mb-12">
+          <div class="flex items-center gap-4 mb-4">
+            {{ $work_heading := $block.content.headings.work | default (i18n "work" | default "Work Experience") }}
+            <h3 class="text-xl sm:text-2xl lg:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">{{ $work_heading | markdownify }}</h3>
+          </div>
+          <div class="space-y-6">
+          {{ range . }}
+            {{/* Date Logic */}}
+            {{ $startYear := "" }}{{ $endYear := "" }}
+            {{ with .date_start }}{{ $startYear = (time .).Format "2006" }}{{ end }}
+            {{ with .date_end }}{{ $endYear = (time .).Format "2006" }}{{ end }}
+            {{ $dateStr := "" }}
+            {{ if and $startYear $endYear }}{{ $dateStr = printf "%s–%s" $startYear $endYear }}
+            {{ else if $startYear }}{{ $dateStr = printf "%s–Present" $startYear }}{{ end }}
+
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 mt-1">
+                {{ partial "functions/get_icon" (dict "name" "briefcase" "attributes" "class='w-6 h-6 text-gray-800 dark:text-gray-200'") }}
+              </div>
+              <div>
+                <p class="text-lg font-semibold text-gray-900 dark:text-white">
+                  {{ .position }}{{ if $dateStr }}, {{ $dateStr }}{{ end }}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">
+                  {{ with .company_url }}<a href="{{.}}" target="_blank" rel="noopener" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{end}}
+                    {{ .company_name }}
+                  {{ if .company_url }}</a>{{end}}
+                </p>
+                {{ with .summary }}
+                <div class="text-gray-600 dark:text-gray-400 text-base mt-2 prose dark:prose-invert leading-relaxed">
+                  {{ . | markdownify | emojify }}
+                </div>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* EDUCATION Section */}}
+        {{ with $person.education }}
+        <div class="mb-12">
+          <div class="flex items-center gap-4 mb-4">
+            {{ $education_heading := $block.content.headings.education | default (i18n "education") }}
+            <h3 class="text-xl sm:text-2xl lg:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">{{ $education_heading | markdownify }}</h3>
+          </div>
+          <div class="space-y-6">
+          {{ range . }}
+            {{/* Date Logic */}}
+            {{ $startYear := "" }}{{ $endYear := "" }}
+            {{ with .date_start }}{{ $startYear = (time .).Format "2006" }}{{ end }}
+            {{ with .date_end }}{{ $endYear = (time .).Format "2006" }}{{ end }}
+            {{ $dateStr := "" }}
+            {{ if and $startYear $endYear }}{{ $dateStr = printf "%s–%s" $startYear $endYear }}
+            {{ else if $startYear }}{{ $dateStr = printf "%s–Present" $startYear }}{{ else if .year }}{{ $dateStr = .year }}{{ end }}
+
+            <div class="flex items-start gap-3">
+              <div class="flex-shrink-0 mt-1">
+                {{ partial "functions/get_icon" (dict "name" "academic-cap" "attributes" "class='w-6 h-6 text-gray-800 dark:text-gray-200'") }}
+              </div>
+              <div>
+                <p class="text-lg font-semibold text-gray-900 dark:text-white">
+                  {{ .area }}{{ if $dateStr }}, {{ $dateStr }}{{ end }}
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">
+                  {{ .institution }}
+                </p>
+              </div>
+            </div>
+          {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* Interests Section */}}
+        {{ with $person.interests }}
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            {{ $interests_heading := $block.content.headings.interests | default (i18n "interests") }}
+            <h3 class="text-xl sm:text-2xl lg:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">{{ $interests_heading | markdownify }}</h3>
+          </div>
+          <ul class="list-disc list-outside pl-6 space-y-2 text-lg text-gray-800 dark:text-gray-200 marker:text-gray-500">
+            {{ range . }}
+            <li>{{ . | markdownify | emojify }}</li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+</div>

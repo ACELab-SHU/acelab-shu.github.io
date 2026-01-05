@@ -1,0 +1,36 @@
+---
+title: Learning Frame Level Attention for Environmental Sound Classification
+authors:
+- Zhichao Zhang
+- Shugong Xu
+- Shunqing Zhang
+- Tianhao Qiao
+- Shan Cao
+date: '2020-07-01'
+publishDate: '2025-11-23T16:16:50.915556Z'
+publication_types:
+- manuscript
+publication: '*arXiv*'
+hugoblox:
+  ids:
+    doi: 10.48550/arXiv.2007.07241
+abstract: Environmental sound classification (ESC) is a challenging problem due to
+  the complexity of sounds. The classification performance is heavily dependent on
+  the effectiveness of representative features extracted from the environmental sounds.
+  However, ESC often suffers from the semantically irrelevant frames and silent frames.
+  In order to deal with this, we employ a frame-level attention model to focus on
+  the semantically relevant frames and salient frames. Specifically, we first propose
+  a convolutional recurrent neural network to learn spectro-temporal features and
+  temporal correlations. Then, we extend our convolutional RNN model with a frame-level
+  attention mechanism to learn discriminative feature representations for ESC. We
+  investigated the classification performance when using different attention scaling
+  function and applying different layers. Experiments were conducted on ESC-50 and
+  ESC-10 datasets. Experimental results demonstrated the effectiveness of the proposed
+  method and our method achieved the state-of-the-art or competitive classification
+  accuracy with lower computational complexity. We also visualized our attention results
+  and observed that the proposed attention mechanism was able to lead the network
+  tofocus on the semantically relevant parts of environmental sounds.
+links:
+- name: arXiv
+  url: https://arxiv.org/abs/2007.07241
+---

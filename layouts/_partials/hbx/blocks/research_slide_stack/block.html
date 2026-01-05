@@ -1,0 +1,193 @@
+{{/* Hugo Blox: Research Slide Stack (Dark Mode Optimized) Block */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $uid := .wcBlock.id | default "slide-stack" }}
+
+<section class="py-16 bg-gray-50 dark:bg-gray-900" id="section-{{ $uid }}">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {{/* --- Part 1: 头部信息 --- */}}
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      {{ if $block.content.tag }}
+      <span class="inline-block px-3 py-1 mb-6 text-xs font-semibold tracking-wider text-primary-600 uppercase bg-primary-100 dark:bg-primary-900/30 rounded-full">
+        {{ $block.content.tag }}
+      </span>
+      {{ end }}
+
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+        {{ $block.content.title }}
+      </h1>
+
+      <div class="prose prose-lg dark:prose-invert mx-auto text-gray-600 dark:text-gray-300 mb-10">
+        {{ $block.content.text | markdownify | emojify }}
+      </div>
+
+      {{/* === 链接按钮 === */}}
+      {{ if $block.content.links }}
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        {{ range $block.content.links }}
+        <a href="{{ .url }}" target="_blank" rel="noopener" 
+           class="group inline-flex items-center px-8 py-3 border border-transparent text-base font-bold rounded-full shadow-md text-white bg-primary-600 hover:bg-primary-700 dark:hover:bg-primary-500 transition-all duration-200 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600">
+           {{ if .icon }}
+             {{ partial "functions/get_icon" (dict "name" .icon "attributes" "class=\"w-5 h-5 mr-2 text-white/90 group-hover:text-white\"") }}
+           {{ end }}
+           {{ .text }}
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      {{/* === 视图切换开关 (视觉优化版) === */}}
+      {{/* 容器背景色调整为 dark:bg-gray-800/80，增加一点通透感 */}}
+      <div class="inline-flex justify-center gap-2 p-1.5 bg-gray-200 dark:bg-gray-800/80 backdrop-blur-sm rounded-full relative z-10 border border-transparent dark:border-white/5">
+        
+        <button onclick="toggleViewMode('{{ $uid }}', 'scroll')" id="btn-scroll-{{ $uid }}" 
+                class="px-6 py-2 rounded-full text-sm font-bold transition-all shadow-sm bg-white dark:bg-slate-600 text-primary-600 dark:text-white">
+          📜 Scroll View
+        </button>
+        
+        <button onclick="toggleViewMode('{{ $uid }}', 'slide')" id="btn-slide-{{ $uid }}"
+                class="px-6 py-2 rounded-full text-sm font-bold transition-all text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white bg-transparent hover:bg-gray-300/50 dark:hover:bg-gray-700/50">
+          🖥️ Slide View
+        </button>
+      </div>
+    </div>
+
+    {{/* --- Part 2: 图片展示容器 --- */}}
+    {{ if $block.content.slides }}
+    <div class="relative group">
+      
+      {{/* 容器 */}}
+      <div id="viewer-{{ $uid }}" class="transition-all duration-300 grid grid-cols-1 gap-8">
+        
+        {{ range $index, $slide := $block.content.slides }}
+          {{ $image := "" }}
+          {{ $image = $page.Resources.GetMatch $slide }}
+          {{ if not $image }}
+            {{ $image = resources.Get (printf "media/%s" $slide) }}
+          {{ end }}
+
+          {{ if $image }}
+          <div class="slide-item relative rounded-xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-slate-800 transition-transform">
+            <img src="{{ $image.RelPermalink }}" 
+                 alt="Slide {{ add $index 1 }}" 
+                 class="w-full h-auto block" 
+                 loading="lazy">
+            
+            {{/* 页码角标 */}}
+            <div class="slide-badge hidden absolute bottom-4 right-4 bg-black/60 text-white text-xs font-mono px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-sm">
+              {{ add $index 1 }} / {{ len $block.content.slides }}
+            </div>
+          </div>
+          {{ else }}
+          <div class="w-full h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center rounded-xl">
+            <span class="text-gray-500">Image not found: {{ $slide }}</span>
+          </div>
+          {{ end }}
+        {{ end }}
+      
+      </div>
+
+      {{/* 导航箭头 */}}
+      <div id="nav-controls-{{ $uid }}" class="hidden">
+        <button onclick="scrollSlides('{{ $uid }}', -1)" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 lg:-translate-x-14 p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg text-primary-600 hover:scale-110 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all z-20 border border-gray-100 dark:border-gray-700">
+          {{ partial "functions/get_icon" (dict "name" "hero/chevron-left" "attributes" "class=\"w-6 h-6\"") }}
+        </button>
+        <button onclick="scrollSlides('{{ $uid }}', 1)" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 lg:translate-x-14 p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg text-primary-600 hover:scale-110 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all z-20 border border-gray-100 dark:border-gray-700">
+          {{ partial "functions/get_icon" (dict "name" "hero/chevron-right" "attributes" "class=\"w-6 h-6\"") }}
+        </button>
+      </div>
+
+    </div>
+    {{ end }}
+
+    <div class="mt-12 text-center text-sm text-gray-400">
+      <span id="hint-scroll-{{ $uid }}">End of Report</span>
+      <span id="hint-slide-{{ $uid }}" class="hidden">Use arrow keys to navigate</span>
+    </div>
+
+  </div>
+</section>
+
+{{/* --- Part 3: JavaScript 逻辑 --- */}}
+<script>
+function toggleViewMode(uid, mode) {
+  const viewer = document.getElementById(`viewer-${uid}`);
+  const navControls = document.getElementById(`nav-controls-${uid}`);
+  const btnScroll = document.getElementById(`btn-scroll-${uid}`);
+  const btnSlide = document.getElementById(`btn-slide-${uid}`);
+  const hintScroll = document.getElementById(`hint-scroll-${uid}`);
+  const hintSlide = document.getElementById(`hint-slide-${uid}`);
+  const badges = viewer.querySelectorAll('.slide-badge');
+
+  // === 按钮样式配置 ===
+  // 激活状态: 白色/深灰背景 + 主题色/白色文字 + 阴影
+  const activeClass = ['bg-white', 'dark:bg-slate-600', 'text-primary-600', 'dark:text-white', 'shadow-sm'];
+  
+  // 未激活状态: 透明背景 + 浅灰文字 + 悬停背景反馈
+  // 关键修改: dark:text-gray-300 (更亮), dark:hover:bg-gray-700/50 (悬停反馈)
+  const inactiveClass = [
+    'bg-transparent', 
+    'text-gray-500', 'dark:text-gray-300', 
+    'hover:text-gray-900', 'dark:hover:text-white',
+    'hover:bg-gray-300/50', 'dark:hover:bg-gray-700/50', // 添加悬停背景
+    'shadow-none'
+  ];
+
+  if (mode === 'slide') {
+    // === 切换到 Slide View ===
+    viewer.className = "flex flex-row overflow-x-auto snap-x snap-mandatory scroll-smooth space-x-6 pb-8 no-scrollbar";
+    
+    const items = viewer.querySelectorAll('.slide-item');
+    items.forEach(item => {
+      item.className = "slide-item relative rounded-xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-slate-800 transition-transform min-w-full snap-center";
+    });
+
+    navControls.classList.remove('hidden');
+    hintScroll.classList.add('hidden');
+    hintSlide.classList.remove('hidden');
+    badges.forEach(b => b.classList.remove('hidden'));
+
+    updateBtnClasses(btnSlide, activeClass, inactiveClass);
+    updateBtnClasses(btnScroll, inactiveClass, activeClass);
+
+  } else {
+    // === 切换到 Scroll View ===
+    viewer.className = "transition-all duration-300 grid grid-cols-1 gap-8";
+    
+    const items = viewer.querySelectorAll('.slide-item');
+    items.forEach(item => {
+      item.className = "slide-item relative rounded-xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-slate-800 transition-transform";
+    });
+
+    navControls.classList.add('hidden');
+    hintScroll.classList.remove('hidden');
+    hintSlide.classList.add('hidden');
+    badges.forEach(b => b.classList.add('hidden'));
+
+    updateBtnClasses(btnScroll, activeClass, inactiveClass);
+    updateBtnClasses(btnSlide, inactiveClass, activeClass);
+  }
+}
+
+function updateBtnClasses(btn, toAdd, toRemove) {
+  btn.classList.remove(...toRemove);
+  btn.classList.add(...toAdd);
+}
+
+function scrollSlides(uid, direction) {
+  const viewer = document.getElementById(`viewer-${uid}`);
+  const scrollAmount = viewer.clientWidth;
+  viewer.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+}
+</script>
+
+<style>
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+</style>

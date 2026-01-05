@@ -1,0 +1,40 @@
+{{/* Hugo Blox: Lab Intro Card (Optimized Visuals) */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ $title := $block.content.title | emojify | $page.RenderString }}
+{{ $subtitle := $block.content.subtitle | default $block.content.text | emojify | $page.RenderString }}
+{{ $description := $block.content.description | emojify | $page.RenderString }}
+
+<div class="relative z-40 -mt-12 md:-mt-20 lg:-mt-24 px-4 sm:px-6 mb-12">
+  
+  <div class="mx-auto max-w-5xl bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-none border border-white/20 dark:border-gray-700
+              px-6 py-8 sm:px-10 sm:py-10 lg:px-16 lg:py-12 text-center">
+
+    {{/* 1. 标题区域 (统一风格) */}}
+    {{ with $title }}
+      <div class="flex flex-col items-center mb-6">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight uppercase">
+          {{ . }}
+        </h2>
+        <div class="h-1 w-16 bg-primary-700 mt-4 rounded-full"></div>
+      </div>
+    {{ end }}
+
+    {{/* 2. 副标题 */}}
+    {{ with $subtitle }}
+      <h3 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+        {{ . }}
+      </h3>
+    {{ end }}
+
+    {{/* 3. 描述文本 */}}
+    {{ with $description }}
+      <div class="prose prose-lg dark:prose-invert mx-auto text-gray-600 dark:text-gray-300 leading-relaxed text-justify sm:text-center">
+        {{ . }}
+      </div>
+    {{ end }}
+
+  </div>
+</div>

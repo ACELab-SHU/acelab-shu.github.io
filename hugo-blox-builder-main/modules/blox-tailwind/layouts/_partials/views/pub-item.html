@@ -1,0 +1,80 @@
+{{ $item := .item }}
+{{ $target_author := .target_author }} 
+{{ $has_attachments := partial "functions/has_attachments" $item }}
+
+<div class="pub-list-item view-pub-item mb-4 pl-2" style="font-family: sans-serif;">
+  
+
+  {{ $venue_raw := $item.Params.publication }}
+
+  {{ $venue_clean := "" }}
+  {{ if $venue_raw }}
+    {{ $venue_clean = $venue_raw | markdownify | plainify }}
+  {{ end }}
+
+  {{ $venue_abbrev := "" }}
+
+  {{ if and site.Data.venues $venue_clean }}
+    {{ range $keyword, $abbr := site.Data.venues }}
+      {{ if in $venue_clean $keyword }}
+        {{ $venue_abbrev = $abbr }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $display_text := $venue_clean }}
+  
+  {{ if $venue_abbrev }}
+    {{ $display_text = $venue_abbrev }}
+  {{ else if $item.Params.publication_short }}
+    {{ $display_text = $item.Params.publication_short | markdownify | plainify }}
+  {{ end }}
+
+  {{ if $display_text }}
+    <span class="font-bold italic text-black dark:text-white mr-1">
+      [{{ $display_text | markdownify | plainify }}]
+    </span>
+  {{ end }}
+
+  <span class="article-metadata li-cite-author text-gray-700 dark:text-gray-300">
+    {{ if $target_author }}
+      {{ range $index, $element := $item.Params.authors }}
+        {{- if gt $index 0 }}, {{ end -}}
+        {{ $name := . }}
+        {{ $active := eq $name $target_author }}
+        {{ $profile := site.GetPage (printf "authors/%s" (urlize $name)) }}
+        <span class="{{ if $active }}font-bold{{ end }}">
+          {{ if $profile }}<a href="{{ $profile.RelPermalink }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}
+        </span>
+      {{ end }},
+    {{ else }}
+      {{ partial "page_metadata_authors" $item }},
+    {{ end }}
+  </span>
+
+  <a href="{{ $item.RelPermalink }}" class="font-bold text-black dark:text-white hover:text-primary-700 transition-colors">
+    "{{ $item.Title }}"
+  </a>,
+
+  <span class="text-gray-600 dark:text-gray-400 italic">
+    {{ if $item.Params.publication }}
+      in {{ $item.Params.publication | markdownify }},
+    {{ end }}
+    {{ $item.Date.Format "2006" }}
+  </span>
+
+  {{ if $has_attachments }}
+  <span class="ml-2 text-sm">
+    {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+  </span>
+  {{ end }}
+
+  {{ if $item.Params.tags }}
+    {{ range $item.Params.tags }}
+      <span class="inline-block ml-2 px-2 py-0.5 rounded text-xs font-semibold text-white bg-[#6b5b42] align-middle transform -translate-y-0.5">
+        {{ . }}
+      </span>
+    {{ end }}
+  {{ end }}
+
+</div>

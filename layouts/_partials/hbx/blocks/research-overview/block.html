@@ -1,0 +1,213 @@
+{{/* Hugo Blox: Research Overview Block (Swiper.js Carousel) */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{/* 1. 引入 Swiper 的 CSS 和 JS */}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16 relative group/slider">
+
+  {{/* Header */}}
+  <div class="flex flex-col items-center text-center mb-12">
+    {{ with $block.content.title }}
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight uppercase">
+        {{ . }}
+      </h2>
+      <div class="h-1 w-16 bg-primary-700 mx-auto mt-4 rounded-full"></div>
+    {{ end }}
+    {{ with $block.content.subtitle }}
+      <p class="mt-4 text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
+        {{ . }}
+      </p>
+    {{ end }}
+  </div>
+
+  {{/* Swiper Container */}}
+  <div class="relative px-8 md:px-12">
+    
+    {{/* 左箭头 */}}
+    <div class="swiper-button-prev-{{ $block.id }} absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/80 dark:bg-gray-800/80 rounded-full shadow-lg flex items-center justify-center text-primary-600 hover:bg-primary-600 hover:text-white transition-all duration-300 cursor-pointer opacity-0 group-hover/slider:opacity-100 backdrop-blur-sm">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+    </div>
+
+    {{/* Swiper 主体 */}}
+    <div class="swiper swiper-{{ $block.id }} !overflow-visible">
+      <div class="swiper-wrapper py-4"> {{/* py-4 用于显示阴影 */}}
+        {{ range $block.content.items }}
+          
+          {{ $link := .link | default "#" | lower }}
+          
+          {{/* Image Logic */}}
+          {{ $imgName := .image }}
+          {{ $img := "" }}
+          {{ if and $link (not (strings.HasPrefix $link "http")) }}
+            {{ $targetPage := site.GetPage $link }}
+            {{ if $targetPage }}
+              {{ $img = $targetPage.Resources.GetMatch $imgName }}
+            {{ end }}
+          {{ end }}
+          {{ if not $img }}
+            {{ $img = resources.Get (printf "media/%s" $imgName) }}
+          {{ end }}
+
+          {{ $target := "" }}
+          {{ if strings.HasPrefix $link "http" }}
+            {{ $target = `target="_blank" rel="noopener"` }}
+          {{ end }}
+
+          {{/* Swiper Slide */}}
+          <div class="swiper-slide h-auto">
+            <a href="{{ $link }}" {{ $target | safeHTMLAttr }} class="group/card flex flex-col h-full bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700">
+              
+              {{/* Image Area */}}
+              <div class="relative h-56 overflow-hidden bg-gray-100 dark:bg-gray-700"> {{/* --- 读取配置参数 --- */}}
+                {{ $fit_image := $block.design.fit_image | default false }}
+
+                {{ if $img }}
+                  {{/* --- 根据配置选择裁剪方式 --- */}}
+                  {{ $img_resize := "" }}
+                  {{ if $fit_image }}
+                    {{/* Fit: 保持原图比例，限制最大尺寸，不裁剪 */}}
+                    {{ $img_resize = $img.Fit "600x600 webp" }}
+                  {{ else }}
+                    {{/* Fill: (默认) 强制裁剪填充，保证统一大小 */}}
+                    {{ $img_resize = $img.Fill "600x400 Center webp" }}
+                  {{ end }}
+
+                  <img src="{{ $img_resize.RelPermalink }}" 
+                       alt="{{ .title }}" 
+                       class="w-full h-full transition-transform duration-500 group-hover/card:scale-110 {{ if $fit_image }}object-contain p-2{{ else }}object-cover{{ end }}">
+                       {{/* 上一行：如果是 fit 模式，用 object-contain 并加一点内边距(p-2) */}}
+
+                {{ else }}
+                  <div class="w-full h-full flex items-center justify-center text-gray-400">
+                    <span class="text-sm">Image not found</span>
+                  </div>
+                {{ end }}
+                
+                {{/* 遮罩层逻辑保持不变 */}}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover/card:opacity-80 transition-opacity"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                   <h3 class="text-xl font-bold text-white group-hover/card:text-primary-200 transition-colors shadow-sm">
+                     {{ .title }}
+                   </h3>
+                </div>
+              </div>
+
+              {{/* Content Area */}}
+              <div class="p-6 flex flex-col flex-grow">
+                <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 leading-relaxed">
+                  {{ .text }}
+                </p>
+                <div class="mt-auto flex items-center text-primary-600 dark:text-primary-400 font-semibold group-hover/card:translate-x-2 transition-transform duration-300">
+                  <span>Learn more</span>
+                  <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+        {{ end }}
+      </div>
+      
+      {{/* 分页器 */}}
+      <div class="swiper-pagination-{{ $block.id }} mt-8 flex justify-center gap-2"></div>
+
+    </div>
+
+    {{/* 右箭头 */}}
+    <div class="swiper-button-next-{{ $block.id }} absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/80 dark:bg-gray-800/80 rounded-full shadow-lg flex items-center justify-center text-primary-600 hover:bg-primary-600 hover:text-white transition-all duration-300 cursor-pointer opacity-0 group-hover/slider:opacity-100 backdrop-blur-sm">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+    </div>
+
+  </div>
+</div>
+
+{{/* Swiper 自定义样式 */}}
+<style>
+  /* 自定义分页器样式 */
+  .swiper-pagination-{{ $block.id }} .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #cbd5e1; /* gray-300 */
+    opacity: 1;
+    transition: all 0.3s;
+  }
+  .swiper-pagination-{{ $block.id }} .swiper-pagination-bullet-active {
+    background: #2563eb; /* primary-600，请根据您的主题色修改 */
+    width: 24px;
+    border-radius: 5px;
+  }
+  /* 深色模式适配 */
+  .dark .swiper-pagination-{{ $block.id }} .swiper-pagination-bullet {
+    background: #475569; /* slate-600 */
+  }
+  .dark .swiper-pagination-{{ $block.id }} .swiper-pagination-bullet-active {
+    background: #3b82f6; /* primary-500 */
+  }
+</style>
+
+{{/* Swiper 初始化脚本 */}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // 读取 YAML 中配置的 columns 参数
+    const columns = {{ $block.design.columns | default 3 }};
+    
+    // 获取实际卡片数量 (Hugo 模板语法)
+    const slideCount = {{ len $block.content.items }};
+
+    // 逻辑判断：只有当卡片数量超过显示的列数时，才开启循环 (loop)
+    // 这样当卡片较少时，Swiper 不会生成重复的填充块，从而允许居中生效
+    const enableLoop = slideCount > columns;
+
+    new Swiper('.swiper-{{ $block.id }}', {
+      // 核心功能
+      loop: enableLoop,          // 动态开关循环
+      centerInsufficientSlides: true, // 当 slide 数量少于 slidesPerView 时，自动居中
+      spaceBetween: 24,          // 卡片间距
+      grabCursor: true,          // 鼠标抓手图标
+      
+      // 键盘导航
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+
+      // 导航按钮
+      navigation: {
+        nextEl: '.swiper-button-next-{{ $block.id }}',
+        prevEl: '.swiper-button-prev-{{ $block.id }}',
+      },
+      
+      // 分页器
+      pagination: {
+        el: '.swiper-pagination-{{ $block.id }}',
+        clickable: true,
+      },
+
+      // 响应式断点
+      breakpoints: {
+        // 手机: 显示 1 个，部分露出下一个 (保持原有逻辑)
+        320: {
+          slidesPerView: 1.2,
+          centeredSlides: true,
+        },
+        // 平板: 显示 2 个
+        640: {
+          slidesPerView: 2,
+          centeredSlides: false, // 此时如果不满2个，centerInsufficientSlides 会接管
+        },
+        // 小桌面: 显示 columns - 1 个
+        1024: {
+          slidesPerView: columns > 2 ? columns - 1 : 2,
+        },
+        // 大桌面: 显示配置的 columns 个
+        1280: {
+          slidesPerView: columns,
+        },
+      },
+    });
+  });
+</script>

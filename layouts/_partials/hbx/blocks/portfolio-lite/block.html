@@ -1,0 +1,301 @@
+{{/* Hugo Blox — Portfolio Lite (Fixed: Layout Reflow & Summary) */}}
+
+{{ $page  := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{/* ------- 1. 基础参数读取 ------- */}}
+{{ $view      := $block.design.view | default "card" }}
+{{ $pageType  := $block.content.page_type | default "" }}
+{{ $folders   := $block.content.filters.folders | default (slice) }}
+{{ $sortBy    := $block.content.sort_by | default "Date" }}
+{{ $sortOrder := $block.content.sort_order | default "desc" }}
+{{ $offset    := $block.content.offset | default 0 }}
+{{ $count     := $block.content.count  | default 0 }}
+{{ $archive_page := $block.content.archive_page | default "" }}
+
+{{/* 过滤按钮 */}}
+{{ $buttons := $block.content.buttons | default (slice) }}
+{{ $tagKey  := $block.content.tag_param | default "tags" }}
+
+{{/* ------- 2. 灵活列数 (支持 1-6 列) ------- */}}
+{{ $columns := $block.design.columns | default 3 }}
+{{ $grid_classes := "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" }} 
+
+{{ if eq $columns 1 }}
+  {{ $grid_classes = "grid-cols-1" }}
+{{ else if eq $columns 2 }}
+  {{ $grid_classes = "grid-cols-1 sm:grid-cols-2" }}
+{{ else if eq $columns 4 }}
+  {{ $grid_classes = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" }}
+{{ else if eq $columns 5 }}
+  {{ $grid_classes = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" }}
+{{ else if eq $columns 6 }}
+  {{ $grid_classes = "grid-cols-1 sm:grid-cols-3 lg:grid-cols-6" }}
+{{ end }}
+
+{{/* ------- 3. 数据查询 ------- */}}
+{{ $query := site.RegularPages }}
+
+{{ if $pageType }}
+  {{ $query = union (where $query "Params.type" "==" $pageType) (where $query "Type" "==" $pageType) }}
+{{ end }}
+
+{{ if gt (len $folders) 0 }}
+  {{ $tmp := slice }}
+  {{ range $p := $query }}
+    {{ $match := false }}
+    {{ range $f := $folders }}
+      {{ if in $p.RelPermalink (printf "/%s/" $f) }}
+        {{ $match = true }}
+      {{ end }}
+    {{ end }}
+    {{ if $match }}
+      {{ $tmp = $tmp | append $p }}
+    {{ end }}
+  {{ end }}
+  {{ $query = $tmp }}
+{{ end }}
+
+{{/* 排序与分页 */}}
+{{ if eq (lower $sortOrder) "asc" }}
+  {{ $query = sort $query $sortBy "asc" }}
+{{ else }}
+  {{ $query = sort $query $sortBy "desc" }}
+{{ end }}
+
+{{ if gt $offset 0 }}
+  {{ if gt (len $query) $offset }}
+    {{ $query = (after $offset $query) }}
+  {{ else }}
+    {{ $query = slice }}
+  {{ end }}
+{{ end }}
+
+{{ if and (gt $count 0) (gt (len $query) $count) }}
+  {{ $query = first $count $query }}
+{{ end }}
+
+{{/* ------- 4. 视图配置 ------- */}}
+{{/* 只有当 show_summary 被显式设置为 true 时才传递 true，否则默认为 false */}}
+{{ $show_summary := $block.design.show_summary | default false }}
+
+{{ $config := dict
+    "columns" $columns
+    "len" (len $query)
+    "fill_image" ($block.design.fill_image | default true)
+    "show_date" ($block.design.show_date | default true)
+    "show_read_time" ($block.design.show_read_time | default false)
+    "show_read_more" ($block.design.show_read_more | default false)
+    "show_summary" $show_summary
+}}
+
+<section class="py-16 md:py-20" data-collection-filter>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {{/* Header */}}
+    <div class="flex flex-col items-center text-center mb-12">
+      {{ with $block.content.title }}
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight uppercase">
+          {{ . | $page.RenderString }}
+        </h2>
+        <div class="h-1 w-16 bg-primary-700 mx-auto mt-4 rounded-full"></div>
+      {{ end }}
+
+      {{ with $block.content.text }}
+        <div class="mt-4 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          {{ . | $page.RenderString }}
+        </div>
+      {{ end }}
+    </div>
+
+    {{/* Filter Buttons */}}
+    {{ if gt (len $buttons) 0 }}
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        {{ range $i, $btn := $buttons }}
+          {{ $name   := $btn.name   | default "All" }}
+          {{ $filter := $btn.filter | default "*" }}
+          <button
+            type="button"
+            class="px-5 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-200 transform hover:-translate-y-0.5 border
+                   
+                   /* --- 默认状态 --- */
+                   bg-white border-gray-200 text-gray-600 
+                   dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300
+                   
+                   /* --- Hover --- */
+                   hover:border-primary-500 hover:text-primary-600
+                   dark:hover:border-primary-400 dark:hover:text-primary-400
+
+                   /* --- 激活状态 (Active) --- */
+                   data-[active=true]:bg-primary-600 
+                   data-[active=true]:border-primary-600 
+                   data-[active=true]:text-white 
+                   data-[active=true]:shadow-md
+                   
+                   dark:data-[active=true]:bg-primary-600 
+                   dark:data-[active=true]:border-primary-600 
+                   dark:data-[active=true]:text-white"
+            data-filter="{{ $filter }}"
+            data-active="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+          >
+            {{ $name }}
+          </button>
+        {{ end }}
+      </div>
+    {{ end }}
+
+{{/* Content Grid */}}
+    {{ $count := len $query }}
+    {{/* 判断：如果实际卡片数量少于配置的列数，且大于0，则启用居中模式 */}}
+    {{ $use_centering := and (lt $count $columns) (gt $count 0) }}
+
+    {{/* 根据模式选择容器的 Class */}}
+    {{ $container_class := printf "grid gap-8 %s" $grid_classes }}
+    {{ if $use_centering }}
+      {{/* 居中模式：使用 Flexbox + 居中 + 换行 */}}
+      {{ $container_class = "flex flex-wrap justify-center gap-8" }}
+    {{ end }}
+
+    <div class="{{ $container_class }}">
+      {{ range $index, $item := $query }}
+
+        {{/* Tags Logic */}}
+        {{ $tags := slice }}
+        {{ $raw := index $item.Params $tagKey }}
+        {{ if $raw }}
+          {{ if (reflect.IsSlice $raw) }}
+            {{ range $raw }}
+              {{ $tags = $tags | append (lower (printf "%v" .)) }}
+            {{ end }}
+          {{ else }}
+            {{ range (split (lower (printf "%v" $raw)) ",") }}
+              {{ $t := trim . " " }}
+              {{ if $t }}{{ $tags = $tags | append $t }}{{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ $tagsStr := delimit $tags "," }}
+
+        {{/* --- 居中模式下的卡片宽度计算 --- */}}
+        {{/* Grid模式下宽度由父级 grid-cols 控制，Flex模式下需要手动指定宽度以保持一致 */}}
+        {{ $item_width_class := "" }}
+        {{ if $use_centering }}
+           {{/* 基础宽度 (手机) */}}
+           {{ $item_width_class = "w-full" }}
+           
+           {{/* 平板 (2列) */}}
+           {{ if ge $columns 2 }}
+             {{/* calc(50% - 1rem) 是为了减去 gap-8 (2rem) 的一半，确保一行能放俩 */}}
+             {{ $item_width_class = printf "%s sm:w-[calc(50%%-1rem)]" $item_width_class }}
+           {{ end }}
+
+           {{/* 桌面 (3列及以上) */}}
+           {{ if ge $columns 3 }}
+             {{ $item_width_class = printf "%s lg:w-[calc(33.333%%-1.35rem)]" $item_width_class }}
+           {{ end }}
+           
+           {{/* 如果是4列 */}}
+           {{ if ge $columns 4 }}
+             {{ $item_width_class = printf "%s lg:w-[calc(25%%-1.5rem)]" $item_width_class }}
+           {{ end }}
+        {{ end }}
+
+        {{/* Item Wrapper */}}
+        <div data-collection-item 
+             data-tags="{{ $tagsStr }}" 
+             class="transition-all duration-500 ease-in-out {{ $item_width_class }}">
+             
+          {{ partial "functions/render_view" (dict
+              "page"  $block
+              "item"  $item
+              "view"  $view
+              "index" $index
+              "config" $config
+          ) }}
+        </div>
+
+      {{ end }}
+    </div>
+
+    {{/* Archive Link */}}
+    {{ with $archive_page }}
+      {{ with site.GetPage . }}
+        <div class="mt-12 text-center">
+          <a href="{{ .RelPermalink }}" class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-full text-base font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+            {{ i18n "more" | default "View All" }}
+            <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      {{ end }}
+    {{ end }}
+
+  </div>
+
+  {{/* JS Logic (Fixed for Grid Reflow) */}}
+  <script>
+    (function () {
+      const section = document.currentScript.closest('[data-collection-filter]');
+      if (!section) return;
+
+      const items   = Array.from(section.querySelectorAll('[data-collection-item]'));
+      const btns    = Array.from(section.querySelectorAll('button[data-filter]'));
+
+      function applyFilter(filter) {
+        const f = (filter || '*').trim().toLowerCase();
+        
+        items.forEach(el => {
+          const tagsStr = (el.getAttribute('data-tags') || '').toLowerCase();
+          const tags = tagsStr.split(',').map(s => s.trim()).filter(Boolean);
+          
+          let shouldShow = (f === '*' || !f) ? true : tags.includes(f);
+
+          if (shouldShow) {
+             el.classList.remove('hidden');
+             // 关键修复：清除 display 样式，让 Grid 布局自动接管，而不是强制 block
+             el.style.display = ''; 
+             
+             requestAnimationFrame(() => {
+                 el.style.opacity = '1';
+                 el.style.transform = 'scale(1)';
+             });
+          } else {
+             el.style.opacity = '0';
+             el.style.transform = 'scale(0.95)';
+             setTimeout(() => {
+                 // 只有当元素确实还是隐藏状态时（避免快速切换导致的闪烁），才添加 hidden
+                 if(el.style.opacity === '0') {
+                     el.classList.add('hidden');
+                     // 关键修复：清除可能残留的内联 display 样式
+                     el.style.display = ''; 
+                 }
+             }, 300);
+          }
+        });
+      }
+
+      if (btns.length) {
+        function setActive(btn) {
+          btns.forEach(b => b.dataset.active = (b === btn ? 'true' : 'false'));
+        }
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            setActive(btn);
+            applyFilter(btn.dataset.filter);
+          });
+        });
+        
+        const initial = btns.find(b => b.dataset.active === 'true') || btns[0];
+        if (initial) {
+          setActive(initial);
+          applyFilter(initial.dataset.filter);
+        } else {
+          applyFilter('*');
+        }
+      } else {
+        applyFilter('*');
+      }
+    })();
+  </script>
+</section>

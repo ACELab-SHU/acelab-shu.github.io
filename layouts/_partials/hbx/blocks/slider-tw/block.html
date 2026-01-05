@@ -1,0 +1,117 @@
+{{/* Hugo Blox: Hero Slider (Swiper.js Version) */}}
+{{- $page := .wcPage -}}
+{{- $block := .wcBlock -}}
+{{- $hash := .wcIdentifier -}}
+{{- $slides := $block.content.slides | default (slice) -}}
+{{- $count := len $slides -}}
+
+{{- $autoPlay := $block.design.auto_play | default true -}}
+{{- $interval := $block.design.interval_ms | default 5000 -}}
+
+{{/* 引入 Swiper (如果之前在 research-overview 引入过，这里其实可以省略，但为了保险起见保留) */}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+{{/* 高度策略：
+  1. 移动端: min-h-[500px] 保证竖屏时人像不被切掉头部
+  2. 桌面端: h-[85vh] 占据大部分屏幕，保留底部一点空间给内容
+*/}}
+<section id="{{ $hash }}" class="relative w-full group/hero">
+
+  <div class="swiper hero-swiper w-full h-[55vh] sm:h-[65vh] md:h-[75vh] lg:h-[85vh] min-h-[500px] z-0">
+    <div class="swiper-wrapper">
+      {{- range $idx, $item := $slides -}}
+        {{- $bg := $item.background -}}
+        {{- $imgURL := "" -}}
+        
+        {{- /* 图片查找逻辑 */ -}}
+        {{- with $bg.image.filename -}}
+          {{- $res := resources.Get (printf "media/%s" .) -}}
+          {{- if $res -}}
+            {{- $imgURL = $res.RelPermalink -}}
+          {{- end -}}
+        {{- end -}}
+
+        <div class="swiper-slide relative w-full h-full bg-gray-900 overflow-hidden">
+          {{ if $imgURL }}
+            <img src="{{ $imgURL }}" alt="Hero Slide" 
+                 class="absolute inset-0 w-full h-full object-cover object-center" 
+                 loading="{{ if eq $idx 0 }}eager{{ else }}lazy{{ end }}">
+          {{ end }}
+
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10 z-10"></div>
+        </div>
+      {{- end -}}
+    </div>
+
+    {{/* 只有多于1张图时才显示控件 */}}
+    {{ if gt $count 1 }}
+      <div class="swiper-pagination hero-pagination !bottom-8 z-20"></div>
+      
+      <div class="swiper-button-next hero-next !hidden md:!flex !text-white/50 hover:!text-white transition-colors"></div>
+      <div class="swiper-button-prev hero-prev !hidden md:!flex !text-white/50 hover:!text-white transition-colors"></div>
+    {{ end }}
+  </div>
+
+  <div class="relative w-full z-30">
+    {{ with $block.blocks }}
+      {{ range . }}
+        {{ partial (printf "blocks/%s/%s" .block .block) (dict "wcPage" $page "wcBlock" .) }}
+      {{ end }}
+    {{ end }}
+  </div>
+
+</section>
+
+{{/* Swiper 样式微调 */}}
+<style>
+  /* 也就是 custom.css 里的样式，直接写在这里防止加载顺序问题 */
+  .hero-pagination .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    transition: all 0.3s;
+  }
+  .hero-pagination .swiper-pagination-bullet-active {
+    background: #ffffff;
+    width: 30px;
+    border-radius: 5px;
+  }
+  .hero-next::after, .hero-prev::after {
+    font-size: 2rem; /* 调整箭头大小 */
+    font-weight: bold;
+  }
+</style>
+
+{{/* Swiper 初始化脚本 */}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.hero-swiper', {
+      // 效果：使用 Fade (渐隐渐现) 更有高级感，适合 Hero
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      },
+      
+      // 循环
+      loop: true,
+      
+      // 自动播放
+      autoplay: {{ if $autoPlay }}{
+        delay: {{ $interval }},
+        disableOnInteraction: false,
+      }{{ else }}false{{ end }},
+
+      // 控件
+      pagination: {
+        el: '.hero-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.hero-next',
+        prevEl: '.hero-prev',
+      },
+    });
+  });
+</script>

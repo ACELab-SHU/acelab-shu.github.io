@@ -1,0 +1,181 @@
+{{/* Hugo Blox: Team Showcase (Sectioned Layout + Classic Card Design) */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{/* Configuration */}}
+{{ $show_social := $block.design.show_social | default true }}
+{{ $show_interests := $block.design.show_interests | default false }}
+{{ $show_role := $block.design.show_role | default true }}
+{{ $show_organizations := $block.design.show_organizations | default false }}
+
+{{ $title := $block.content.title | emojify | $page.RenderString }}
+{{ $subtitle := $block.content.subtitle | emojify | $page.RenderString }}
+{{ $text := $block.content.text | emojify | $page.RenderString }}
+
+{{/* 1. 数据预处理 */}}
+{{ $groups := slice }}
+{{ range $block.content.user_groups }}
+  {{ $group_name := . }}
+  {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
+  
+  {{/* --- 预先按名字(Title)升序排列 --- */}}
+  {{ $query = sort $query "Title" "asc" }}
+
+  {{ $sort_by := $block.content.sort_by | default "Params.last_name" }}
+  {{ $sort_by = partial "functions/get_sort_by_parameter" $sort_by }}
+  {{ $sort_ascending := $block.content.sort_ascending | default true }}
+  {{ $sort_order := cond $sort_ascending "asc" "desc" }}
+  {{ $query = sort $query $sort_by $sort_order }}
+  
+  {{ if gt (len $query) 0 }}
+    {{ $groups = $groups | append (dict "name" $group_name "people" $query) }}
+  {{ end }}
+{{ end }}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+  {{/* 2. 主标题区域 */}}
+  <div class="flex flex-col items-center text-center mb-8">
+    {{ with $title }}
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight uppercase">
+        {{ . }}
+      </h2>
+      <div class="h-1 w-16 bg-primary-700 mx-auto mt-4 rounded-full"></div>
+    {{ end }}
+    {{ with $subtitle }}
+      <p class="mt-4 text-xl text-gray-600 dark:text-gray-400">{{ . }}</p>
+    {{ end }}
+  </div>
+
+  {{/* 3. 循环渲染每个分组 */}}
+  {{ range $g := $groups }}
+    {{ $group_name := $g.name }}
+    {{ $people := $g.people }}
+    {{ $n := len $people }}
+
+    {{ $gridConfig := "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" }}
+    {{ if eq $n 1 }}
+      {{ $gridConfig = "grid-cols-1 justify-items-center" }}
+    {{ else if eq $n 2 }}
+      {{ $gridConfig = "grid-cols-1 sm:grid-cols-2 justify-items-center max-w-4xl mx-auto" }}
+    {{ else if eq $n 3 }}
+      {{ $gridConfig = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center max-w-6xl mx-auto" }}
+    {{ end }}
+
+    <div class="mb-24 last:mb-0">
+      <div class="flex items-center gap-3 mb-10 border-b border-gray-200 dark:border-gray-700 pb-3">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white tracking-wide">
+          {{ $group_name | markdownify }}
+        </h3>
+        <span class="px-2.5 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-bold rounded-full">
+          {{ $n }}
+        </span>
+      </div>
+
+      <div class="grid gap-10 {{ $gridConfig }}">
+        {{ range $person := $people }}
+           
+           {{/* --- 关键修改点：链接识别逻辑 --- */}}
+           {{ $avatar := ($person.Resources.ByType "image").GetMatch "*avatar*" }}
+           {{ $link := "" }}
+           {{ $is_external := false }}
+
+           {{ if $person.Params.external_url }}
+             {{/* 如果设置了外部链接，优先使用 */}}
+             {{ $link = $person.Params.external_url }}
+             {{ $is_external = true }}
+           {{ else }}
+             {{/* 否则查找内部作者页面链接 */}}
+             {{ with site.GetPage (printf "/authors/%s" (path.Base $person.File.Dir)) }}
+               {{ $link = .RelPermalink }}
+             {{ end }}
+           {{ end }}
+           {{/* --- 结束关键修改 --- */}}
+
+           <div class="group relative w-full mx-auto flex flex-col h-full" style="max-width: 340px;">
+             <div class="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
+
+               {{/* 头像区域 */}}
+               {{ if $avatar }}
+                 <a href="{{ $link | safeURL }}" {{ if $is_external }} target="_blank" rel="noopener" {{ end }} class="block relative h-48 w-48 mx-auto mt-8 overflow-hidden rounded-full ring-4 ring-gray-50 dark:ring-gray-700">
+                   {{ $image := $avatar.Fill "400x400 Center webp" }}
+                   <img src="{{ $image.RelPermalink }}"
+                        alt="{{ $person.Title }}"
+                        loading="lazy"
+                        class="w-full h-full object-cover rounded-full transition-transform duration-500 group-hover:scale-110">
+                 </a>
+               {{ else }}
+                 <a href="{{ $link | safeURL }}" {{ if $is_external }} target="_blank" rel="noopener" {{ end }} class="block relative h-48 w-48 mx-auto mt-8 overflow-hidden rounded-full ring-4 ring-gray-50 dark:ring-gray-700 bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-400 group-hover:text-primary-500 transition-colors">
+                    <svg class="w-24 h-24 transition-transform duration-500 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                 </a>
+               {{ end }}
+
+               {{/* 信息区域 */}}
+               <div class="p-6 flex-grow flex flex-col items-center text-center">
+                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                   <a href="{{ $link | safeURL }}" {{ if $is_external }} target="_blank" rel="noopener" {{ end }} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                     {{ $person.Title }}
+                   </a>
+                 </h3>
+
+                 {{ if $show_role }}
+                   <div class="text-gray-600 dark:text-gray-300 mb-4 w-full">
+                     {{ with $person.Params.role }}
+                       <p class="font-semibold text-sm tracking-wide text-primary-700 dark:text-primary-400 mb-2">{{ . }}</p>
+                     {{ end }}
+                     {{ if and $show_organizations $person.Params.organizations }}
+                       {{ range first 1 $person.Params.organizations }}
+                         <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed px-2">{{ .name }}</p>
+                       {{ end }}
+                     {{ end }}
+                   </div>
+                 {{ end }}
+
+                 {{ with $person.Params.bio }}
+                   <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{{ . }}</p>
+                 {{ end }}
+
+                 {{ if and $show_interests $person.Params.interests }}
+                   <div class="mb-4">
+                     <div class="flex flex-wrap gap-1 justify-center">
+                       {{ range first 3 $person.Params.interests }}
+                         <span class="inline-block bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
+                           {{ . }}
+                         </span>
+                       {{ end }}
+                     </div>
+                   </div>
+                 {{ end }}
+
+                 <div class="flex-grow"></div>
+
+                 {{/* 社交图标 */}}
+                 {{ if $show_social }}
+                   <div class="w-full flex justify-center gap-4 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
+                     {{ range $person.Params.social }}
+                       {{ $slink := .url | default .link }}
+                       {{ $scheme := (urls.Parse $slink).Scheme }}
+                       {{ $target := "" }}
+                       {{ if not $scheme }}
+                         {{ $slink = (.url | default .link) | relLangURL }}
+                         {{ if eq (path.Ext $slink) ".pdf" }}{{ $target = "target=\"_blank\" rel=\"noopener\"" }}{{ end }}
+                       {{ else if in (slice "http" "https") $scheme }}
+                         {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+                       {{ end }}
+                       <a href="{{ $slink | safeURL }}" {{ $target | safeHTMLAttr }} class="text-gray-400 hover:text-primary-600 dark:text-gray-500 dark:hover:text-primary-400 transition-colors transform hover:scale-110">
+                         {{ partial "functions/get_icon" (dict "name" .icon "attributes" "class=\"w-5 h-5\"") }}
+                       </a>
+                     {{ end }}
+                   </div>
+                 {{ end }}
+               </div>
+             </div>
+           </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</div>

@@ -1,0 +1,144 @@
+# ======================================================
+# Journals
+# ======================================================
+
+# IEEE 通信 / 信号 / 网络
+"IEEE Transactions on Wireless Communications": "IEEE TWC"
+"IEEE Transactions on Vehicular Technology": "IEEE TVT"
+"IEEE Transactions on Signal Processing": "IEEE TSP"
+"IEEE Transactions on Communications": "IEEE TCOM"
+"IEEE Journal on Selected Areas in Communications": "IEEE JSAC"
+"IEEE Internet of Things Journal": "IEEE IoT-J"
+"IEEE Transactions on Cognitive Communications and Networking": "IEEE TCCN"
+"IEEE Transactions on Green Communications and Networking": "IEEE TGCN"
+"IEEE Transactions on Mobile Computing": "IEEE TMC"
+
+# IEEE 电路 / 芯片 / 系统
+"IEEE Transactions on Very Large Scale Integration (VLSI) Systems": "IEEE TVLSI"
+"IEEE Transactions on Circuits and Systems I: Regular Papers": "IEEE TCAS-I"
+"IEEE Transactions on Circuits and Systems II: Express Briefs": "IEEE TCAS-II"
+"IEEE Journal on Emerging and Selected Topics in Circuits and Systems": "IEEE JETCAS"
+"IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems": "IEEE TCAD"
+"IEEE Embedded Systems Letters": "IEEE ESL"
+
+# IEEE 快报 / 综合
+"IEEE Sensors Journal": "IEEE Sensors J."
+"IEEE Communications Letters": "IEEE Commun. Lett."
+"IEEE Wireless Communications Letters": "IEEE WCL"
+"IEEE Antennas and Wireless Propagation Letters": "IEEE AWPL"
+"IEEE Access": "IEEE Access"
+"IEEE Communications Magazine": "IEEE Commun. Mag."
+
+# 非 IEEE / ACM 期刊（保持常用简历写法）
+"China Communications": "China Comm."
+"Journal of Communications and Networks": "JCN"
+"Journal of Systems Architecture": "JSA"
+"Microprocessors and Microsystems": "MICPRO"
+
+"Neurocomputing": "Neurocomputing"
+"Pattern Recognition": "Pattern Recognit."
+"Multimedia Tools and Applications": "MTAP"
+"Computer Communications": "Comput. Commun."
+"Digital Signal Processing": "Digit. Signal Process."
+"Materials Chemistry and Physics": "Mater. Chem. Phys."
+"Nano Research": "Nano Res."
+
+"Science Bulletin": "Sci. Bull."
+"Scientific Reports": "Sci. Rep."
+"Frontiers of Information Technology & Electronic Engineering": "FITEE"
+"ZTE Technology Journal": "ZTE Tech."
+
+# ======================================================
+# Conferences
+# ======================================================
+
+# 通信 / 网络
+"IEEE Global Communications Conference": "IEEE GLOBECOM"
+"2019 IEEE Globecom Workshops": "IEEE GLOBECOM Workshops 2019"
+"IEEE International Conference on Communications": "IEEE ICC"
+"IEEE INFOCOM": "IEEE INFOCOM"
+"IEEE Wireless Communications and Networking Conference": "IEEE WCNC"
+
+"2017 IEEE 85th Vehicular Technology Conference": "IEEE VTC 2017 (Spring)"
+"2019 IEEE 89th Vehicular Technology Conference": "IEEE VTC 2019 (Spring)"
+"2019 IEEE 90th Vehicular Technology Conference": "IEEE VTC 2019 (Fall)"
+"2020 IEEE 92nd Vehicular Technology Conference": "IEEE VTC 2020 (Fall)"
+"2022 IEEE 95th Vehicular Technology Conference": "IEEE VTC 2022 (Spring)"
+
+"IEEE International Symposium on Personal, Indoor and Mobile Radio Communications": "IEEE PIMRC"
+"2022 IEEE 33rd Annual International Symposium on Personal, Indoor and Mobile Radio Communications": "IEEE PIMRC 2022"
+
+"2023 International Conference on Future Communications and Networks": "FCN 2023"
+"2019 International Conference on Internet of Things": "iThings 2019"
+"2nd Annual International Conference on Electronics, Electrical Engineering and Information Science": "EEEIS 2016"
+
+# 电路 / 系统 / 芯片
+"IEEE International Symposium on Circuits and Systems": "IEEE ISCAS"
+"IEEE International Solid-State Circuits Conference": "IEEE ISSCC"
+"IEEE Custom Integrated Circuits Conference": "IEEE CICC"
+"IEEE International Conference on ASIC": "IEEE ASICON"
+"2023 IEEE 15th International Conference on ASIC": "IEEE ASICON 2023"
+"IEEE International Conference on Integrated Circuits and Microsystems": "IEEE ICICM"
+"2016 International Conference on Integrated Circuits and Microsystems": "IEEE ICICM 2016"
+"IEEE International Conference on Artificial Intelligence Circuits and Systems": "IEEE AICAS"
+"2021 IEEE 3rd International Conference on Artificial Intelligence Circuits and Systems": "IEEE AICAS 2021"
+"2022 IEEE 4th International Conference on Artificial Intelligence Circuits and Systems": "IEEE AICAS 2022"
+"2023 IEEE 5th International Conference on Artificial Intelligence Circuits and Systems": "IEEE AICAS 2023"
+
+"Asia and South Pacific Design Automation Conference": "ASP-DAC"
+"International Symposium on Quality Electronic Design": "ISQED"
+
+# ISCAS（年份版）
+"2016 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2016"
+"2017 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2017"
+"2018 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2018"
+"2019 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2019"
+"2020 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2020"
+"2021 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2021"
+"2022 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2022"
+"2023 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2023"
+"2024 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2024"
+"2025 IEEE International Symposium on Circuits and Systems": "IEEE ISCAS 2025"
+
+# 信号处理 / 理论
+"IEEE Signal Processing Advances in Wireless Communications": "IEEE SPAWC"
+"2019 IEEE 20th International Workshop on Signal Processing Advances in Wireless Communications": "IEEE SPAWC 2019"
+"2023 IEEE 24th International Workshop on Signal Processing Advances in Wireless Communications": "IEEE SPAWC 2023"
+
+"IEEE Global Conference on Signal and Information Processing": "IEEE GlobalSIP"
+"IEEE Workshop on Signal Processing Systems": "IEEE SiPS"
+"2019 IEEE International Workshop on Signal Processing Systems": "IEEE SiPS 2019"
+
+"IEEE International Symposium on Information Theory": "IEEE ISIT"
+"International Conference on Digital Signal Processing": "DSP"
+"2018 30th International Teletraffic Congress": "ITC 30"
+"2020 32nd International Teletraffic Congress": "ITC 32"
+"34th International Teletraffic Congress": "ITC 34"
+
+"2022 16th European Conference on Antennas and Propagation": "EuCAP 2022"
+"2017 IEEE International Conference on Signal Processing, Communications and Computing": "IEEE ICSPCC 2017"
+
+# AI / 视觉 / 编译
+"Asian Conference on Computer Vision": "ACCV"
+"International Conference on Pattern Recognition": "ICPR"
+"AAAI Conference on Artificial Intelligence": "AAAI"
+
+"ACM SIGPLAN/SIGBED International Conference on Languages, Compilers, and Tools for Embedded Systems": "ACM LCTES"
+"ACM Turing Award Celebration Conference - China 2023": "ACM TURC 2023"
+
+# 区域 / 系统 / 软件
+"IEEE/CIC International Conference on Communications in China": "IEEE ICCC"
+"IEEE Asia Pacific Conference on Circuits and Systems": "IEEE APCCAS"
+"IEEE International Conference on Green Computing and Communications": "IEEE GreenCom"
+
+"International Conference on Wireless Communications and Signal Processing": "WCSP"
+"Asia-Pacific Conference on Communications": "APCC"
+"International Conference on Embedded Software and Systems": "ICESS"
+"International Conference on High Performance Computing and Communication": "HPCC"
+"2019 15th International Wireless Communications and Mobile Computing Conference": "IWCMC 2019"
+
+# ======================================================
+# Preprint
+# ======================================================
+"arXiv": "arXiv"
+"CoRR": "arXiv"

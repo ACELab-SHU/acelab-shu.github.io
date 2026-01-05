@@ -1,0 +1,44 @@
+# Navigation Links
+#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
+#     desired widget in your `content/home/` folder.
+#   The weight parameter defines the order that the links will appear in.
+
+main:
+  - name: Home
+    url: /
+    weight: 10
+  - name: Research
+    # url: /researches/
+    url: /#researches
+    identifier: research
+    weight: 11
+  - name: Neuro Baseband
+    url: /researches/NeuroBaseband/
+    parent: research
+    weight: 1
+  - name: Edge AI Inference Engine
+    url: /researches/Edge_AI/
+    parent: research
+    weight: 2
+  # - name: Communication-AI Fusion and Integrated Compute-Communication Architectures for 6G
+  #   url: /researches/comm-ai-fusion/
+  #   parent: research
+  #   weight: 3
+  # - name: Project
+  #   url: /projects/
+  #   weight: 12
+  # - name: Teaching
+  #   url: /teaching/
+  #   weight: 13
+  - name: People
+    url: /people/
+    weight: 14
+  - name: Publications
+    url: /publication/
+    weight: 15
+  - name: Events
+    url: /events
+    weight: 16
+  - name: Join Us
+    url: /opportunities/
+    weight: 17

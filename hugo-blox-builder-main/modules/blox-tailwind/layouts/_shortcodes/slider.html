@@ -1,0 +1,69 @@
+<div class="relative not-prose">
+  <!-- 轨道 -->
+  <div
+    class="slider-track flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+    onwheel="if(Math.abs(event.deltaX)<Math.abs(event.deltaY))this.scrollLeft+=event.deltaY;">
+    <!-- 隐藏滚动条（跨浏览器） -->
+    <style>
+      .slider-track::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    {{/* 幻灯片内容（用户传进来的块） */}} {{/* 要求每个 item 外层加 data-slide
+    */}} {{ .Inner | safeHTML }}
+  </div>
+
+  <!-- 左右按钮（可选） -->
+  <button
+    type="button"
+    class="slider-prev absolute left-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 shadow bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700"
+    aria-label="Prev">
+    ‹
+  </button>
+  <button
+    type="button"
+    class="slider-next absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-2 shadow bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700"
+    aria-label="Next">
+    ›
+  </button>
+
+  <script>
+    (function () {
+      const root = document.currentScript.parentElement;
+      const track = root.querySelector(".slider-track");
+      const items = [...track.querySelectorAll("[data-slide]")];
+
+      // 让每个 item 吸附到视窗（scroll-snap）
+      items.forEach((el) => el.classList.add("snap-start", "shrink-0"));
+
+      // 计算一个视口宽度（按第一个 item）
+      function slideWidth() {
+        const first = items[0];
+        return first
+          ? first.getBoundingClientRect().width +
+              parseFloat(getComputedStyle(track).gap || 0)
+          : 0;
+      }
+
+      function go(dir) {
+        track.scrollBy({ left: dir * slideWidth(), behavior: "smooth" });
+      }
+
+      root
+        .querySelector(".slider-prev")
+        ?.addEventListener("click", () => go(-1));
+      root
+        .querySelector(".slider-next")
+        ?.addEventListener("click", () => go(1));
+
+      // 触摸滑动自然生效（overflow-x + scroll-snap），无需额外 JS
+      // 键盘辅助
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") go(-1);
+        if (e.key === "ArrowRight") go(1);
+      });
+      root.tabIndex = 0; // 允许键盘焦点
+    })();
+  </script>
+</div>
