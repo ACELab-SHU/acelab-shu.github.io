@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:berialest@shu.edu.cn'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:berialest@shu.edu.cn'
 
 interests:
   - RISC-V and AI Chips

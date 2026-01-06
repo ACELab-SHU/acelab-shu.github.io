@@ -29,12 +29,10 @@ profiles:
     label: E-mail Me
 #   - icon: academicons/google-scholar
 #     url: https://scholar.google.com/citations?user=ePsR1BgAAAAJ
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:shenyihao@shu.edu.cn'
-#   - icon: academicons/google-scholar
-#     url: https://scholar.google.com/citations?user=ePsR1BgAAAAJ
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:carrot29@shu.edu.cn'
 
 interests:
   - High-Precision GNSS Positioning Algorithms

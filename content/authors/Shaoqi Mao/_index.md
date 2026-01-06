@@ -26,7 +26,14 @@ organizations:
   - name: COMAC Shanghai Aircraft Design & Research Institute
     url: http://sadri.comac.cc/
 
-
+profiles:
+  - icon: envelope
+    url: 'mailto:2140954153@qq.com'
+    label: E-mail Me
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:2140954153@qq.com'
 
 interests:
   - Video and Image Processing

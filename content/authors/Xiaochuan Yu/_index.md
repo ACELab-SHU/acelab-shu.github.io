@@ -22,14 +22,14 @@ organizations:
     url: https://scie.shu.edu.cn/
 
 # # Social network links
-# profiles:
-#   - icon: envelope
-#     url: 'mailto:yxc@shu.edu.cn'
-#     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:yxc@shu.edu.cn'
+profiles:
+  - icon: envelope
+    url: 'mailto:yxc@shu.edu.cn'
+    label: E-mail Me
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:yxc@shu.edu.cn'
 
 interests:
   - Communication Algorithms and AI Technologies

@@ -26,7 +26,14 @@ organizations:
   - name: HiSilicon
     url: https://www.hisilicon.com/cn
 
-
+profiles:
+  - icon: envelope
+    url: 'mailto:tianciwang1999@163.com'
+    label: E-mail Me
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:tianciwang1999@163.com'
 
 interests:
   - Wireless Communication

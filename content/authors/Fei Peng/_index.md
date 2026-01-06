@@ -26,6 +26,16 @@ organizations:
   - name: TCL
     url: https://www.tcltech.com/
 
+    # Social network links
+profiles:
+  - icon: envelope
+    url: 'mailto:906315284@qq.com'
+    label: E-mail Me
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:906315284@qq.com'
+
 
 
 interests:
