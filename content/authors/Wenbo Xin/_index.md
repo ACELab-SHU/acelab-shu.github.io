@@ -26,7 +26,14 @@ organizations:
   - name: ASR
     url: https://www.asrmicro.com/
 
-
+profiles:
+  - icon: envelope
+    url: 'mailto:xinwenbo1996@163.com'
+    label: E-mail Me
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:txinwenbo1996@163.com'
 
 interests:
   - Wireless Communication

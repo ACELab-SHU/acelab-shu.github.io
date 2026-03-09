@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:13127537420@163.com'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:13127537420@163.com'
 
 interests:
   - GNSS Baseband Receiver Design

@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:liuchengsheng@shu.edu.cn'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:liuchengsheng@shu.edu.cn'
 
 interests:
   - Neural Network Design for AI-Enabled Wireless Communication Systems

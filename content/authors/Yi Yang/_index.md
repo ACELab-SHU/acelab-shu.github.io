@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:lynnyy@shu.edu.cn'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:lynnyy@shu.edu.cn'
 
 interests:
   - AI Chips and Systems

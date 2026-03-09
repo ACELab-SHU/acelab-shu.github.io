@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:limznag@shu.edu.cn'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:limznag@shu.edu.cn'
 
 interests:
   - FPGA-Based Digital Signal Processing

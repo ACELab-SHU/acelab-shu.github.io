@@ -480,7 +480,7 @@
   urldate   = {2025-11-23},
 }
 
-@InProceedings{huangAgeInformation2,
+@InProceedings{huangAgeInformation2022,
   author       = {Huang, Yijie and Jiang, Zhiyuan},
   booktitle    = {34th International Teletraffic Congress (ITC 34)},
   title        = {Age of {{Information}} in an {{M}}/{{M}}/2 {{Queue}} with {{In-Order Delivery}}},
@@ -593,14 +593,6 @@
   doi       = {10.23919/jcc.2021.02.014},
   publisher = {IEEE},
   urldate   = {2025-11-22},
-}
-
-@Misc{ImprovedScalingLaw,
-  howpublished = {https://scholar.google.com/citations?view\_op=view\_citation\&hl=zh-CN\&user=DH4HG-4AAAAJ\&cstart=100\&pagesize=100\&citation\_for\_view=DH4HG-4AAAAJ:WA5NYHcadZ8C},
-  title        = {‪{{Improved}} Scaling Law for Status Update Timeliness in Massive {{IoT}} by Elastic Spatial Multiplexing‬},
-  abstract     = {‪Z Jiang, S Zhou, Z Niu‬, ‪IEEE GLOBECOM 2018, 2018‬ - ‪引用次数：4 次‬},
-  doi          = {10.1109/glocom.2018.8647132},
-  urldate      = {2025-11-22},
 }
 
 @InCollection{jiaIFRIterativeFusion2021,
@@ -1773,14 +1765,6 @@
   urldate   = {2025-11-22},
 }
 
-@Article{xuLSRNRecurrentResidual,
-  author     = {XU, {\relax SHUGONG} and CAO, {\relax SHAN}},
-  title      = {{{LSRN}}: {{A Recurrent Residual Learning Framework}} for {{Continuous Wireless Channel Estimation Using Super-Resolution Concept}}},
-  doi        = {10.1109/access.2020.2975272},
-  shorttitle = {{{LSRN}}},
-  urldate    = {2025-11-22},
-}
-
 @InProceedings{yangAccuratePowerTemperature2016,
   author    = {Yang, Jianxun and Cao, Shan},
   booktitle = {2016 {{International Conference}} on {{Integrated Circuits}} and {{Microsystems}} ({{ICICM}})},
@@ -2487,6 +2471,28 @@
   doi        = {10.1109/iscas56072.2025.11043934},
   shorttitle = {{{MPQA}}},
   urldate    = {2025-11-22},
+}
+
+@Article{JiangLES2025,
+  author   = {Jiang, Limin and Shi, Yi and Xu, Siyi and Cao, Shan and Jiang, Zhiyuan},
+  journal  = {IEEE Embedded Systems Letters},
+  title    = {A Hybrid Hardware-Software Scheduling Scheme for Heterogeneous Many-Core Systems},
+  year     = {2025},
+  issn     = {1943-0671},
+  pages    = {1-1},
+  abstract = {As heterogeneous many-core systems gain prominence in embedded domains, efficient scheduling mechanisms become increasingly vital. Existing solutions often suffer from trade-offs between real-time responsiveness, parallelism, and programmability. We propose a hybrid hardware-software scheduling framework for heterogeneous many-core systems, which ensures the software algorithm’s scheduling results while dynamically adjusting task execution at runtime based on hardware status. Task dependencies are analyzed offline using a domain-specific language (DSL) to generate optimized schedules. At runtime, a hardware scheduler performs fast dependency checks and task dispatching. Experimental results show efficient parallel scheduling with minimal overhead, positioning the framework as a practical solution for latency-sensitive applications such as wireless baseband processing.},
+  doi      = {10.1109/LES.2025.3635097},
+}
+
+@Article{JiangTCAD2025,
+  author   = {Jiang, Limin and Xu, Siyi and Liu, Yintao and Shen, Yihao and Shi, Yi and Cao, Shan and Jiang, Zhiyuan},
+  journal  = {IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems},
+  title    = {An Arbitrary Register Grouping Scheme for RISC-V Vector Extension: Compilation Support and Hardware Implementation},
+  year     = {2025},
+  issn     = {1937-4151},
+  pages    = {1-1},
+  abstract = {Vector instruction set architectures (ISAs) play a critical role in accelerating data-parallel computation, yet mainstream designs—such as the RISC-V “V” Vector Extension (RVV) – still rely on rigid, power-of-two register grouping strategies. These limitations hinder performance when handling ultra-long vectors or non-uniform workloads, as they require extensive strip-mining and careful low-level tuning to maintain efficiency. To overcome these bottlenecks, we propose Zoozve, a flexible, strip-mining-free extension to the RISC-V vector ISA. Zoozve introduces an arbitrary register grouping mechanism that enables more precise register utilization and eliminates the need for data slicing across multiple loop iterations. This work presents a full-stack realization of Zoozve, including (1) a hardware-compatible ISA with support for flexible vector lengths and asymmetric instructions, (2) a compiler backend based on LLVM that performs intrinsic splitting, register allocation with live-interval modification, and instruction coalescing, and (3) a hardware proof-of-concept implementation that integrates hazard detection and a register-level element exchange engine. Experimental evaluation using instruction-level simulation shows that Zoozve achieves up to 344.44× speedup in fast Fourier transform (FFT), 76× in dot product, 58.92× in axpy, and 20.41× in 2D convolution compared to RVV, primarily by eliminating strip-mining and improving register reuse. Register transfer level (RTL) synthesis in a 40 nm process shows that Zoozve’s additional hardware logic incurs only 9% area overhead, confirming its feasibility for real-world deployment. Together, these results demonstrate Zoozve’s potential as a scalable and efficient vector processing solution for high-performance computing, machine learning, and signal processing.},
+  doi      = {10.1109/TCAD.2025.3649448},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

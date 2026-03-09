@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:2786716124@shu.edu.cn'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:2786716124@shu.edu.cn'
 
 interests:
   - Cryptographic Algorithms and RISC-V

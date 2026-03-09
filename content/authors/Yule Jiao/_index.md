@@ -26,10 +26,10 @@ profiles:
   - icon: envelope
     url: 'mailto:jiaoyule@shu.edu.cn'
     label: E-mail Me
-# social:
-#   - icon: envelope
-#     icon_pack: fas
-#     link: 'mailto:luohanbin@shu.edu.cn'
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:jiaoyule@shu.edu.cn'
 
 interests:
   - FPGA-Based Digital Signal Processing
