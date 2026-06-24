@@ -3,7 +3,7 @@
 title: Shan Cao
 type: landing
 
-external_url: "https://scie-ce.shu.edu.cn/info/1092/1091.htm"
+external_url: "/shan-cao/"
 
 # Name pronunciation (optional)
 name_pronunciation: ''
