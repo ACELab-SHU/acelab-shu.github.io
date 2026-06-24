@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications on Zhiyuan Jiang</title>
+    <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/</link>
+    <description>Recent content in Publications on Zhiyuan Jiang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2020 Zhiyuan Jiang</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://acelab-shu.github.io/zhiyuan-jiang/publication/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Analyzing Age of Information in Multiaccess Networks by Fluid Limits</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/76/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/76/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Age of Information Optimized MAC in V2X Sidelink via Piggyback-Based Collaboration</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/63/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/63/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Age-Optimal Scheduling for Heterogeneous Traffic with Timely Throughput Constraints</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/77/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/77/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Error Analysis for Status Update from Sensors with Temporally and Spatially Correlated Observations</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/66/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/66/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Predictive Wireless Based Status Update for Communication-Agnostic Sampling</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/70/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/70/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SMART: Situationally-Aware Multi-Agent Reinforcement Learning-Based Transmissions</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/53/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/53/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensing and Communication Co-Design for Status Update in Multiaccess Wireless Networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/55/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/55/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Energy-optimal and delay-bounded computation offloading in mobile edge computing with heterogeneous clouds</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/25/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/25/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Round-Robin is Provably Near-Optimal for Minimizing Age with HARQ over Heterogeneous Unreliable Multiaccess Channels</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/75/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/75/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Age-Optimal Scheduling for Heterogeneous Traffic with Timely-Throughput Constraint</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/71/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/71/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SENATE: A Permissionless Byzantine Consensus Protocol in Wireless Networks for Real-Time Internet-of-Things Applications</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/35/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/35/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Reinforcement Learning-Based Beam Tracking for Low-Latency Services in Vehicular Networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/57/</link>
+      <pubDate>Tue, 11 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/57/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Learning-Based Coverage and Capacity Optimization</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/49/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/49/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Revealing Much While Saying Less: Predictive Wireless for Status Update</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/56/</link>
+      <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/56/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AI-Assisted Low Information Latency Wireless Networking</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/54/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/54/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Closed-Form Whittle&#39;s Index-Enabled Random Access for Timely Status Update</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/41/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/41/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimal Blocklength Allocation towards Reduced Age of Information in Wireless Sensor Networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/61/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/61/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Closed-Form Analysis of Non-Linear Age of Information in Status Updates With an Energy Harvesting Transmitter</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/21/</link>
+      <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/21/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scalable Multi-Agent Learning for Situationally-Aware Multiple-Access and Grant-Free Transmissions</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/52/</link>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/52/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Distributed Policy Learning Based Random Access for Diversified QoS Requirements</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/47/</link>
+      <pubDate>Fri, 19 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/47/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimizing Information Freshness in Broadcast Network with Unreliable Links and Random Arrivals: An Approximate Index Policy</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/50/</link>
+      <pubDate>Fri, 19 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/50/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Status from a Random Field: How Densely Should One Update?</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/48/</link>
+      <pubDate>Fri, 19 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/48/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning-Based Remote Channel Inference: Feasibility Analysis and Case Study</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/33/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/33/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploiting the Moving Intelligence: Delay-Optimized Computation Offloading in Vehicular Fog Networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/vcc/</link>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/vcc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Intermittent CSI Update for Massive MIMO Systems with Heterogeneous User Mobility</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/32/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A Two-Step Learning and Interpolation Method for Location-based Channel Database Construction</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/24/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/24/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A Unified Sampling and Scheduling Approach for Status Update in Multiaccess Wireless Networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/40/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/40/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Only Those Requested Count: Proactive Scheduling Polices for Minimizing Effective Age-of-Information</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/51/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/51/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploiting Wireless Channel State Information Structures Beyond Linear Correlations: A Deep Learning Approach</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/17/</link>
+      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/17/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Improved Scaling Law for Status Update Timeliness in Massive IoT by Elastic Spatial Multiplexing</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/37/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/37/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Inferring Remote Channel State Information: Cramer-Rao Lower Bound and Deep Learning Implementation</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/39/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/39/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Time-Sequence Channel Inference for Beam Alignment\ in Vehicular Networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/45/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/45/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Can Decentralized Status Update Achieve Universally Near-Optimal Age-of-Information in Wireless Multiaccess Channels?</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/38/</link>
+      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/38/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Adaptive Learning-Based Task Offloading for Vehicular Edge Computing Systems</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/44/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/44/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Methods and apparatuses for spatial pre-processing of signals in a wireless communication system</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/43/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/43/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Radio Node Calibration</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/46/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/46/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Decentralized Status Update for Age-of-Information Optimization in Wireless Multiaccess Channels</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/36/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/36/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Beam-based massive MIMO downlink scheduling based on statistical CSI by block coordinated update</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/16/</link>
+      <pubDate>Mon, 11 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/16/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Multiplexing of subframes with different subcarrier spacings</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/42/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/42/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Discrete spatial compression beyond beamspac channel sparsity based on branch-and-bound</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/22/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/22/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Network Architecture, Methods, and Devices for a Wireless Communications Network - 1/3</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/10/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/10/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Network Architecture, Methods, and Devices for a Wireless Communications Network - 2/3</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/9/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How often should CSI be updated for massive MIMO systems with massive connectivity?</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/28/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/28/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Joint user scheduling and beam selection optimization for beam-based massive MIMO downlinks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/15/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/15/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning-based task offloading for vehicular cloud computing systems</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/34/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/34/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimal discrete spatial compression for beamspace massive MIMO signals</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/12/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/12/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimal sleeping mechanism for multiple servers with MMPP-based bursty traffic arrival</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/30/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/30/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Remote channel inference for beamforming in ultra-dense hyper-cellular network</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/29/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/29/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Task replication for deadline-constrained vehicular cloud computing: optimal policy, performance analysis and implications on road traffic</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/27/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/27/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Timely Status Update in Massive IoT Systems: Decentralized Scheduling for Wireless Uplinks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/31/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/31/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Elastic Local Breakout Strategy and Implementation for Delay-Sensitive Packets with Local Significance</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/23/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/23/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CSI acquisition for sleeping cells in hyper cellular networks based on channel learning</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/26/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/26/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Proactive Content Push in Heterogeneous Networks with Multiple Energy Harvesting Small Cells</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/18/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/18/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Synergetic communication-and-computation optimization in software-defined hypercellular networks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/20/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/20/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>System design and software-defined implementation for hyper-cellular network</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/19/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/19/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Antenna-beam spatial transformation in C-RAN with large antenna arrays</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/14/</link>
+      <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/14/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pilot-data superposition for beam-based FDD massive MIMO downlinks</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/13/</link>
+      <pubDate>Mon, 06 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/13/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A novel TLS-based antenna reciprocity calibration scheme in TDD MIMO systems</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/11/</link>
+      <pubDate>Thu, 01 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/11/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Achievable rates of FDD massive MIMO systems with spatial channel correlation</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/5/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimal antenna cluster size in cell-free large-scale distributed antenna systems with imperfect CSI and intercluster interference</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/2/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>On dimensionality loss in FDD massive MIMO systems</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/7/</link>
+      <pubDate>Mon, 09 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>User scheduling in pilot-assisted TDD multiuser MIMO systems</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/8/</link>
+      <pubDate>Mon, 09 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dynamic channel acquisition in MU-MIMO</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/4/</link>
+      <pubDate>Mon, 29 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>On the achievable rates of FDD massive MIMO systems with spatial channel correlation</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/6/</link>
+      <pubDate>Mon, 13 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Minimum power consumption of a base station with large-scale antenna array</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/3/</link>
+      <pubDate>Thu, 29 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Capacity bounds of downlink network-MIMO systems with inter-cluster interference</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/publication/1/</link>
+      <pubDate>Sat, 01 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/publication/1/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

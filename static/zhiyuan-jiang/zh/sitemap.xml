@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/zh/categories/" hreflang="zh"/>
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/categories/" hreflang="en"/>
+    
+      <loc>https://acelab-shu.github.io/zhiyuan-jiang/zh/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/zh/publication_types/" hreflang="zh"/>
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/publication_types/" hreflang="en"/>
+    
+      <loc>https://acelab-shu.github.io/zhiyuan-jiang/zh/publication_types/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/zh/tags/" hreflang="zh"/>
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/tags/" hreflang="en"/>
+    
+      <loc>https://acelab-shu.github.io/zhiyuan-jiang/zh/tags/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/zh/" hreflang="zh"/>
+      <xhtml:link rel="alternate" href="https://acelab-shu.github.io/zhiyuan-jiang/" hreflang="en"/>
+    
+      <loc>https://acelab-shu.github.io/zhiyuan-jiang/zh/</loc>
+      <lastmod>2016-04-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+</urlset>

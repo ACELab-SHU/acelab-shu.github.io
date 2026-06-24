@@ -3,7 +3,7 @@
 title: Zhiyuan Jiang
 type: landing
 
-external_url: "https://zhiyuan-jiang.github.io"
+external_url: "/zhiyuan-jiang/"
 
 # Name pronunciation (optional)
 name_pronunciation: ''

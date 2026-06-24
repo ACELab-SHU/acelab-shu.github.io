@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on 姜之源</title>
+    <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/</link>
+    <description>Recent content in Homes on 姜之源</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>&amp;copy; 2020 Zhiyuan Jiang</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://acelab-shu.github.io/zhiyuan-jiang/zh/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/about/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/about/</guid>
+      <description>个人简介 欢迎访问我的主页。我于2010年和2015年分别在清华大学电子工程系获得工学学士和博士学位，博士导师为牛志升教授。2013年至2014年，我访问美国南加州大学 WiDeS 研究组，合作导师为 Andreas F. Molisch 教授。2015年至2016年，我在 Ericsson 担任研究员。2017年至2018年，我访问美国南加州大学 ANRG 研究组，与 Bhaskar Krishnamachari 教授 合作。2018年，我在美国俄勒冈州希尔斯伯勒 Intel Labs 从事无线信号处理研究。目前，我任上海大学通信与信息工程学院教授。关于我的研究工作，请访问 ACELab 主页。</description>
+    </item>
+    
+    <item>
+      <title>荣誉与奖励</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/honors/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/honors/</guid>
+      <description> 中国电子学会自然科学奖二等奖（第三完成人） China Communications Best Paper Award, 2023 华为技术合作成果转化奖二等奖 ASICON Best Student Paper Award International Teletraffic Congress Rising Scholar Award, 2020 上海市青年科技启明星计划, 2020 IEEE ICC 2020 Best Paper Award IEEE Wireless Communications Letters Exemplary Reviewer IEEE INFOCOM 2019 Best In-Session Presentation Award 上海市海外高层次人才计划, 2018 上海市东方学者特聘教授, 2018 清华大学本科及研究生阶段多项奖学金  </description>
+    </item>
+    
+    <item>
+      <title>学术服务</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/services/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/services/</guid>
+      <description>期刊编辑
+ Associate Editor, IEEE/KICS Journal of Communications and Networks Guest Editor, IEEE Internet of Things Journal Special Issue on Age of Information and Data Semantics for Sensing, Communication and Control Co-Design in IoT  会议组织
+ Program Co-Chair, IEEE WCNC 2021 Workshop on Intelligent Computing and Caching at the Network Edge TPC Co-Chair, IEEE GLOBECOM 2020 Workshop on Information Freshness, Communications, Control, and Computing for Industrial IoT Publicity Co-Chair, IEEE DySPAN 2020 Publicity Co-Chair, IEEE WCNC 2020 Workshop on Intelligent Computing and Caching at the Network Edge Publicity Co-Chair, IEEE Globecom 2019 Workshop on Wireless Edge Intelligence  程序委员会</description>
+    </item>
+    
+    <item>
+      <title>教学</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/teaching/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/teaching/</guid>
+      <description>上海大学通信与信息工程学院
+ 通信原理（本科生）  清华大学电子工程系（助教）
+ 高等线性代数 排队论  </description>
+    </item>
+    
+    <item>
+      <title>个人</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/personal/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/personal/</guid>
+      <description>我曾于2010年至2015年效力于清华大学棒球队。球队曾获得2009、2010、2011、2013、2014、2016、2017年北京市高校棒球冠军，并在2009年桂林、2013年天津、2014年无锡、2015年大连举行的全国高校棒球比赛中获得冠军或并列冠军。
+我也是梦幻棒球和 MLB 的爱好者，喜欢的 MLB 球队是 Boston Red Sox。</description>
+    </item>
+    
+    <item>
+      <title>联系方式</title>
+      <link>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/contact/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://acelab-shu.github.io/zhiyuan-jiang/zh/home/contact/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
