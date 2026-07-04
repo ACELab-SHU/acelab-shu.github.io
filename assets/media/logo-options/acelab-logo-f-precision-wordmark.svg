@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180" role="img" aria-label="ACE-Lab Precision Wordmark logo">
+  <defs><style>.word{fill:#172033;font:900 78px Arial,Helvetica,sans-serif;letter-spacing:0}.lab{fill:#172033;font:900 58px Arial,Helvetica,sans-serif;letter-spacing:0}.sub{fill:#66788a;font:500 18px Arial,Helvetica,sans-serif;letter-spacing:0}</style></defs>
+  <text class="word" x="38" y="98">ACE</text>
+  <rect x="210" y="48" width="54" height="10" rx="5" fill="#17a398"/>
+  <text class="lab" x="282" y="98">Lab</text>
+  <path d="M43 126 H174 M290 126 H426" fill="none" stroke="#1266d6" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="211" cy="126" r="7" fill="#ff9f1c"/>
+  <circle cx="252" cy="126" r="7" fill="#17a398"/>
+  <text class="sub" x="43" y="154">clean website-first logo</text>
+</svg>

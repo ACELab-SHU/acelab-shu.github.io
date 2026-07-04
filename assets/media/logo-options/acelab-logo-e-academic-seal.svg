@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180" role="img" aria-label="ACE-Lab Academic Seal logo">
+  <defs><style>.word{fill:#172033;font:800 62px Arial,Helvetica,sans-serif;letter-spacing:0}.lab{fill:#172033;font:800 52px Arial,Helvetica,sans-serif;letter-spacing:0}.sub{fill:#66788a;font:500 18px Arial,Helvetica,sans-serif;letter-spacing:0}</style></defs>
+  <circle cx="92" cy="90" r="72" fill="#ffffff" stroke="#223044" stroke-width="7"/>
+  <circle cx="92" cy="90" r="50" fill="#eef6ff" stroke="#1266d6" stroke-width="6"/>
+  <path d="M62 111 L92 48 L122 111 M75 86 H109" fill="none" stroke="#223044" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M49 131 C78 148 108 148 136 131" fill="none" stroke="#17a398" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="92" cy="90" r="8" fill="#ff9f1c"/>
+  <text class="word" x="205" y="94">ACE</text>
+  <text class="lab" x="327" y="94">Lab</text>
+  <text class="sub" x="208" y="125">Shanghai University</text>
+</svg>

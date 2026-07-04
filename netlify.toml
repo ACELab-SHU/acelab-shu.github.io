@@ -3,18 +3,18 @@
     set -e
     echo "=== Starting Blog build process ==="
     echo "Node version: $(node --version)"
-    echo "pnpm version: $(pnpm --version)"
+    echo "npm version: $(npm --version)"
     echo "Hugo version: $(hugo version)"
     echo "Go version: $(go version || echo 'Go not available')"
     
     echo "=== Installing dependencies ==="
-    pnpm install --verbose
+    npm ci --verbose
     
     echo "=== Running Hugo build ==="
     hugo --gc --minify -b $URL --logLevel debug --printI18nWarnings --printPathWarnings
     
     echo "=== Running Pagefind indexing ==="
-    pnpm dlx pagefind --source 'public' --verbose
+    npx pagefind --source 'public' --verbose
     
     echo "=== Build completed successfully ==="
   """
@@ -28,7 +28,6 @@
   HUGO_LOG_I18N_WARNINGS = "true"
   HUGO_LOG_WARNINGS = "true"
   FORCE_COLOR = "1"
-  PNPM_LOG_LEVEL = "debug"
 
 [context.production.environment]
   HUGO_ENV = "production"
@@ -38,9 +37,9 @@
     set -e
     echo "=== Deploy Preview Build ==="
     echo "Deploy URL: $DEPLOY_PRIME_URL"
-    pnpm install --verbose
+    npm ci --verbose
     hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL --logLevel debug --printI18nWarnings --printPathWarnings
-    pnpm dlx pagefind --source 'public' --verbose
+    npx pagefind --source 'public' --verbose
   """
 
 [context.branch-deploy]
@@ -48,9 +47,9 @@
     set -e
     echo "=== Branch Deploy Build ==="
     echo "Deploy URL: $DEPLOY_PRIME_URL"
-    pnpm install --verbose
+    npm ci --verbose
     hugo --gc --minify -b $DEPLOY_PRIME_URL --logLevel debug --printI18nWarnings --printPathWarnings
-    pnpm dlx pagefind --source 'public' --verbose
+    npx pagefind --source 'public' --verbose
   """
 
 [[plugins]]
