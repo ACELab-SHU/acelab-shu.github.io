@@ -12,12 +12,22 @@
 {{ $title := $block.content.title | emojify | $page.RenderString }}
 {{ $subtitle := $block.content.subtitle | emojify | $page.RenderString }}
 {{ $text := $block.content.text | emojify | $page.RenderString }}
+{{ $isZH := eq site.Language.Lang "zh" }}
+{{ $contentSite := index site.Sites 0 }}
 
 {{/* 1. 数据预处理 */}}
 {{ $groups := slice }}
 {{ range $block.content.user_groups }}
   {{ $group_name := . }}
-  {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
+  {{ $display_group_name := $group_name }}
+  {{ if $isZH }}
+    {{ if eq $group_name "Faculties" }}{{ $display_group_name = "教师" }}{{ end }}
+    {{ if eq $group_name "Postdoctoral Researchers" }}{{ $display_group_name = "博士后" }}{{ end }}
+    {{ if eq $group_name "Ph.D. Students" }}{{ $display_group_name = "博士生" }}{{ end }}
+    {{ if eq $group_name "Master Students" }}{{ $display_group_name = "硕士生" }}{{ end }}
+    {{ if eq $group_name "Alumni" }}{{ $display_group_name = "校友" }}{{ end }}
+  {{ end }}
+  {{ $query := where (where $contentSite.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
   
   {{/* --- 预先按名字(Title)升序排列 --- */}}
   {{ $query = sort $query "Title" "asc" }}
@@ -29,7 +39,7 @@
   {{ $query = sort $query $sort_by $sort_order }}
   
   {{ if gt (len $query) 0 }}
-    {{ $groups = $groups | append (dict "name" $group_name "people" $query) }}
+    {{ $groups = $groups | append (dict "name" $display_group_name "people" $query) }}
   {{ end }}
 {{ end }}
 
@@ -87,7 +97,7 @@
              {{ $is_external = true }}
            {{ else }}
              {{/* 否则查找内部作者页面链接 */}}
-             {{ with site.GetPage (printf "/authors/%s" (path.Base $person.File.Dir)) }}
+             {{ with $contentSite.GetPage (printf "/authors/%s" (path.Base $person.File.Dir)) }}
                {{ $link = .RelPermalink }}
              {{ end }}
            {{ end }}

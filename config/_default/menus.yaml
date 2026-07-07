@@ -4,19 +4,19 @@
 #   The weight parameter defines the order that the links will appear in.
 
 main:
-  - name: Home
+  - name: 首页
     url: /
     weight: 10
-  - name: Research
+  - name: 研究方向
     # url: /researches/
     url: /#researches
     identifier: research
     weight: 11
-  - name: Neuro Baseband
+  - name: NeuroBaseband
     url: /researches/NeuroBaseband/
     parent: research
     weight: 1
-  - name: Edge AI Inference Engine
+  - name: 边缘 AI 推理引擎
     url: /researches/Edge_AI/
     parent: research
     weight: 2
@@ -30,15 +30,15 @@ main:
   # - name: Teaching
   #   url: /teaching/
   #   weight: 13
-  - name: People
+  - name: 团队成员
     url: /people/
     weight: 14
-  - name: Publications
+  - name: 论文成果
     url: /publication/
     weight: 15
-  - name: Events
+  - name: 实验室活动
     url: /events
     weight: 16
-  - name: Join Us
+  - name: 加入我们
     url: /opportunities/
     weight: 17

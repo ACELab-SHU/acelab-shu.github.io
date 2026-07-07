@@ -6,9 +6,23 @@
 {{ $showToolbar := default true $block.content.filters.show_toolbar }}
 {{ $filterAuthor := default "" $block.content.filters.author }}
 {{ $sortOrder := default "year_type" $block.design.sort_order }}
+{{ $isZH := eq site.Language.Lang "zh" }}
+{{ $labelSearch := cond $isZH "搜索（题名/作者/会议或期刊）" "Search (Title/Author/Venue)" }}
+{{ $labelKeywords := cond $isZH "输入关键词..." "Type keywords..." }}
+{{ $labelYear := cond $isZH "年份" "Year" }}
+{{ $labelAllYear := cond $isZH "全部年份" "All year" }}
+{{ $labelType := cond $isZH "类型" "Type" }}
+{{ $labelAllType := cond $isZH "全部类型" "All type" }}
+{{ $labelConference := cond $isZH "会议论文" "Conference Papers" }}
+{{ $labelJournal := cond $isZH "期刊论文" "Journal Articles" }}
+{{ $labelPreprint := cond $isZH "预印本" "Preprints" }}
+{{ $labelOther := cond $isZH "其他成果" "Other Publications" }}
+{{ $labelFilter := cond $isZH "筛选" "Filter" }}
+{{ $labelReset := cond $isZH "重置" "Reset" }}
+{{ $contentSite := index site.Sites 0 }}
 
 {{/* ================= 数据获取与预处理 ================= */}}
-{{ $query := site.RegularPages }}
+{{ $query := $contentSite.RegularPages }}
 {{ $query = where $query "Type" "publication" }}
 
 {{/* 1. 作者筛选 */}}
@@ -33,19 +47,19 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
       
       <div class="md:col-span-4 flex flex-col">
-        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">Search (Title/Author/Venue)</label>
-        <input type="text" id="pub-search-input" placeholder="Type keywords..." 
+        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">{{ $labelSearch }}</label>
+        <input type="text" id="pub-search-input" placeholder="{{ $labelKeywords }}" 
                class="w-full px-3 py-2 rounded border-none focus:ring-2 focus:ring-blue-300 
                       bg-white text-black placeholder-gray-500
                       dark:bg-slate-700 dark:text-white dark:placeholder-gray-400 dark:focus:ring-primary-500">
       </div>
 
       <div class="md:col-span-2 flex flex-col">
-        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">Year</label>
+        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">{{ $labelYear }}</label>
         <select id="pub-filter-year" class="w-full px-3 py-2 rounded border-none cursor-pointer
                       bg-white text-black
                       dark:bg-slate-700 dark:text-white">
-          <option value="all">All year</option>
+          <option value="all">{{ $labelAllYear }}</option>
           {{ range ($query.GroupByDate "2006") }}
             <option value="{{ .Key }}">{{ .Key }}</option>
           {{ end }}
@@ -53,14 +67,14 @@
       </div>
 
       <div class="md:col-span-2 flex flex-col">
-        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">Type</label>
+        <label class="text-white dark:text-gray-200 font-semibold mb-1 ml-1">{{ $labelType }}</label>
         <select id="pub-filter-type" class="w-full px-3 py-2 rounded border-none cursor-pointer
                       bg-white text-black
                       dark:bg-slate-700 dark:text-white">
-          <option value="all">All type</option>
-          <option value="1">Conference Papers</option> 
-          <option value="2">Journal Articles</option>   
-          <option value="3">Preprint / Other</option>
+          <option value="all">{{ $labelAllType }}</option>
+          <option value="1">{{ $labelConference }}</option> 
+          <option value="2">{{ $labelJournal }}</option>   
+          <option value="3">{{ if $isZH }}预印本 / 其他{{ else }}Preprint / Other{{ end }}</option>
         </select>
       </div>
       
@@ -68,14 +82,14 @@
         <button onclick="filterPublications()" class="w-full font-bold py-2 rounded transition shadow
                        bg-white text-[#00509e] hover:bg-gray-100
                        dark:bg-primary-600 dark:text-white dark:hover:bg-primary-500">
-          Filter
+          {{ $labelFilter }}
         </button>
       </div>
 
       <div class="md:col-span-2">
         <button onclick="resetFilters()" class="w-full bg-transparent border border-white text-white font-bold py-2 rounded 
                        hover:bg-white/10 dark:hover:bg-white/5 transition">
-          Reset
+          {{ $labelReset }}
         </button>
       </div>
     </div>
@@ -99,7 +113,7 @@
           {{ $confs := where .Pages "Params.publication_types" "intersect" (slice "1" "paper-conference") }}
           {{ if len $confs }}
           <div class="js-group-sub mb-6" data-group-type="type" data-value="1">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Conference Papers</h3>
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">{{ $labelConference }}</h3>
             {{/* 关键修改：传递 target_author 参数 */}}
             {{ range $confs }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
           </div>
@@ -108,7 +122,7 @@
           {{ $journals := where .Pages "Params.publication_types" "intersect" (slice "2" "article-journal") }}
           {{ if len $journals }}
           <div class="js-group-sub mb-6" data-group-type="type" data-value="2">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Journal Articles</h3>
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">{{ $labelJournal }}</h3>
             {{ range $journals }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
           </div>
           {{ end }}
@@ -116,7 +130,7 @@
           {{ $preprints := where .Pages "Params.publication_types" "intersect" (slice "3" "article-preprint") }}
           {{ if len $preprints }}
           <div class="js-group-sub mb-6" data-group-type="type" data-value="3">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Preprints</h3>
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">{{ $labelPreprint }}</h3>
             {{ range $preprints }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
           </div>
           {{ end }}
@@ -124,7 +138,7 @@
           {{ $others := where .Pages "Params.publication_types" "intersect" (slice "0" "4" "5" "6" "report" "thesis" "book" "chapter" "book-section" "manuscript" "speech" "patent") }}
           {{ if len $others }}
           <div class="js-group-sub mb-6" data-group-type="type" data-value="3">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">Other Publications</h3>
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">{{ $labelOther }}</h3>
             {{ range $others }}{{ partial "views/pub-item" (dict "item" . "target_author" $filterAuthor) }}{{ end }}
           </div>
           {{ end }}
@@ -140,7 +154,7 @@
       {{ if len $allConfs }}
         <div class="js-group-main mb-10" data-group-type="type" data-value="1">
           <div class="flex items-center mb-6">
-             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Conference Papers</h2>
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">{{ $labelConference }}</h2>
           </div>
           {{ range $allConfs.GroupByDate "2006" }}
           <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
@@ -156,7 +170,7 @@
       {{ if len $allJournals }}
         <div class="js-group-main mb-10" data-group-type="type" data-value="2">
           <div class="flex items-center mb-6">
-             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Journal Articles</h2>
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">{{ $labelJournal }}</h2>
           </div>
           {{ range $allJournals.GroupByDate "2006" }}
           <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
@@ -172,7 +186,7 @@
       {{ if len $allPreprints }}
         <div class="js-group-main mb-10" data-group-type="type" data-value="3">
           <div class="flex items-center mb-6">
-             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Preprints</h2>
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">{{ $labelPreprint }}</h2>
           </div>
           {{ range $allPreprints.GroupByDate "2006" }}
           <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">
@@ -188,7 +202,7 @@
       {{ if len $allOthers }}
         <div class="js-group-main mb-10" data-group-type="type" data-value="3">
            <div class="flex items-center mb-6">
-             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">Other Publications</h2>
+             <h2 class="text-2xl font-bold uppercase text-primary-700 dark:text-primary-400 border-l-4 border-primary-700 dark:border-primary-400 pl-3">{{ $labelOther }}</h2>
           </div>
           {{ range $allOthers.GroupByDate "2006" }}
           <div class="js-group-sub mb-6 ml-4" data-group-type="year" data-value="{{ .Key }}">

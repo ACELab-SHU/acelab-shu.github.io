@@ -1,6 +1,7 @@
 {{/* Hugo Blox: Research Overview Block (Swiper.js Carousel) */}}
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
+{{ $isZH := eq site.Language.Lang "zh" }}
 
 {{/* 1. 引入 Swiper 的 CSS 和 JS */}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -37,12 +38,13 @@
         {{ range $block.content.items }}
           
           {{ $link := .link | default "#" | lower }}
+          {{ $lookupLink := replaceRE "^/zh/" "/" $link }}
           
           {{/* Image Logic */}}
           {{ $imgName := .image }}
           {{ $img := "" }}
           {{ if and $link (not (strings.HasPrefix $link "http")) }}
-            {{ $targetPage := site.GetPage $link }}
+            {{ $targetPage := site.GetPage $lookupLink }}
             {{ if $targetPage }}
               {{ $img = $targetPage.Resources.GetMatch $imgName }}
             {{ end }}
@@ -101,7 +103,7 @@
                   {{ .text }}
                 </p>
                 <div class="mt-auto flex items-center text-primary-600 dark:text-primary-400 font-semibold group-hover/card:translate-x-2 transition-transform duration-300">
-                  <span>Learn more</span>
+                  <span>{{ if $isZH }}了解更多{{ else }}Learn more{{ end }}</span>
                   <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>

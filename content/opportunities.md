@@ -1,46 +1,35 @@
 ---
-title: 'Experience'
+title: 加入我们
 date: 2023-10-24
 type: landing
 
 design:
   spacing: '5rem'
 
-# Note: `username` refers to the user's folder name in `content/authors/`
-
-# Page sections
 sections:
   - block: contact-info
     content:
-      title: Contact Us
-      subtitle: Get in touch with our research team
-      visit_title: Visit Our Lab
-      connect_title: Connect With Us
+      title: 联系我们
+      subtitle: 欢迎与 ACELab 研究团队交流
+      visit_title: 实验室地址
+      connect_title: 联系方式
       address:
         lines:
-          - 12th Building B309
-          - School of Communication and Information Engineering
-          - Shanghai University
-          - Shanghai
-          - China
-
+          - 上海市宝山区上大路 99 号
+          - 上海大学通信与信息工程学院
+          - 12 号楼 B309
       office_hours:
-        - "Monday - Friday: 9:00 AM - 5:00 PM"
-        - "Lab Meetings: Wednesday 3:00 PM"
+        - "周一至周五：9:00-17:00"
+        - "组会时间：周三 15:00"
       email: jiangzhiyuan@shu.edu.cn
-      # phone: "+1 (555) 123-4567"
       social:
-        # - icon: brands/x
-        #   url: https://twitter.com/SmithLabResearch
-        # - icon: brands/linkedin
-        #   url: https://linkedin.com/company/smith-lab
         - icon: brands/github
           url: https://github.com/ACELab-SHU
       prospective:
-        title: Prospective Members
-        text: Interested in joining our lab? We're looking for motivated researchers.
+        title: 招生与招聘
+        text: 欢迎对无线通信、智能计算、集成电路与系统架构感兴趣的同学和研究者加入我们。
         button:
-          text: View Open Positions
+          text: 查看加入方式
           url: /opportunities
       map_url: https://maps.app.goo.gl/mw272XP3g3SripR4A
       map_embed: |

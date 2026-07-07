@@ -2,6 +2,7 @@
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
 {{ $uid := .wcBlock.id | default "slide-stack" }}
+{{ $isZH := eq site.Language.Lang "zh" }}
 
 <section class="py-16 bg-gray-50 dark:bg-gray-900" id="section-{{ $uid }}">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,12 +44,12 @@
         
         <button onclick="toggleViewMode('{{ $uid }}', 'scroll')" id="btn-scroll-{{ $uid }}" 
                 class="px-6 py-2 rounded-full text-sm font-bold transition-all shadow-sm bg-white dark:bg-slate-600 text-primary-600 dark:text-white">
-          📜 Scroll View
+          {{ if $isZH }}📜 长页浏览{{ else }}📜 Scroll View{{ end }}
         </button>
         
         <button onclick="toggleViewMode('{{ $uid }}', 'slide')" id="btn-slide-{{ $uid }}"
                 class="px-6 py-2 rounded-full text-sm font-bold transition-all text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white bg-transparent hover:bg-gray-300/50 dark:hover:bg-gray-700/50">
-          🖥️ Slide View
+          {{ if $isZH }}🖥️ 幻灯片浏览{{ else }}🖥️ Slide View{{ end }}
         </button>
       </div>
     </div>
@@ -102,8 +103,8 @@
     {{ end }}
 
     <div class="mt-12 text-center text-sm text-gray-400">
-      <span id="hint-scroll-{{ $uid }}">End of Report</span>
-      <span id="hint-slide-{{ $uid }}" class="hidden">Use arrow keys to navigate</span>
+      <span id="hint-scroll-{{ $uid }}">{{ if $isZH }}报告结束{{ else }}End of Report{{ end }}</span>
+      <span id="hint-slide-{{ $uid }}" class="hidden">{{ if $isZH }}可使用方向键切换{{ else }}Use arrow keys to navigate{{ end }}</span>
     </div>
 
   </div>

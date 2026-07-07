@@ -107,6 +107,6 @@ sections:
       view: pub-item
       sort_order: "type_year" # 可选: "year_type" (默认) 或 "type_year"
 ---
-**Zeyu Hu** is an assistant professor in Information and Communication Engineering at Shanghai University, affiliated with the ACE-Lab, Key Laboratory of Specialty Fiber and Optical Access Networks. He received his Ph.D. degree in Information and Communication Engineering from Beijing University of Posts and Telecommunications (BUPT), and was a joint Ph.D. student at The University of Electro-Communications (UEC), Japan.
+**Zeyu Hu** is an assistant professor in Information and Communication Engineering at Shanghai University, affiliated with ACELab, Key Laboratory of Specialty Fiber and Optical Access Networks. He received his Ph.D. degree in Information and Communication Engineering from Beijing University of Posts and Telecommunications (BUPT), and was a joint Ph.D. student at The University of Electro-Communications (UEC), Japan.
 
 His research interests include Non-Geostationary Satellite Orbit (NGSO) Communication, Artificial Intelligence - Radio Access Network (AI-RAN) and Age of Information (Aol) optimization. His recent work focuses on fresh data collection and scheduling in large-scale satellite IoT systems, as well as energy–delay tradeoff optimization in space–air–ground integrated networks. He has published multiple papers in leading IEEE journals, including IEEE Transactions on Vehicular Technology, IEEE Internet of Things Journal, and IEEE Transactions on Communications.

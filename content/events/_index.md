@@ -1,64 +1,26 @@
 ---
-title: Recent Events 
+title: 实验室活动
 type: landing
-# cms_exclude: true
-#url: talk
-
-# View
-# view: card
-
-# Optional cover image (relative to `assets/media/` folder).
-# image:
-#   caption: ''
-#   filename: ''
 
 sections:
-  - block: collection
-    # id: news
+  - block: portfolio-lite
     content:
-      title: Recent Events 
-      subtitle: ''
-      text: ''
-      # Choose how many pages you would like to display (0 = all pages)
-      count: 0
-      # Filter on criteria
+      title: 实验室活动
       filters:
-        folders: 
+        folders:
           - events
         exclude_featured: false
-        exclude_future: false
-        exclude_past: false
-      # Choose how many pages you would like to offset by
-      offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
-      order: desc
+      tag_param: "publication_type"
+      buttons:
+        - name: 全部
+          filter: "*"
+        - name: 团队建设
+          filter: "Team Building"
     design:
-      # Choose a layout view
-      view: card
-  # - block: collection
-  #   # id: news
-  #   content:
-  #     title: Recent News 
-  #     subtitle: ''
-  #     text: ''
-  #     # Page type to display. E.g. post, talk, publication...
-  #     page_type: blog
-  #     # Choose how many pages you would like to display (0 = all pages)
-  #     count: 5
-  #     # Filter on criteria
-  #     filters:
-  #       author: ''
-  #       category: ''
-  #       tag: ''
-  #       exclude_featured: false
-  #       exclude_future: false
-  #       exclude_past: false
-  #       publication_type: ''
-  #     # Choose how many pages you would like to offset by
-  #     offset: 0
-  #     # Page order: descending (desc) or ascending (asc) date.
-  #     order: desc
-  #   design:
-  #     # Choose a layout view
-  #     view: date-title-summary
+      columns: 3
+      fill_image: true
+      show_summary: true
+      show_date: true
+      show_read_time: true
+      show_read_more: true
 ---

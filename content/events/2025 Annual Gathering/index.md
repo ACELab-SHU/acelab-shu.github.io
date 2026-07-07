@@ -1,71 +1,60 @@
 ---
-title: 2025 Annual Gathering
+title: 2025 年度聚会
 
-event: 2025 Annual Gathering
+event: 2025 年度聚会
 event_url: https://example.org
 
-location: Dongnanjiao Restaurant
+location: 东南蕉餐厅
 address:
-  street: Building C, No. 1388 Shangda Road
-  city: Shanghai
-  region: Baoshan District
+  street: 上大路 1388 号 C 座
+  city: 上海
+  region: 宝山区
   postcode: ''
-  country: China
+  country: 中国
 
-summary: The 2025 Annual Gathering is a year-end event organized for lab members, aiming to provide students and researchers with an opportunity for communication and engagement in a relaxed setting. Hosted at Dongnanjiao Restaurant, the gathering combines a shared dining experience with light recreational activities to promote interaction and community building within the lab.
+summary: 2025 年度聚会面向实验室全体成员，提供轻松交流和团队互动的机会。活动结合聚餐、音乐和桌游等环节，帮助成员在科研之外加强沟通与凝聚力。
 
-abstract: The 2025 Annual Gathering is organized as a year-end event to promote communication, strengthen cohesion, and foster a greater sense of belonging among lab members. Featuring a shared dinner and a range of light recreational activities, the gathering creates a relaxed and inclusive environment in which students and researchers can interact beyond their regular academic responsibilities. The event is intended to enrich the lab’s collective culture, encourage mutual understanding, and conclude the year in a warm and memorable way.
+abstract: 2025 年度聚会旨在促进实验室成员之间的交流，增强团队凝聚力和归属感。活动安排了共同用餐和轻量化娱乐项目，为同学和老师提供一个放松、开放、友好的互动场景。
 
 date: '2026-02-11'
 all_day: true
 
 publication_type: ["Team Building"]
-
 authors: []
-
 tags: []
-
 featured: false
 
 image:
-  caption: '2025 Annual Gathering'
+  caption: '2025 年度聚会'
   focal_point: Center
 
 slides: ""
-
 projects: []
 ---
 
-## About the Event
+## 活动简介
 
-### Overview
+### 概览
 
-The 2025 Annual Gathering is planned as a year-end event for lab members, providing students and researchers with an opportunity to come together in a relaxed and welcoming setting. As the year draws to a close, the gathering offers a valuable occasion to step away from daily academic routines, reflect on shared experiences, and strengthen connections within the lab.
+2025 年度聚会是实验室年末交流活动，为成员提供在日常科研之外相互了解和放松互动的机会。活动地点为东南蕉餐厅，围绕共享晚餐、音乐互动和桌游交流展开。
 
-Held at Dongnanjiao Restaurant, the event features a Southeast Asian dining experience together with a selection of light recreational activities. Through a combination of shared dining, music, and interactive games, the gathering is designed to create a warm and enjoyable atmosphere that encourages communication, participation, and community building.
+### 活动内容
 
-### Activities
+#### 东南亚风味晚餐
 
-#### 🍽️ Southeast Asian Dinner
+- 多样化菜品为大家提供轻松愉快的聚餐体验
+- 师生在用餐过程中自由交流，增进彼此了解
 
-- A rich variety of Southeast Asian dishes was carefully prepared, offering distinctive flavors and an enjoyable dining experience for the gathering
+#### 歌唱与互动
 
-- In a relaxed and pleasant atmosphere, faculty members and students enjoyed the meal together while engaging in casual conversations and warm exchanges
-#### 🎤 Karaoke Session
+- 晚餐期间安排歌唱表演，营造活跃氛围
+- 师生共同参与，增加活动的参与感和趣味性
 
-- A live singing performance was arranged during dinner, creating a lively and enjoyable atmosphere throughout the event
+#### 桌游交流
 
-- Faculty members and students also actively participated in singing, which further enhanced the sense of enjoyment and engagement through relaxed interaction and communication
+- 活动设置 Avalon、Splendor 等桌游项目
+- 通过合作、沟通和策略互动增强团队凝聚力
 
+### 活动意义
 
-#### 🧩 Board Games
-
-- The gathering included a selection of board games such as Avalon and Splendor, providing diverse opportunities for participation and interaction
-
-- Through cooperation, conversation, and strategic thinking in the games, the activity further strengthened interaction among participants and enhanced the cohesion of the lab
-
-### Purpose and Impact
-
-The annual gathering aims to promote communication, strengthen cohesion, and foster a greater sense of belonging among lab members. By providing an opportunity for students and researchers to engage in a relaxed setting outside their regular academic work, the event helps encourage mutual understanding and build a more connected lab.
-
-As a year-end occasion, the gathering also serves as a meaningful opportunity to reflect on shared experiences and celebrate the collective efforts of the past year. In this way, it contributes to a warm, inclusive, and supportive lab culture, while creating positive memories for the year ahead.
+年度聚会希望帮助实验室成员在轻松环境中建立更紧密的联系，促进交流与互信，并以温暖的方式回顾过去一年的共同经历。

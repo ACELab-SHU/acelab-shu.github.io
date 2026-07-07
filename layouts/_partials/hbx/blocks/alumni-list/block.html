@@ -7,9 +7,11 @@
 {{ $subtitle := $block.content.subtitle | emojify | $page.RenderString }}
 {{ $target_groups := $block.content.user_groups }}
 {{ $query := slice }}
+{{ $isZH := eq site.Language.Lang "zh" }}
+{{ $contentSite := index site.Sites 0 }}
 
 {{/* 1. 筛选逻辑 */}}
-{{ range where site.Pages "Section" "authors" }}
+{{ range where $contentSite.Pages "Section" "authors" }}
   {{ $author := . }}
   {{ $is_match := false }}
   {{ if $author.Params.user_groups }}
@@ -46,17 +48,17 @@
     
     {{/* 表头部分：YEAR居中, NAME居左, DEGREE居左, DESTINATION居左 */}}
     <div class="hidden md:flex items-center bg-gray-100 dark:bg-gray-900 border-b-2 border-primary-600 py-4 px-8 text-base font-bold text-gray-800 dark:text-white uppercase tracking-wider">
-      <div class="w-[20%] text-center">Year</div>
-      <div class="w-[20%] text-left">Name</div>
-      <div class="w-[20%] text-left">Degree</div>
-      <div class="w-[40%] text-left">Destination</div>
+      <div class="w-[20%] text-center">{{ if $isZH }}年份{{ else }}Year{{ end }}</div>
+      <div class="w-[20%] text-left">{{ if $isZH }}姓名{{ else }}Name{{ end }}</div>
+      <div class="w-[20%] text-left">{{ if $isZH }}学位{{ else }}Degree{{ end }}</div>
+      <div class="w-[40%] text-left">{{ if $isZH }}毕业去向{{ else }}Destination{{ end }}</div>
     </div>
 
     <div class="divide-y divide-gray-100 dark:divide-gray-700">
       
       {{ if eq (len $query) 0 }}
          <div class="p-8 text-center text-gray-500">
-           No alumni found.
+           {{ if $isZH }}暂无校友信息。{{ else }}No alumni found.{{ end }}
          </div>
       {{ else }}
 
@@ -81,9 +83,9 @@
         {{ range $item := $sorted }}
             {{ $person := $item.Page }}
             {{ $link := $person.RelPermalink }}
-            {{ $year := $person.Params.graduation_year | default "N/A" }}
+            {{ $year := $person.Params.graduation_year | default (cond $isZH "暂无" "N/A") }}
             {{ $degree := $person.Params.degree | default "" }}
-            {{ $destination := $person.Params.destination | default "Unknown" }}
+            {{ $destination := $person.Params.destination | default (cond $isZH "暂无" "Unknown") }}
 
             <div class="group flex flex-col md:flex-row md:items-center py-5 px-8 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors duration-200">
               

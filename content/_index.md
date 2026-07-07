@@ -1,11 +1,9 @@
 ---
-# Leave the homepage title empty to use the site title
 title: ''
 date: 2025-10-24
 type: landing
 
 design:
-  # Default section spacing
   spacing: '6rem'
 
 sections:
@@ -14,17 +12,17 @@ sections:
       slides:
         - background:
             image:
-              filename: team1.jpg      # 放在 assets/media/hero1.jpg
+              filename: team1.jpg
               position: center
               size: cover
         - background:
             image:
-              filename: team2.jpg      # 放在 assets/media/hero1.jpg
+              filename: team2.jpg
               position: center
               size: cover
         - background:
             image:
-              filename: team3.jpg      # 放在 assets/media/hero1.jpg
+              filename: team3.jpg
               position: center
               size: cover
     design:
@@ -36,163 +34,61 @@ sections:
       - block: lab-card
         id: lab-intro
         content:
-          title: "ACE-Lab"
-          subtitle: "Advanced Communication and Computing Electronics Lab, Shanghai University"
+          title: "ACELab"
+          subtitle: "上海大学先进通信与计算芯片实验室"
           description: >
-            ACE-Lab focuses on wireless communication, intelligent computing,
-            and integrated electronic systems, bridging fundamental research
-            and real-world applications.
+            ACELab 面向无线通信、智能计算与集成电路系统开展交叉研究，
+            关注从基础方法、体系结构到真实应用场景的贯通创新。
+
   - block: research-overview
     id: researches
     content:
-      title: Key Research Directions
-      # Subtitle 概括了两个方向的共同愿景：AI与通信的融合，以及架构创新
-      subtitle: "Pioneering the convergence of AI and Communication through next-generation heterogeneous architectures."
-      
+      title: 重点研究方向
+      subtitle: "面向 AI 与通信深度融合，探索下一代异构计算与开放式通信架构。"
       items:
-        # 方向一：NeuroBaseband
         - title: "NeuroBaseband"
-          # 强调：打破传统基带僵局，采用数据流驱动 RISC-V，实现 51x 加速 [cite: 253, 378, 380, 550]
-          text: "A fundamental re-imagination of baseband processors. By replacing legacy rigid hardware with a dataflow-driven RISC-V architecture, we eliminate control-flow inefficiencies, achieving a 51x speedup in 5G processing and enabling a sustainable, open path to 6G."
-          image: "featured.png" 
+          text: "面向 6G 的新型基带处理器架构。通过数据流驱动的 RISC-V 体系替代传统固定硬件路径，降低控制流开销，提升 5G/6G 基带处理效率，并为开放、可持续的通信计算平台提供支撑。"
+          image: "featured.png"
           link: "/researches/NeuroBaseband/"
-
-        # 方向二：Edge AI
-        - title: "Edge AI Inference Engine"
-          # 强调：解决边缘 AI 的不可能三角，异构计算，打破内存墙 [cite: 9, 24, 47, 56]
-          text: "Addressing the Edge AI Trilemma with a unified compute engine. Our heterogeneous architecture (1D+2D) integrates compute and memory to shatter the 'Memory Wall,' delivering high-throughput inference for CNNs and Transformers within stringent power envelopes."
+        - title: "边缘 AI 推理引擎"
+          text: "面向边缘智能的高效异构计算引擎。通过 1D 向量核心与 2D 脉动阵列共享片上存储，缓解存储墙瓶颈，在受限功耗下支持 CNN、Transformer 等模型的高吞吐推理。"
           image: "featured.png"
           link: "/researches/Edge_AI/"
-
-        # # 方向一：AI 芯片
-        # - title: "AI Chips and Neural Network Processors"
-        #   text: "Energy-efficient Domain-Specific Architectures (DSA) featuring heterogeneous RISC-V + NPU designs and full-stack compilation support for edge intelligence."
-        #   # 请确保图片放在 assets/media/research/ 下，或者根据实际路径修改
-        #   image: "featured_ai_chip.png" 
-        #   # 链接到刚才创建的子页面路径
-        #   link: "/researches/ai-chips/"
-
-        # # 方向二：无线通信
-        # - title: "Wireless Communication Systems"
-        #   text: "Advanced baseband SoC design for 5G/B5G, V2X vehicular networks, and specialized industrial applications, focusing on reliability and low latency."
-        #   image: "featured_wireless.png"
-        #   link: "/researches/wireless-systems/"
-
-        # # 方向三：通信-AI 融合
-        # - title: "Communication-AI Fusion and ISAC "
-        #   text: "Architecting 6G native AI systems with Integrated Sensing and Communication (ISAC) and semantic transmission capabilities for autonomous agents."
-        #   image: "featured_fusion.png"
-        #   link: "/researches/comm-ai-fusion/"
-
     design:
-      columns: 3 # 可选项: 2, 3, 4。 设置为 3 表示一次看 3 个，超出的部分通过滑动查看。
+      columns: 3
       fit_image: true
-      # 浅灰色背景，区分于上下的白色区块
       css_class: "bg-gray-50 dark:bg-gray-900"
-  # - block: portfolio-lite
-  #   content:
-  #     offset: 0
-  #     count: 0
-  #     title: PROJECT
-  #     # page_type: projects
-  #     filters:
-  #       folders:
-  #         - researches
-  #       exclude_featured: false
-  #     tag_param: "tags"
-  #     buttons:
-  #       - name: All
-  #         filter: "*"
-  #       - name: 5G
-  #         filter: "5g"
-  #       - name: UAV
-  #         filter: "uav"
-  #   design:
-  #     view: card        # card / article-grid / date-title-summary
-  #     columns: 3 
-  #     fill_image: false
-  #     show_summary: true
-  #     show_date: true
-  #     show_read_time: false
-  #     show_read_more: false
+
   - block: portfolio-lite
     content:
       offset: 0
       count: 0
-      title: Events
+      title: 实验室活动
       filters:
         folders:
           - events
         exclude_featured: false
       tag_param: "publication_type"
       buttons:
-        - name: All
+        - name: 全部
           filter: "*"
-        - name: Team Building
+        - name: 团队建设
           filter: "Team Building"
     design:
-      columns: 3 
+      columns: 3
       fill_image: true
       show_summary: true
       show_date: true
       show_read_time: true
       show_read_more: true
-  # - block: collection
-  #   content:
-  #     title: Recent Publications
-  #     text: ''
-  #     filters:
-  #       folders:
-  #         - publication
-  #       exclude_featured: false
-  #   design:
-  #     view: citation
+
   - block: pub-collection
     content:
-      title: Publications
+      title: 论文成果
       filters:
-        author: ""           # (可选) 填入名字，留空则显示所有
-        show_toolbar: false   # (可选) 是否显示蓝色筛选条，默认为 true
+        author: ""
+        show_toolbar: false
     design:
       view: pub-item
-      sort_order: "type_year" # 可选: "year_type" (默认) 或 "type_year"
-  # - block: collection
-  #   id: talks
-  #   content:
-  #     title: Recent & Upcoming Talks
-  #     filters:
-  #       folders:
-  #         - events
-  #   design:
-  #     view: card
-  # - block: collection
-  #   id: news
-  #   content:
-  #     title: Recent News
-  #     subtitle: ''
-  #     text: ''
-  #     # Page type to display. E.g. post, talk, publication...
-  #     page_type: blog
-  #     # Choose how many pages you would like to display (0 = all pages)
-  #     count: 5
-  #     # Filter on criteria
-  #     filters:
-  #       author: ''
-  #       category: ''
-  #       tag: ''
-  #       exclude_featured: false
-  #       exclude_future: false
-  #       exclude_past: false
-  #       publication_type: ''
-  #     # Choose how many pages you would like to offset by
-  #     offset: 0
-  #     # Page order: descending (desc) or ascending (asc) date.
-  #     order: desc
-  #   design:
-  #     # Choose a layout view
-  #     view: card
-  #     # Reduce spacing
-  #     spacing:
-  #       padding: [0, 0, 0, 0]
-
+      sort_order: "type_year"
 ---

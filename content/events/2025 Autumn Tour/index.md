@@ -1,103 +1,61 @@
 ---
-title: 2025 Autumn Tour
+title: 2025 秋游
 
-event: 2025 Autumn Tour
+event: 2025 秋游
 event_url: https://example.org
 
-location: Changxing Island Country Park
+location: 长兴岛郊野公园
 address:
-  street: No. 199, Qiu Gan Road, east side of Phoenix Highway, Changxing Island, Chongming
-  city: Shanghai
+  street: 崇明区长兴岛凤凰公路东侧秋柑路 199 号
+  city: 上海
   region: CN
   postcode: '202150'
-  country: China
+  country: 中国
 
-summary: The 2025 Autumn Tour will take place at Changxing Island Country Park in Chongming, Shanghai. The event combines outdoor activities, nature experiences, and leisure programs to provide participants with an opportunity to relax, engage in team interaction, and enjoy the autumn landscape in a pleasant and informal setting.
-abstract: This autumn tour is designed around the theme of connecting with nature, relieving stress, and strengthening team cohesion. The program features a variety of interactive and recreational activities, including orange picking, a petting zoo experience, water-based activities, outdoor sports, and social relaxation sessions. Through a balanced mix of physical activity and leisure, the event aims to foster communication, collaboration, and a positive team atmosphere beyond daily academic and research routines.
+summary: 2025 秋游计划在上海崇明长兴岛郊野公园举行，活动结合户外体验、自然景观和团队互动，让成员在轻松氛围中放松身心、增进交流。
 
-# Talk start and end times.
-#   End time can optionally be hidden by prefixing the line with `#`.
+abstract: 本次秋游以亲近自然、缓解压力和增强团队凝聚力为主题，安排采摘、动物互动、水上项目、户外运动和休闲交流等内容，帮助成员在科研学习之外建立更积极的团队氛围。
+
 date: '2025-11-16T09:00:00Z'
-# date_end: '2030-06-01T15:00:00Z'
 all_day: true
 
-# Schedule page publish date (NOT talk date).
-# publishDate: '2017-01-01T00:00:00Z'
-
 publication_type: [Team Building]
-
 authors: []
-
 tags: []
-
-# Is this a featured talk? (true/false)
 featured: false
 
 image:
-  caption: 'Metasequoia forest'
+  caption: '水杉林'
   focal_point: Right
 
-# links:
-#   - type: code
-#     url: https://github.com
-#   - type: slides
-#     url: https://slideshare.net
-#   - type: video
-#     url: https://youtube.com
-
-# Markdown Slides (optional).
-#   Associate this talk with Markdown slides.
-#   Simply enter your slide deck's filename without extension.
-#   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
-#   Otherwise, set `slides = ""`.
 slides: ""
-
-# Projects (optional).
-#   Associate this post with one or more of your projects.
-#   Simply enter your project's folder or file name without extension.
-#   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
-#   Otherwise, set `projects = []`.
 projects: []
 ---
 
-## About the Event
+## 活动简介
 
-### Overview
+### 概览
 
-The 2025 Autumn Tour will be held at Changxing Island Country Park, a scenic destination known for its natural environment and diverse outdoor facilities. The event is organized as a full-day group activity, encouraging broad participation and providing a refreshing break from academic and research work.
+2025 秋游将在长兴岛郊野公园举行。公园拥有丰富的自然景观和户外设施，适合开展一整天的团队活动。活动鼓励实验室成员共同参与，在自然环境中放松身心、增进沟通。
 
-### Activities
+### 活动内容
 
-#### 🍊 Orange Picking
+#### 采摘体验
 
-- Hands-on experience in seasonal orange orchards
+- 体验季节性橘园采摘
+- 在乡野环境中享受收获新鲜水果的乐趣
 
-- Enjoy the pleasure of harvesting fresh fruit in a rural setting
+#### 动物互动
 
-#### 🐾 Petting Zoo
+- 与温顺动物近距离接触
+- 提供轻松愉快、适合全员参与的体验
 
-- Close interaction with a variety of friendly animals
+#### 水上活动
 
-- A relaxing and enjoyable experience suitable for all participants
+- 竹筏项目可欣赏周边自然景色
+- 皮划艇项目有助于提升协作和参与感
 
-#### 🚣 Water-Based Activities
+#### 户外运动
 
-- Bamboo Rafting: a gentle ride offering views of the surrounding landscape
-
-- Kayaking: an active experience promoting coordination and teamwork
-
-#### 🏹 Outdoor Sports
-
-- Archery: improving focus and engagement through target practice
-
-- Tandem Bicycling: emphasizing cooperation and mutual coordination
-
-#### 🍵 Tea by the Fireplace
-
-- Casual tea gathering in a cozy outdoor setting
-
-- Open discussions and informal conversations among team members
-
-### Purpose and Impact
-
-This autumn tour aims to enhance communication and camaraderie among team members, promote a healthy balance between work and leisure, and strengthen the sense of belonging within the team. By creating shared experiences outside the usual working environment, the event contributes to long-term collaboration and team vitality.
+- 通过轻量化运动项目促进交流
+- 在轻松氛围中增强团队活力

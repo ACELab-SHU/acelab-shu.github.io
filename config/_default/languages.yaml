@@ -3,20 +3,47 @@
 #   Documentation: https://docs.hugoblox.com/reference/language/
 
 # Default language
+zh:
+  languageCode: zh-Hans
+  languageName: 简体中文
+  title: ACELab
+  weight: 1
+  params:
+    description: 上海大学先进通信与计算芯片实验室
+
 en:
   languageCode: en-us
-  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
-  #contentDir: content/en
-
-# Uncomment the lines below to configure your website in a second language.
-#zh:
-#  languageCode: zh-Hans
-#  contentDir: content/zh
-#  title: Chinese website title...
-#  params:
-#    description: Site description in Chinese...
-#  menu:
-#    main:
-#      - name: 传
-#        url: '#about'
-#        weight: 1
+  languageName: English
+  title: ACELab
+  weight: 2
+  params:
+    description: Advanced Communication and Computing Chip Lab, Shanghai University
+  menus:
+    main:
+      - name: Home
+        url: /en/
+        weight: 10
+      - name: Research
+        url: /en/#researches
+        identifier: research
+        weight: 11
+      - name: NeuroBaseband
+        url: /en/researches/NeuroBaseband/
+        parent: research
+        weight: 1
+      - name: Edge AI Inference Engine
+        url: /en/researches/Edge_AI/
+        parent: research
+        weight: 2
+      - name: People
+        url: /en/people/
+        weight: 14
+      - name: Publications
+        url: /en/publication/
+        weight: 15
+      - name: Events
+        url: /en/events/
+        weight: 16
+      - name: Join Us
+        url: /en/opportunities/
+        weight: 17
