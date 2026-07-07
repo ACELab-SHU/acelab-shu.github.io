@@ -37,7 +37,7 @@ sections:
         id: lab-intro
         content:
           title: "ACELab"
-          subtitle: "Advanced Communication and Computing Chip Lab, Shanghai University"
+          subtitle: "Advanced Communication and Computing Electronics Lab"
           description: >
             ACELab focuses on wireless communication, intelligent computing,
             and integrated circuit systems, bridging fundamental research

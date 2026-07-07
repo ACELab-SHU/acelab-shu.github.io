@@ -35,7 +35,7 @@ sections:
         id: lab-intro
         content:
           title: "ACELab"
-          subtitle: "上海大学先进通信与计算芯片实验室"
+          subtitle: "上海大学先进通信与计算芯片实验室<br>Advanced Communication and Computing Electronics Lab"
           description: >
             ACELab 面向无线通信、智能计算与集成电路系统开展交叉研究，
             关注从基础方法、体系结构到真实应用场景的贯通创新。

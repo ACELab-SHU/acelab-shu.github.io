@@ -17,7 +17,7 @@ en:
   title: ACELab
   weight: 2
   params:
-    description: Advanced Communication and Computing Chip Lab, Shanghai University
+    description: Advanced Communication and Computing Electronics Lab
   menus:
     main:
       - name: Home
