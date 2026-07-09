@@ -65,6 +65,11 @@
         {{/* 2. 排序逻辑 */}}
         {{ $weighted_list := slice }}
         {{ range $person := $query }}
+            {{ $display_name := $person.Title }}
+            {{ if $isZH }}
+              {{ with index site.Data.people_names $person.Title }}{{ $display_name = . }}{{ end }}
+              {{ with $person.Params.name_zh }}{{ $display_name = . }}{{ end }}
+            {{ end }}
             {{ $d := lower ($person.Params.degree | default "") }}
             {{ $weight := 99 }}
             {{ if or (in $d "postdoc") (in $d "post-doc") (in $d "博士后") }} {{ $weight = 10 }}
@@ -72,7 +77,7 @@
             {{ else if or (in $d "master") (in $d "m.sc") (in $d "ma") (in $d "ms") (in $d "meng") (in $d "硕士") }} {{ $weight = 30 }}
             {{ else if or (in $d "bachelor") (in $d "b.sc") (in $d "ba") (in $d "bs") (in $d "beng") (in $d "本科") (in $d "学士") }} {{ $weight = 40 }}
             {{ end }}
-            {{ $item := dict "Page" $person "Weight" $weight "Name" $person.Title "Year" ($person.Params.graduation_year | default "0") }}
+            {{ $item := dict "Page" $person "Weight" $weight "Name" $display_name "Year" ($person.Params.graduation_year | default "0") }}
             {{ $weighted_list = $weighted_list | append $item }}
         {{ end }}
         {{ $sorted := sort $weighted_list "Name" "asc" }}
@@ -86,6 +91,17 @@
             {{ $year := $person.Params.graduation_year | default (cond $isZH "暂无" "N/A") }}
             {{ $degree := $person.Params.degree | default "" }}
             {{ $destination := $person.Params.destination | default (cond $isZH "暂无" "Unknown") }}
+            {{ $display_name := $person.Title }}
+            {{ if $isZH }}
+              {{ with index site.Data.people_names $person.Title }}{{ $display_name = . }}{{ end }}
+              {{ with $person.Params.name_zh }}{{ $display_name = . }}{{ end }}
+            {{ end }}
+            {{ if $isZH }}
+              {{ if eq $degree "PostDoc" }}{{ $degree = "博士后" }}{{ end }}
+              {{ if eq $degree "Ph.D." }}{{ $degree = "博士" }}{{ end }}
+              {{ if eq $degree "M.S." }}{{ $degree = "硕士" }}{{ end }}
+              {{ if eq $degree "B.S." }}{{ $degree = "学士" }}{{ end }}
+            {{ end }}
 
             <div class="group flex flex-col md:flex-row md:items-center py-5 px-8 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors duration-200">
               
@@ -110,7 +126,7 @@
                    </div>
                  {{ end }}
                  <a href="{{ $link }}" class="text-base font-bold text-gray-900 dark:text-white hover:text-primary-600 transition-colors truncate">
-                   {{ $person.Title }}
+                   {{ $display_name }}
                  </a>
               </div>
 

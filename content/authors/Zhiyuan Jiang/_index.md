@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Zhiyuan Jiang
+name_zh: 姜之源
 type: landing
 
 external_url: "/zhiyuan-jiang/"

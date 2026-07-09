@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Shan Cao
+name_zh: 曹姗
 type: landing
 
 external_url: "/shan-cao/"

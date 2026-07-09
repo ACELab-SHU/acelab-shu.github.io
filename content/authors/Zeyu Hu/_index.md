@@ -1,8 +1,9 @@
 ---
 # Display name
 title: Zeyu Hu
+name_zh: 胡泽宇
 type: landing
-external_url: "https://scie-ce.shu.edu.cn/info/1092/1232.htm"
+external_url: "/zeyu-hu/"
 
 # Full name (for SEO)
 first_name: Zeyu
@@ -24,7 +25,7 @@ superuser: false
 highlight_name: true
 
 # Role/position/tagline
-role: Assistant Professor
+role: Experimentalist · Master's Supervisor
 
 # Organizations/Affiliations to display in Biography blox
 organizations:
@@ -58,7 +59,7 @@ education:
     institution: Shanghai University
     icon: ""
     date_start: 2023-06-01
-    date_end: "2025-06-01"
+    date_end: "2025-10-01"
     summary: 
   - area: Joint Ph.D. in Department of Computer and Network Engineering
     institution: The University of Electro-Communications
