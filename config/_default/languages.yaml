@@ -28,11 +28,11 @@ en:
         identifier: research
         weight: 11
       - name: NeuroBaseband
-        url: /en/researches/NeuroBaseband/
+        url: /reports/neurobaseband/en/
         parent: research
         weight: 1
       - name: Edge AI Inference Engine
-        url: /en/researches/Edge_AI/
+        url: /reports/npu/en/
         parent: research
         weight: 2
       - name: People

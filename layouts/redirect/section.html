@@ -1,0 +1,17 @@
+{{ $to := .Params.redirect_to | default site.Home.RelPermalink }}
+{{ $isZH := eq site.Language.Lang "zh" }}
+<!doctype html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if $isZH }}返回主页{{ else }}Back to Home{{ end }} · ACELab</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ $to }}">
+<link rel="canonical" href="{{ $to | absURL }}">
+<script>window.location.replace({{ $to | jsonify | safeJS }});</script>
+</head>
+<body>
+<p><a href="{{ $to }}">{{ if $isZH }}返回主页 · 研究方向{{ else }}Back to Home · Research{{ end }}</a></p>
+</body>
+</html>

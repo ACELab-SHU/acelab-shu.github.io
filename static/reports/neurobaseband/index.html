@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroBaseband 高能效 RISC-V 融合基带 · ACELab 交互研究报告</title>
+<meta name="description" content="NeuroBaseband：以无线数据流为牵引的 RISC-V 领域专用架构。Venus v2 40nm 流片实测，FFT 能效达通用平台 33.4 倍。">
+<link rel="stylesheet" href="/reports/shared/css/fonts.css?v=20260920-1">
+<link rel="stylesheet" href="/reports/shared/css/style.css?v=20260920-1">
+<link rel="canonical" href="https://acelab-shu.github.io/reports/neurobaseband/">
+<link rel="alternate" hreflang="zh-Hans" href="https://acelab-shu.github.io/reports/neurobaseband/">
+<link rel="alternate" hreflang="en" href="https://acelab-shu.github.io/reports/neurobaseband/en/">
+</head>
+<body>
+
+<a class="back-home" href="/">← 返回主页</a>
+<a class="lang-switch" href="/reports/neurobaseband/en/">EN</a>
+
+<!-- ═══ Cover · Variant A 芯片递归 ═══ -->
+<header id="cover">
+  <canvas id="cover-canvas" aria-hidden="true"></canvas>
+  <div class="cover-inner">
+    <p class="cover-kicker">RESEARCH REPORT · NEUROBASEBAND · DATA AS OF 2026-09-20</p>
+    <h1 class="cover-title">把基带从专用硬件，<br><span class="cover-num">变成可编程的数据流</span></h1>
+    <p class="cover-sub">NeuroBaseband 高能效 RISC-V 融合基带 · 面向 6G AI-RAN</p>
+    <p class="cover-lede">传统基带、O-CU/O-DU 分层与 AI-RAN 三条演进主线，受制于同一组结构性瓶颈：高搬移开销、低确定性、体系割裂、能效压力。NeuroBaseband 以无线基带的数据流与周期性为牵引，做从指令到系统的领域专用协同设计——Venus v2 芯片已完成 40nm 流片实测，把 GPP 与 ASIC 之间 10³× 的能效鸿沟压缩到约 10×。</p>
+    <div class="cover-chips">
+      <button class="chip" data-goto="#sec-exec">核心发现</button>
+      <button class="chip" data-goto="#sec-arch">四项研究内容</button>
+      <button class="chip" data-goto="#sec-measure">实测证据</button>
+      <button class="chip" data-goto="#sec-venus">Venus v2 芯片</button>
+      <button class="chip" data-goto="#sec-eco">定位与生态</button>
+      <button class="chip" data-goto="#sec-sources">来源登记</button>
+    </div>
+    <p class="cover-anchor">证据分级：团队自测 &gt; 行业公开 &gt; 第三方转述 &gt; 整理推演 [标注] · 本页不构成投资或采购建议</p>
+    <div class="scroll-hint"><span></span>SCROLL</div>
+  </div>
+  <p class="cover-caption">Fig. 0 · 每一颗芯片，都是更大算力版图上的一格 —— scale, all the way up</p>
+</header>
+
+<main>
+
+<!-- ═══ §0 核心发现 ═══ -->
+<section id="sec-exec" class="band">
+  <div class="prose">
+    <p class="sec-no">§0 · 核心发现</p>
+    <h2>软件的灵活性，接近 ASIC 的能效</h2>
+    <p class="dek">以高能效 RISC-V 融合计算，靠低 idle 功耗与系统级调度赢得真实部署能效——把 GPP 与 ASIC 之间 10³× 的能效鸿沟压缩到约 10×。</p>
+    <p>基带处理的能效对比有一个长期被忽视的事实：峰值算力不等于部署能效。Venus v2 在 28nm 归一化口径下把 FFT 能效做到 <em>256 MSps/W</em>，是 Xeon 6434 的 <em>33.4×</em><button class="src" data-drill data-title="FFT 能效 · Venus v2" data-value="256.0 MSps/W · 33.4×" data-sub="28nm 归一化：吞吐 ∝ 线宽，能效 ∝ 线宽²；对比 Xeon 6434 7.7 MSps/W。" data-source="ACELab Venus v2 实测归一化 · 2026-09（K1）">◆</button>；更关键的是 idle 功耗 0.027W——低负载场景下，idle 功耗直接摊入平均能耗，这才是真实部署的决定项。</p>
+  </div>
+  <div class="wide xl"><div id="fft-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <blockquote class="quote-card">
+      <p class="q-text">软件灵活 + ASIC 级能效。以高能效 RISC-V 融合计算，靠低 idle 功耗与系统级调度赢得真实部署能效。</p>
+      <p class="q-who">— <b>ACELab · 深轶科技</b>，团队介绍 STRATEGIC TAKEAWAY<span class="q-src">2026-09</span></p>
+      <div class="q-why"><span class="q-lab">Context</span>融合基带把 GPP↔ASIC 能效鸿沟压缩至约 7–10×，同时保持 RISC-V 的开放可编程能力。<span class="q-lab why">Why it matters</span>能效拐点出现在真实负载曲线，而不是峰值跑分。</div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══ §1 四项研究内容 ═══ -->
+<section id="sec-arch" class="band">
+  <div class="prose">
+    <p class="sec-no">§1 · 架构主线</p>
+    <h2>四项研究内容，沿一条跨层主线贯通</h2>
+    <p class="dek">以无线基带的数据流与周期性为牵引，做从指令到系统的领域专用协同设计——并保持 RISC-V 开放可编程能力。</p>
+    <p>向量单元决定算子的执行效率，数据流调度决定系统的实时性，领域工具链决定生态的可用性，低功耗 SoC 决定部署的真实能耗——四层不是并列的模块，而是同一条数据流主线在不同抽象层上的投影。</p>
+  </div>
+  <div class="wide xl">
+    <div class="term-mag">
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">向量单元</h3>
+        <p class="t-full">ARBITRARY REGISTER GROUPING · RVV+</p>
+        <p class="t-gist">任意寄存器分组，让向量长度匹配无线算子的真实长度。</p>
+        <div class="t-more"><p>突破 RVV 固定幂次分组，64 位扩展编码与冲突检测处理寄存器重叠与读写相关；元素交换引擎承担跨通道重排与 gather/scatter，复数/定点除法/饱和运算走可扩展数据通道。目标算子：FFT · 信道估计 · 编解码 · 线性代数。</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">数据流调度</h3>
+        <p class="t-full">HIERARCHICAL DATAFLOW SCHEDULING</p>
+        <p class="t-gist">软件负责全局低频，硬件负责局部高频，兼顾扩展性与实时性。</p>
+        <div class="t-more"><p>任务—线程—计算簇三级模型：DAG 显式建模基带模块映射，层次化存储强化局部性，打包发货机制以 DMA/CSR/中断协同部署回收。硬件调度器监测依赖与输出状态快速触发任务，保证吞吐与硬实时。</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">工具链</h3>
+        <p class="t-full">DSL → LLVM → RISC-V · SAME-SOURCE</p>
+        <p class="t-gist">同一份代码贯通任务描述、编译优化与硬件部署。</p>
+        <div class="t-more"><p>领域专用语言描述任务图与依赖，LLVM 完成指令拆分合并与任意分组寄存器分配，生成 RISC-V 汇编映射到可扩展数据通道；同源代码支持仿真、评估与二进制部署，把领域语义一直保留到编译和调度后端。</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">低功耗 SoC</h3>
+        <p class="t-full">POWER DOMAINS · MBIST</p>
+        <p class="t-gist">四电源域按负载逐级唤醒，工业级可测。</p>
+        <div class="t-more"><p>睡眠、待机、数字前端与计算任务四种工作模式，常开域维持快速唤醒；多制式并发共享同一计算簇。MBIST 与故障覆盖保证工业级可测性，为车规与基站场景铺路。</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ §2 实测证据 ═══ -->
+<section id="sec-measure" class="band">
+  <div class="prose">
+    <p class="sec-no">§2 · 实测证据</p>
+    <h2>LDPC 译码：接近 x86 吞吐，能耗低一到两个数量级</h2>
+    <p>Venus 归一化吞吐约为 Xeon 的 89%，计算能耗 4.15 nJ/bit/iter——比 ARM A76 低 84.4×，比 GPU 4090 低 181.8×。测试口径：CS4 · 码率 340/1024 · 码块 25443 · CPU 单核吞吐；吞吐按线性、能效按平方做工况归一化。</p>
+  </div>
+  <div class="wide xl">
+    <p class="chart-title">LDPC 译码性能对比（28nm 归一化）</p>
+    <p class="chart-sub">点击行查看口径与来源 · ASIC ACC100 为参考下界</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="数据表格，可横向滚动"><table class="dt" id="ldpc-table">
+      <thead><tr><th>平台</th><th>频率</th><th>工艺</th><th>吞吐 Mbps</th><th>nJ/bit/iter</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="chart-src">Source · 团队自测 · Venus v2 实测（K2）· 2026-09</p>
+  </div>
+  <div class="prose">
+    <h3 class="sub-h">idle 功耗：被低估的部署能耗决定项</h3>
+    <p>基站与边缘节点大量时间处于低负载。Venus v2 idle 功耗 0.027W（单 Tile 口径），比竞品低两个数量级；99% 负载阈值下总功耗 Venus ≈4.36W vs ACC100 ≥19.2W，吞吐需求 &lt;2.06 Gbps 时 Venus 更节能<button class="src" data-drill data-title="idle 功耗 · Venus v2" data-value="0.027 W" data-sub="单 Tile 口径；RK3588 2.67W、ACC100 18.0W、RTX 4090 38.27W、AMD 9950X 46.33W、Xeon 6434 68.67W。" data-source="ACELab Venus v2 实测 · 2026-09（K3）">◆</button>。</p>
+  </div>
+  <div class="wide xl"><div id="idle-chart" class="chart-frame"></div></div>
+</section>
+
+<!-- ═══ §3 Venus v2 ═══ -->
+<section id="sec-venus" class="band">
+  <div class="prose">
+    <p class="sec-no">§3 · 芯片实现</p>
+    <h2>Venus v2：从架构到芯片实现</h2>
+    <p>40nm、300MHz、10 核、四电源域的多制式 SoC，峰值功耗 0.763W。四种工作模式覆盖睡眠、待机、数字前端与计算任务，按负载逐级唤醒；MBIST 与故障覆盖保证工业级可测。</p>
+  </div>
+  <div class="wide">
+    <div class="table-scroll" tabindex="0" role="region" aria-label="数据表格，可横向滚动"><table class="dt" id="spec-table">
+      <thead><tr><th>指标</th><th>数值</th><th>说明</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="chart-src">Source · 团队自测 · Venus v2 流片实测（K4）· 2026-09</p>
+  </div>
+</section>
+
+<!-- ═══ §4 定位与生态 ═══ -->
+<section id="sec-eco" class="band">
+  <div class="prose">
+    <p class="sec-no">§4 · 定位与生态</p>
+    <h2>面向 6G AI-RAN 的开放融合基带</h2>
+    <p class="dek">RISC-V 开放指令集 + 领域扩展 + 同源工具链，让基带从黑盒 ASIC 变成可演进的基础设施。</p>
+    <p>NeuroBaseband 的开放生态落在 ACE-Echo 开放平台：架构文档、工具链与评估环境对外开放，支撑从学术研究到客户导入的同一条路径。成果侧，顶会论文与多次成功流片构成「说过 → 做过 → 测过」的完整闭环。</p>
+    <p><a href="https://acelab-shu.github.io/ACE-Echo" target="_blank" rel="noopener">访问 ACE-Echo 开放平台 →</a></p>
+  </div>
+  <div class="wide">
+    <div class="table-scroll" tabindex="0" role="region" aria-label="数据表格，可横向滚动"><table class="dt" id="proof-table">
+      <thead><tr><th>维度</th><th>事实</th><th>说明</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="chart-src">Source · ACELab 团队介绍 deck p7（K9）· 2026-09</p>
+  </div>
+</section>
+
+<!-- ═══ Sources ═══ -->
+<footer id="sec-sources">
+  <div class="prose">
+    <p class="sec-no">Sources &amp; method</p>
+    <h2>方法、纪律与来源</h2>
+    <div class="note-box">
+      <p><b>证据分级。</b> 团队自测（芯片实测与客户导入数据）&gt; 行业公开 &gt; 第三方转述 &gt; 整理推演 [标注]。所有关键数字在来源登记表中带日期锚定。</p>
+      <p><b>来源分类，均带日期。</b> <span class="src-cat company">团队自测</span> <span class="src-cat industry">行业公开</span> <span class="src-cat broker">第三方转述</span> <span class="src-cat kimi">整理推演</span></p>
+      <p><b>口径纪律。</b> 跨工艺对比一律注明归一化口径（吞吐 ∝ 线宽，能效 ∝ 线宽²）；路线图目标与实测值分开表述。</p>
+    </div>
+  </div>
+  <div class="wide xl">
+    <div style="margin-top:26px">
+      <p class="chart-title">来源登记 · K1–K4 · K9</p>
+      <p class="chart-sub">本报告依赖的每一个数字及其带日期的出处</p>
+    </div>
+    <div id="source-list"></div>
+  </div>
+  <div class="prose">
+    <p class="colophon">Interactive research edition · Compiled 2026-09-20 · ACELab · 上海大学先进通信与计算芯片实验室<br>本页不构成投资建议 · <a href="/">返回主页</a> · <a href="/reports/npu/">姊妹篇：感知 NPU × KXP</a></p>
+  </div>
+</footer>
+
+</main>
+
+<div id="drill-card" role="dialog" aria-labelledby="drill-title" hidden></div>
+
+<script>window.RPT_SOURCE_IDS = ["K1", "K2", "K3", "K4", "K9"];</script>
+<script src="/reports/shared/js/data.js?v=20260920-1"></script>
+<script src="/reports/shared/js/utils.js?v=20260920-1"></script>
+<script src="/reports/shared/js/cover.js?v=20260920-1"></script>
+<script src="/reports/shared/js/charts.js?v=20260920-1"></script>
+<script src="/reports/shared/js/sources.js?v=20260920-1"></script>
+<script>
+// DOM tables from data layer (LDPC / Venus spec / proof)
+(function () {
+  const lb = document.querySelector("#ldpc-table tbody");
+  if (lb) {
+    window.RPT.ldpc.forEach(r => {
+      const tr = document.createElement("tr");
+      if (r.hero) tr.className = "hl";
+      tr.innerHTML = `<td><b>${r.name}</b></td><td class="num">${r.freq}</td><td class="num">${r.node}</td><td class="num">${r.tput}</td><td class="num">${r.energy}</td>`;
+      tr.setAttribute("data-drill", "");
+      tr.dataset.title = `LDPC 译码 · ${r.name}`;
+      tr.dataset.value = `${r.tput} Mbps · ${r.energy} nJ/bit/iter`;
+      tr.dataset.sub = `CS4 · 码率 340/1024 · 码块 25443 · CPU 单核吞吐；${r.freq} · ${r.node}。吞吐线性、能效平方工艺归一化。`;
+      tr.dataset.source = "ACELab Venus v2 实测 · 2026-09（K2）";
+      lb.appendChild(tr);
+    });
+    const asic = document.createElement("tr");
+    asic.innerHTML = `<td>ASIC ACC100（参考下界）</td><td class="num">—</td><td class="num">28 nm</td><td class="num">—</td><td class="num">0.179</td>`;
+    asic.setAttribute("data-drill", "");
+    asic.dataset.title = "参考下界 · ASIC ACC100";
+    asic.dataset.value = "0.179 nJ/bit/iter";
+    asic.dataset.sub = "功能完整的专用 ASIC 仍是能效下界；Venus 与其差距约 23×，后续瓶颈集中在执行拍数、butterfly 并行度与跨 lane shuffle。";
+    asic.dataset.source = "ACELab Venus v2 实测 · 2026-09（K2）";
+    lb.appendChild(asic);
+  }
+
+  const sb = document.querySelector("#spec-table tbody");
+  if (sb) window.RPT.venus_spec.forEach(([k, v, n]) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><b>${k}</b></td><td class="num">${v}</td><td>${n}</td>`;
+    tr.setAttribute("data-drill", "");
+    tr.dataset.title = `Venus v2 · ${k}`;
+    tr.dataset.value = v;
+    tr.dataset.sub = n + "。四种工作模式按负载逐级唤醒；MBIST 与故障覆盖保证工业级可测。";
+    tr.dataset.source = "ACELab Venus v2 流片实测 · 2026-09（K4）";
+    sb.appendChild(tr);
+  });
+
+  const pb = document.querySelector("#proof-table tbody");
+  if (pb) window.RPT.proof.forEach(([k, v, n]) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><b>${k}</b></td><td class="num">${v}</td><td>${n}</td>`;
+    tr.setAttribute("data-drill", "");
+    tr.dataset.title = `成果实力 · ${k}`;
+    tr.dataset.value = v;
+    tr.dataset.sub = n;
+    tr.dataset.source = "ACELab 团队介绍 deck p7 · 2026-09（K9）";
+    pb.appendChild(tr);
+  });
+})();
+</script>
+<script src="/reports/shared/js/main.js?v=20260920-1"></script>
+</body>
+</html>

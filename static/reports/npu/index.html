@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>超低功耗感知 NPU × KXP · ACELab 交互研究报告</title>
+<meta name="description" content="让计算靠近数据：Kuiloong 端侧 mW 级语义门控 × KXP 数据中心 KV 扩展近存计算，跨链路流量下降约 3,000–4,000 倍。">
+<link rel="stylesheet" href="/reports/shared/css/fonts.css?v=20260920-1">
+<link rel="stylesheet" href="/reports/shared/css/style.css?v=20260920-1">
+<link rel="canonical" href="https://acelab-shu.github.io/reports/npu/">
+<link rel="alternate" hreflang="zh-Hans" href="https://acelab-shu.github.io/reports/npu/">
+<link rel="alternate" hreflang="en" href="https://acelab-shu.github.io/reports/npu/en/">
+</head>
+<body>
+
+<a class="back-home" href="/">← 返回主页</a>
+<a class="lang-switch" href="/reports/npu/en/">EN</a>
+
+<!-- ═══ Cover · Variant A 芯片递归 ═══ -->
+<header id="cover">
+  <canvas id="cover-canvas" aria-hidden="true"></canvas>
+  <div class="cover-inner">
+    <p class="cover-kicker">RESEARCH REPORT · NPU × KXP · DATA AS OF 2026-09-20</p>
+    <h1 class="cover-title">让计算靠近数据，<br><span class="cover-num">从端侧到数据中心</span></h1>
+    <p class="cover-sub">超低功耗多模态感知 NPU · Kuiloong × KXP（KV Extension Processor）</p>
+    <p class="cover-lede">同一套近存计算哲学的两端：端侧 Kuiloong 以 mW 级功耗做多模态语义门控——视觉确认、语音唤醒、事件流触发，决定是否唤醒主系统；数据中心 KXP 把 Decode Attention 搬到 KV 所在的 DDR 旁边，GPU 只保留权重密集计算，让长上下文推理的容量与带宽不再绑死在昂贵 HBM 上。</p>
+    <div class="cover-chips">
+      <button class="chip" data-goto="#sec-exec">核心发现</button>
+      <button class="chip" data-goto="#sec-kuiloong">感知 NPU Kuiloong</button>
+      <button class="chip" data-goto="#sec-kxp">KV 扩展处理器 KXP</button>
+      <button class="chip" data-goto="#sec-sources">来源登记</button>
+    </div>
+    <p class="cover-anchor">证据分级：团队自测 &gt; 行业公开 &gt; 第三方转述 &gt; 整理推演 [标注] · KXP 为拟研发产品，本页不构成投资或采购建议</p>
+    <div class="scroll-hint"><span></span>SCROLL</div>
+  </div>
+  <p class="cover-caption">Fig. 0 · 每一颗芯片，都是更大算力版图上的一格 —— scale, all the way up</p>
+</header>
+
+<main>
+
+<!-- ═══ §0 核心发现 ═══ -->
+<section id="sec-exec" class="band">
+  <div class="prose">
+    <p class="sec-no">§0 · 核心发现</p>
+    <h2>一个哲学，两个尺度</h2>
+    <p class="dek">「让计算靠近数据」在端侧是功耗门控问题，在数据中心是内存墙问题——两者共享同一套近存计算底座。</p>
+    <p>端侧 Kuiloong 以 mW 级功耗决定「要不要唤醒主系统」：原始数据不外流，NPU 只输出标签、置信度与状态，确认后再唤醒主系统。数据中心 KXP 把 Decode Attention 搬到 KV 所在的 DDR 旁边，让每 Token 跨链路流量从 ≈10 GiB 降到 ≈2–3 MiB<button class="src" data-drill data-title="跨链路流量 · KXP" data-value="≈10 GiB → ≈2–3 MiB / token" data-sub="70B 类 GQA · 32K 上下文 · BF16 KV；跨链路复杂度从随上下文增长的 O(L·d) 降为近似固定的 O(d)。" data-source="KXP 技术方案汇报 · 2026-07-25（K6）">◆</button>。让计算靠近数据——这是两端共同的底座逻辑。</p>
+  </div>
+  <div class="prose">
+    <blockquote class="quote-card">
+      <p class="q-text">以低功耗语义门控降低系统无效唤醒，以 KV 近存计算释放长上下文推理的容量与带宽。</p>
+      <p class="q-who">— <b>ACELab · 深轶科技</b>，团队介绍 STRATEGIC TAKEAWAY<span class="q-src">2026-09</span></p>
+      <div class="q-why"><span class="q-lab">Context</span>端侧「always-on」的电费与数据中心 HBM 的容量墙，本质是同一个问题：数据搬移比计算更贵。<span class="q-lab why">Why it matters</span>把计算搬到数据旁边，两端都绕开搬移税。</div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══ §1 Kuiloong ═══ -->
+<section id="sec-kuiloong" class="band">
+  <div class="prose">
+    <p class="sec-no">§1 · 感知 NPU</p>
+    <h2>Kuiloong：卡位在粗触发与重推理之间</h2>
+    <p class="dek">传感器粗触发、NPU 语义确认、主系统按需接管——多级功耗门控让「always-on」不再等于「always-on 的电费」。</p>
+    <p>Kuiloong 定位为多模态语义门控协处理器：视觉确认、语音唤醒、事件流触发，以低功耗语义确认是否值得唤醒主系统。架构上是 RISC-V 控制 + 多维计算 + 共享近存：标量单元、1D 向量核与 2D 矩阵/卷积阵列统一访问共享近存，减少 DMA 与数据复制——单一软件栈，无双栈同步，ONNX 可表示即可映射。</p>
+  </div>
+  <div class="wide xl"><div id="cascade-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <div class="metric-strip">
+      <div class="m" data-drill data-title="面积效率 · Kuiloong" data-value="150 GOPS/mm²" data-sub="GF 40nm 口径，集成于智能家电控制芯片；mW 级平均功耗，支持睡眠/待机。" data-source="ACELab-NPU 简介 · 2026（K5）"><div class="v">150</div><div class="k">GOPS/mm² 面积效率（GF 40nm）</div></div>
+      <div class="m" data-drill data-title="平均功耗 · Kuiloong" data-value="mW 级" data-sub="极低功耗 NPU IP 已进入头部智能家居厂家控制芯片的集成验证阶段——「将集成」表示客户导入阶段，不等同于已量产。" data-source="ACELab-NPU 简介 · 2026（K5）"><div class="v">mW 级</div><div class="k">平均功耗 · 支持睡眠 / 待机</div></div>
+      <div class="m" data-drill data-title="端到端工具链" data-value="INT8 / INT4" data-sub="前端导入 ONNX/TFLite/PTH → 剪枝·PTQ → 算子融合与内存规划 → 仿真器与硬件双端验证。客户数据闭环 + 模型库 + OTA 构成量产壁垒。" data-source="ACELab-NPU 简介 · 2026（K5）"><div class="v">INT8/4</div><div class="k">剪枝量化 · 端到端编译部署</div></div>
+      <div class="m" data-drill data-title="唤醒下降目标" data-value="5–10×" data-sub="客户共创阶段（6–12 月）目标：建立误报测试集、客户场景数据验证，主 SoC 唤醒下降 5–10×。属路线图目标，非实测值。" data-source="ACELab-NPU 简介 · 2026（K5）"><div class="v">5–10×</div><div class="k">主系统唤醒下降目标（共创期）</div></div>
+    </div>
+    <div class="note-box">
+      <p><b>产业验证边界。</b> Kuiloong NPU IP 目前处于头部智能家居厂家控制芯片的集成验证阶段，并与芯翼科技共同申请上海市科委重点研发项目、围绕 RISC-V 智能物联网 SoC 联合攻关——「客户导入」不等同于已量产，这是本页对该进展的统一口径。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ §2 KXP ═══ -->
+<section id="sec-kxp" class="band">
+  <div class="prose">
+    <p class="sec-no">§2 · KV 扩展处理器</p>
+    <h2>KXP：把 Decode Attention 搬到 KV 数据旁边</h2>
+    <p class="dek">大模型 Decode 的瓶颈已从算力转移到内存——KXP 是位于 GPU 与大容量 DDR 之间，专门负责上下文存储、管理与 Decode Attention 近存计算的处理器。</p>
+    <p>长上下文的压力来自一个简单的增长规律：KV Cache 随并发数与上下文长度线性膨胀。70B 类 GQA 模型、BF16 口径下，单请求 1M 上下文即需约 312 GiB KV<button class="src" data-drill data-title="KV Cache · 1M 上下文" data-value="≈ 312 GiB / 单请求" data-sub="70B 类 GQA · BF16 实测量级；8K ≈2.5 GiB、32K ≈10 GiB、128K ≈40 GiB。容量由上下文长度、并发数、层数与 KV 维度决定，与模型参数量不成正比。" data-source="KXP 技术方案汇报 p5 · 2026-07-25（K8）">◆</button>——超过任何单张 GPU 的 HBM 容量。而权重、KV 与工作区竞争的正是同一块不可拆分的 HBM：用户真正缺少的是容量与带宽，却被迫按整卡采购，多余算力沉淀为成本。</p>
+    <p>只做存储卸载（KV 放 DDR、逐 Token 搬回 GPU）只是把容量瓶颈换成链路带宽瓶颈：32K 上下文每 Token 约需搬运 10 GiB 历史 KV，50 Token/s 对应 500 GiB/s 持续流量，GPU 在等待中空转。KXP 的出路是让计算靠近数据：在 KV 所在的 DDR 旁边完成 Attention，只把结果送回 GPU。</p>
+  </div>
+  <div class="wide xl"><div id="kxp-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <h3 class="sub-h">KV 语义内存：与通用 CXL 内存控制器的分界线</h3>
+    <p>即使暂不执行 Attention，KXP 也能先解决 KV 的容量、碎片、迁移与隔离问题：分页与地址转换、Block 分配回收、HBM/DDR/SSD 三级冷热分层、Prefix Cache 共享、分支管理与去重、请求级地址空间与多租户配额。它理解层、Head、Token 和请求——这是通用内存做不到的共享与隔离。</p>
+  </div>
+  <div class="wide xl"><div id="kv-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <div class="note-box">
+      <p><b>定位声明。</b> KXP 为拟研发产品：第一代只卸载 Decode Attention 核心（十三项任务中的七项，全部在上下文数据面），模型权重面六项保持在 GPU 侧不变。核心指标是有效 DDR 带宽、每瓦 KV 扫描能力与低延迟任务提交——TOPS 在这里并非关键指标。竞品格局为公开资料整理 [推演标注]。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Sources ═══ -->
+<footer id="sec-sources">
+  <div class="prose">
+    <p class="sec-no">Sources &amp; method</p>
+    <h2>方法、纪律与来源</h2>
+    <div class="note-box">
+      <p><b>证据分级。</b> 团队自测（芯片实测与客户导入数据）&gt; 行业公开 &gt; 第三方转述 &gt; 整理推演 [标注]。所有关键数字在来源登记表中带日期锚定。</p>
+      <p><b>来源分类，均带日期。</b> <span class="src-cat company">团队自测</span> <span class="src-cat industry">行业公开</span> <span class="src-cat broker">第三方转述</span> <span class="src-cat kimi">整理推演</span></p>
+      <p><b>口径纪律。</b> 路线图目标与实测值分开表述；「客户导入」不等同于量产；KXP 为拟研发产品。</p>
+    </div>
+  </div>
+  <div class="wide xl">
+    <div style="margin-top:26px">
+      <p class="chart-title">来源登记 · K5–K8 · K10</p>
+      <p class="chart-sub">本报告依赖的每一个数字及其带日期的出处</p>
+    </div>
+    <div id="source-list"></div>
+  </div>
+  <div class="prose">
+    <p class="colophon">Interactive research edition · Compiled 2026-09-20 · ACELab · 上海大学先进通信与计算芯片实验室<br>本页不构成投资建议 · <a href="/">返回主页</a> · <a href="/reports/neurobaseband/">姊妹篇：NeuroBaseband 融合基带</a></p>
+  </div>
+</footer>
+
+</main>
+
+<div id="drill-card" role="dialog" aria-labelledby="drill-title" hidden></div>
+
+<script>window.RPT_SOURCE_IDS = ["K5", "K6", "K7", "K8", "K10"];</script>
+<script src="/reports/shared/js/data.js?v=20260920-1"></script>
+<script src="/reports/shared/js/utils.js?v=20260920-1"></script>
+<script src="/reports/shared/js/cover.js?v=20260920-1"></script>
+<script src="/reports/shared/js/charts.js?v=20260920-1"></script>
+<script src="/reports/shared/js/sources.js?v=20260920-1"></script>
+<script src="/reports/shared/js/main.js?v=20260920-1"></script>
+</body>
+</html>

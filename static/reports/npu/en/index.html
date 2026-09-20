@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultra-Low-Power Sensing NPU × KXP · ACELab Interactive Report</title>
+<meta name="description" content="Move compute to the data: Kuiloong mW-class semantic gating at the edge × KXP near-memory Decode Attention at data-center scale — cross-link traffic down by roughly 3,000–4,000×.">
+<link rel="stylesheet" href="/reports/shared/css/fonts.css?v=20260920-1">
+<link rel="stylesheet" href="/reports/shared/css/style.css?v=20260920-1">
+<link rel="canonical" href="https://acelab-shu.github.io/reports/npu/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://acelab-shu.github.io/reports/npu/">
+<link rel="alternate" hreflang="en" href="https://acelab-shu.github.io/reports/npu/en/">
+</head>
+<body>
+
+<a class="back-home" href="/en/">← Home</a>
+<a class="lang-switch" href="/reports/npu/">中文</a>
+
+<!-- ═══ Cover · Variant A die recursion ═══ -->
+<header id="cover">
+  <canvas id="cover-canvas" aria-hidden="true"></canvas>
+  <div class="cover-inner">
+    <p class="cover-kicker">RESEARCH REPORT · NPU × KXP · DATA AS OF 2026-09-20</p>
+    <h1 class="cover-title">Move compute to the data,<br><span class="cover-num">from edge to data center</span></h1>
+    <p class="cover-sub">Ultra-Low-Power Multimodal Sensing NPU · Kuiloong × KXP (KV Extension Processor)</p>
+    <p class="cover-lede">Two ends of one near-memory computing philosophy: at the edge, Kuiloong performs multimodal semantic gating at mW-class power — visual confirmation, voice wake-up, event-stream triggering — deciding whether the host system should wake at all; in the data center, KXP moves Decode Attention next to the DDR where KV lives, leaving GPUs to weight-dense compute, so long-context capacity and bandwidth are no longer hostage to expensive HBM.</p>
+    <div class="cover-chips">
+      <button class="chip" data-goto="#sec-exec">Key finding</button>
+      <button class="chip" data-goto="#sec-kuiloong">Sensing NPU Kuiloong</button>
+      <button class="chip" data-goto="#sec-kxp">KV Extension Processor KXP</button>
+      <button class="chip" data-goto="#sec-sources">Sources</button>
+    </div>
+    <p class="cover-anchor">Evidence grading: in-house &gt; industry public &gt; third-party &gt; compiled [marked] · KXP is a planned product; this page is not investment or procurement advice</p>
+    <div class="scroll-hint"><span></span>SCROLL</div>
+  </div>
+  <p class="cover-caption">Fig. 0 · Every die is one cell of a much larger compute map — scale, all the way up</p>
+</header>
+
+<main>
+
+<!-- ═══ §0 Key finding ═══ -->
+<section id="sec-exec" class="band">
+  <div class="prose">
+    <p class="sec-no">§0 · Key finding</p>
+    <h2>One philosophy, two scales</h2>
+    <p class="dek">"Move compute to the data" is a power-gating problem at the edge and a memory-wall problem in the data center — both rest on the same near-memory computing foundation.</p>
+    <p>At the edge, Kuiloong decides at mW-class power whether the host system deserves to wake: raw data never leaves the device, the NPU emits only labels, confidence and state, and the host wakes only after confirmation. In the data center, KXP moves Decode Attention next to the DDR where KV lives, cutting per-token cross-link traffic from ≈10 GiB to ≈2–3 MiB<button class="src" data-drill data-title="Cross-link traffic · KXP" data-value="≈10 GiB → ≈2–3 MiB / token" data-sub="70B-class GQA · 32K context · BF16 KV; cross-link complexity drops from O(L·d), growing with context, to a near-constant O(d)." data-source="KXP technical briefing · 2026-07-25 (K6)">◆</button>. Moving compute to the data — that is the shared foundation logic at both ends.</p>
+  </div>
+  <div class="prose">
+    <blockquote class="quote-card">
+      <p class="q-text">Cut wasteful system wake-ups with low-power semantic gating; unlock long-context capacity and bandwidth with KV near-memory computing.</p>
+      <p class="q-who">— <b>ACELab · Shenyi Technology</b>, team deck STRATEGIC TAKEAWAY<span class="q-src">2026-09</span></p>
+      <div class="q-why"><span class="q-lab">Context</span>The electricity bill of edge "always-on" and the HBM capacity wall in the data center are the same problem: moving data costs more than computing it.<span class="q-lab why">Why it matters</span>Move compute next to the data, and both ends escape the data-movement tax.</div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══ §1 Kuiloong ═══ -->
+<section id="sec-kuiloong" class="band">
+  <div class="prose">
+    <p class="sec-no">§1 · Sensing NPU</p>
+    <h2>Kuiloong: between coarse triggers and heavy inference</h2>
+    <p class="dek">Coarse sensor trigger, NPU semantic confirmation, host takeover on demand — multi-level power gating means "always-on" no longer implies an always-on electricity bill.</p>
+    <p>Kuiloong is positioned as a multimodal semantic-gating co-processor: visual confirmation, voice wake-up and event-stream triggering decide at low power whether the host system is worth waking. Architecturally it pairs a RISC-V control core with multi-dimensional compute and shared near-memory: scalar units, 1D vector cores and a 2D matrix/convolution array all access shared near-memory, eliminating DMA and data copies — one software stack, no dual-stack synchronization; anything ONNX can express, the toolchain can map.</p>
+  </div>
+  <div class="wide xl"><div id="cascade-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <div class="metric-strip">
+      <div class="m" data-drill data-title="Area efficiency · Kuiloong" data-value="150 GOPS/mm²" data-sub="GF 40nm basis, integrated into smart-appliance control chips; mW-class average power with sleep/standby support." data-source="ACELab-NPU brief · 2026 (K5)"><div class="v">150</div><div class="k">GOPS/mm² area efficiency (GF 40nm)</div></div>
+      <div class="m" data-drill data-title="Average power · Kuiloong" data-value="mW-class" data-sub="The ultra-low-power NPU IP has entered integration verification inside a leading smart-home vendor's control chips — 'to be integrated' denotes a customer-adoption stage, not mass production." data-source="ACELab-NPU brief · 2026 (K5)"><div class="v">mW-class</div><div class="k">Average power · sleep / standby</div></div>
+      <div class="m" data-drill data-title="End-to-end toolchain" data-value="INT8 / INT4" data-sub="Front-end import of ONNX/TFLite/PTH → pruning &amp; PTQ → operator fusion and memory planning → dual-side validation on simulator and hardware. Customer data loop + model library + OTA form the production moat." data-source="ACELab-NPU brief · 2026 (K5)"><div class="v">INT8/4</div><div class="k">Pruning &amp; quantization · end-to-end compile &amp; deploy</div></div>
+      <div class="m" data-drill data-title="Wake-up reduction target" data-value="5–10×" data-sub="Customer co-creation phase (6–12 months) target: build a false-alarm test set, validate on customer-scenario data, cut main-SoC wake-ups 5–10×. A roadmap target, not a measured figure." data-source="ACELab-NPU brief · 2026 (K5)"><div class="v">5–10×</div><div class="k">Host wake-up reduction target (co-creation)</div></div>
+    </div>
+    <div class="note-box">
+      <p><b>Boundary of industrial validation.</b> Kuiloong NPU IP is currently in integration verification with a leading smart-home vendor's control chips, and together with Xinyi Information Technology the team has applied for a Shanghai Science and Technology Commission key R&amp;D program on RISC-V intelligent IoT SoCs — "customer adoption" does not equal mass production; that is this page's uniform wording for the progress.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ §2 KXP ═══ -->
+<section id="sec-kxp" class="band">
+  <div class="prose">
+    <p class="sec-no">§2 · KV Extension Processor</p>
+    <h2>KXP: move Decode Attention next to the KV data</h2>
+    <p class="dek">The bottleneck of LLM decode has shifted from compute to memory — KXP sits between the GPU and high-capacity DDR, dedicated to context storage, management and near-memory Decode Attention.</p>
+    <p>Long-context pressure follows one simple growth law: KV Cache inflates linearly with concurrency and context length. For a 70B-class GQA model at BF16, a single 1M-context request needs about 312 GiB of KV<button class="src" data-drill data-title="KV Cache · 1M context" data-value="≈ 312 GiB / single request" data-sub="70B-class GQA · BF16 measured magnitude; 8K ≈2.5 GiB, 32K ≈10 GiB, 128K ≈40 GiB. Capacity is set by context length, concurrency, layer count and KV dimensions — not proportional to parameter count." data-source="KXP technical briefing p5 · 2026-07-25 (K8)">◆</button> — beyond any single GPU's HBM. Yet weights, KV and workspace all compete for the same indivisible HBM: what users actually lack is capacity and bandwidth, but they are forced to buy whole cards, and the surplus compute sinks into cost.</p>
+    <p>Storage offload alone (KV on DDR, hauled back to the GPU token by token) merely swaps a capacity bottleneck for a link-bandwidth one: at 32K context, each token drags ≈10 GiB of history KV across the link; 50 tokens/s means 500 GiB/s of sustained traffic, with the GPU idling while it waits. KXP's answer is to move compute to the data: finish Attention right next to the DDR where KV lives, and send only results back to the GPU.</p>
+  </div>
+  <div class="wide xl"><div id="kxp-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <h3 class="sub-h">KV semantic memory: the dividing line from generic CXL controllers</h3>
+    <p>Even before any Attention is executed, KXP can solve KV's capacity, fragmentation, migration and isolation problems: paging and address translation, block allocation and reclamation, HBM/DDR/SSD three-tier hot-cold layering, prefix-cache sharing, branch management and deduplication, request-level address spaces and multi-tenant quotas. It understands layers, heads, tokens and requests — sharing and isolation that generic memory cannot offer.</p>
+  </div>
+  <div class="wide xl"><div id="kv-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <div class="note-box">
+      <p><b>Positioning statement.</b> KXP is a planned product: generation one offloads only the Decode Attention core (seven of thirteen tasks, all on the context data plane); the six weight-plane tasks stay on the GPU unchanged. The core metrics are effective DDR bandwidth, KV scan capacity per watt and low-latency task submission — TOPS is not the key metric here. The competitive landscape is compiled from public sources [marked as inference].</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Sources ═══ -->
+<footer id="sec-sources">
+  <div class="prose">
+    <p class="sec-no">Sources &amp; method</p>
+    <h2>Method, discipline &amp; sources</h2>
+    <div class="note-box">
+      <p><b>Evidence grading.</b> In-house (silicon measurements and customer-adoption data) &gt; industry public &gt; third-party &gt; compiled [marked]. Every key number is date-anchored in the source register.</p>
+      <p><b>Source categories, all dated.</b> <span class="src-cat company">In-house</span> <span class="src-cat industry">Industry public</span> <span class="src-cat broker">Third-party</span> <span class="src-cat kimi">Compiled</span></p>
+      <p><b>Caliber discipline.</b> Roadmap targets are stated separately from measured values; "customer adoption" does not equal mass production; KXP is a planned product.</p>
+    </div>
+  </div>
+  <div class="wide xl">
+    <div style="margin-top:26px">
+      <p class="chart-title">Source register · K5–K8 · K10</p>
+      <p class="chart-sub">Every number this report relies on, with its dated provenance</p>
+    </div>
+    <div id="source-list"></div>
+  </div>
+  <div class="prose">
+    <p class="colophon">Interactive research edition · Compiled 2026-09-20 · ACELab · Advanced Communication &amp; Computing IC Lab, Shanghai University<br>This page is not investment advice · <a href="/en/">Back to Home</a> · <a href="/reports/neurobaseband/en/">Companion report: NeuroBaseband fusion baseband</a></p>
+  </div>
+</footer>
+
+</main>
+
+<div id="drill-card" role="dialog" aria-labelledby="drill-title" hidden></div>
+
+<script>window.RPT_SOURCE_IDS = ["K5", "K6", "K7", "K8", "K10"];</script>
+<script src="/reports/shared/js/data.js?v=20260920-1"></script>
+<script src="/reports/shared/js/data-en.js?v=20260920-1"></script>
+<script src="/reports/shared/js/utils.js?v=20260920-1"></script>
+<script src="/reports/shared/js/cover.js?v=20260920-1"></script>
+<script src="/reports/shared/js/charts.js?v=20260920-1"></script>
+<script src="/reports/shared/js/sources.js?v=20260920-1"></script>
+<script src="/reports/shared/js/main.js?v=20260920-1"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroBaseband Energy-Efficient RISC-V Fusion Baseband · ACELab Interactive Report</title>
+<meta name="description" content="NeuroBaseband: a dataflow-pulled RISC-V domain-specific architecture for wireless baseband. Silicon-proven with Venus v2 at 40nm, 33.4× FFT energy efficiency over general-purpose platforms.">
+<link rel="stylesheet" href="/reports/shared/css/fonts.css?v=20260920-1">
+<link rel="stylesheet" href="/reports/shared/css/style.css?v=20260920-1">
+<link rel="canonical" href="https://acelab-shu.github.io/reports/neurobaseband/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://acelab-shu.github.io/reports/neurobaseband/">
+<link rel="alternate" hreflang="en" href="https://acelab-shu.github.io/reports/neurobaseband/en/">
+</head>
+<body>
+
+<a class="back-home" href="/en/">← Home</a>
+<a class="lang-switch" href="/reports/neurobaseband/">中文</a>
+
+<!-- ═══ Cover · Variant A die recursion ═══ -->
+<header id="cover">
+  <canvas id="cover-canvas" aria-hidden="true"></canvas>
+  <div class="cover-inner">
+    <p class="cover-kicker">RESEARCH REPORT · NEUROBASEBAND · DATA AS OF 2026-09-20</p>
+    <h1 class="cover-title">Turning baseband from fixed hardware<br><span class="cover-num">into a programmable dataflow</span></h1>
+    <p class="cover-sub">NeuroBaseband · Energy-Efficient RISC-V Fusion Baseband for 6G AI-RAN</p>
+    <p class="cover-lede">Legacy baseband, O-CU/O-DU disaggregation and AI-RAN all hit the same structural bottlenecks: data-movement overhead, weak determinism, fragmented stacks and power pressure. NeuroBaseband is pulled by the dataflow and periodicity of wireless baseband, co-designed from instruction set to system — silicon-proven with the Venus v2 40nm chip, compressing the GPP-to-ASIC efficiency gap from 10³× to about 10×.</p>
+    <div class="cover-chips">
+      <button class="chip" data-goto="#sec-exec">Key finding</button>
+      <button class="chip" data-goto="#sec-arch">Four research threads</button>
+      <button class="chip" data-goto="#sec-measure">Measured evidence</button>
+      <button class="chip" data-goto="#sec-venus">Venus v2 silicon</button>
+      <button class="chip" data-goto="#sec-eco">Position &amp; ecosystem</button>
+      <button class="chip" data-goto="#sec-sources">Sources</button>
+    </div>
+    <p class="cover-anchor">Evidence grading: in-house &gt; industry public &gt; third-party &gt; compiled [marked] · This page is not investment or procurement advice</p>
+    <div class="scroll-hint"><span></span>SCROLL</div>
+  </div>
+  <p class="cover-caption">Fig. 0 · Every die is one cell of a much larger compute map — scale, all the way up</p>
+</header>
+
+<main>
+
+<!-- ═══ §0 Key finding ═══ -->
+<section id="sec-exec" class="band">
+  <div class="prose">
+    <p class="sec-no">§0 · Key finding</p>
+    <h2>Software flexibility, near-ASIC efficiency</h2>
+    <p class="dek">High-efficiency RISC-V fusion computing wins real deployment efficiency through low idle power and system-level scheduling — compressing the 10³× GPP-to-ASIC efficiency gap to about 10×.</p>
+    <p>Baseband efficiency comparisons have long ignored one fact: peak throughput is not deployment efficiency. Venus v2 reaches <em>256 MSps/W</em> on FFT (28nm-normalized), <em>33.4×</em> the Xeon 6434<button class="src" data-drill data-title="FFT efficiency · Venus v2" data-value="256.0 MSps/W · 33.4×" data-sub="28nm normalization: throughput ∝ linewidth, efficiency ∝ linewidth²; vs Xeon 6434 at 7.7 MSps/W." data-source="ACELab Venus v2 measured & normalized · 2026-09 (K1)">◆</button>. More decisive is the 0.027W idle power — under light load, idle power dominates average energy, and that is what real deployments pay for.</p>
+  </div>
+  <div class="wide xl"><div id="fft-chart" class="chart-frame"></div></div>
+  <div class="prose">
+    <blockquote class="quote-card">
+      <p class="q-text">Software-flexible with ASIC-grade efficiency. High-efficiency RISC-V fusion computing wins real deployment efficiency through low idle power and system-level scheduling.</p>
+      <p class="q-who">— <b>ACELab · Deep Transcend</b>, team deck STRATEGIC TAKEAWAY<span class="q-src">2026-09</span></p>
+      <div class="q-why"><span class="q-lab">Context</span>Fusion baseband compresses the GPP↔ASIC efficiency gap to roughly 7–10× while keeping RISC-V open programmability.<span class="q-lab why">Why it matters</span>The efficiency inflection shows up on real load curves, not on peak benchmarks.</div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══ §1 Four research threads ═══ -->
+<section id="sec-arch" class="band">
+  <div class="prose">
+    <p class="sec-no">§1 · Architecture thread</p>
+    <h2>Four research threads, one cross-layer throughline</h2>
+    <p class="dek">Pulled by the dataflow and periodicity of wireless baseband — domain-specific co-design from instruction set to system, while keeping RISC-V open programmability.</p>
+    <p>The vector unit decides operator efficiency, dataflow scheduling decides system real-timeliness, the domain toolchain decides ecosystem usability, and the low-power SoC decides deployed energy. The four are not parallel modules but projections of one dataflow throughline at different abstraction levels.</p>
+  </div>
+  <div class="wide xl">
+    <div class="term-mag">
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">Vector unit</h3>
+        <p class="t-full">ARBITRARY REGISTER GROUPING · RVV+</p>
+        <p class="t-gist">Arbitrary register grouping matches vector length to the real length of wireless operators.</p>
+        <div class="t-more"><p>Beyond RVV's fixed power-of-two grouping: 64-bit extension encoding and conflict detection handle register overlap and read-write hazards; an element-exchange engine covers cross-lane shuffle and gather/scatter; complex/fixed-point divide and saturating ops run on extensible datapaths. Target operators: FFT · channel estimation · coding · linear algebra.</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">Dataflow scheduling</h3>
+        <p class="t-full">HIERARCHICAL DATAFLOW SCHEDULING</p>
+        <p class="t-gist">Software handles global low frequency; hardware handles local high frequency — scalability meets real-time.</p>
+        <div class="t-more"><p>A task–thread–cluster three-level model: DAGs explicitly map baseband modules, hierarchical memory reinforces locality, and a pack-and-ship mechanism coordinates DMA/CSR/interrupt deployment and recycling. A hardware scheduler watches dependencies and output state to fire tasks fast, guaranteeing throughput and hard real-time.</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">Toolchain</h3>
+        <p class="t-full">DSL → LLVM → RISC-V · SAME-SOURCE</p>
+        <p class="t-gist">One source of code runs through task description, compilation and hardware deployment.</p>
+        <div class="t-more"><p>A domain language describes task graphs and dependencies; LLVM performs instruction splitting/merging and arbitrarily-grouped register allocation, emitting RISC-V assembly mapped onto extensible datapaths. The same source supports simulation, evaluation and binary deployment — domain semantics survive all the way into the compiler and scheduling backend.</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+      <article class="term" tabindex="0">
+        <h3 class="t-abbr">Low-power SoC</h3>
+        <p class="t-full">POWER DOMAINS · MBIST</p>
+        <p class="t-gist">Four power domains wake stage by stage with load; industrial-grade testability.</p>
+        <div class="t-more"><p>Four operating modes — sleep, standby, digital front-end and compute — with an always-on domain for fast wakeup; concurrent multi-mode shares one compute cluster. MBIST and fault coverage deliver industrial testability, paving the road to automotive and base-station deployments.</p></div>
+        <p class="t-hint">Hover for the full story</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ §2 Measured evidence ═══ -->
+<section id="sec-measure" class="band">
+  <div class="prose">
+    <p class="sec-no">§2 · Measured evidence</p>
+    <h2>LDPC decoding: near-x86 throughput at one to two orders less energy</h2>
+    <p>Venus normalized throughput is about 89% of the Xeon's, at 4.15 nJ/bit/iter — 84.4× lower than ARM A76 and 181.8× lower than GPU 4090. Basis: CS4 · rate 340/1024 · block 25443 · single-core CPU throughput; throughput normalized linearly, energy quadratically, across process nodes.</p>
+  </div>
+  <div class="wide xl">
+    <p class="chart-title">LDPC decoding performance (28nm-normalized)</p>
+    <p class="chart-sub">CLICK A ROW FOR BASIS & SOURCE · ASIC ACC100 AS REFERENCE FLOOR</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Data table, scroll horizontally"><table class="dt" id="ldpc-table">
+      <thead><tr><th>Platform</th><th>Clock</th><th>Node</th><th>Mbps</th><th>nJ/bit/iter</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="chart-src">Source · In-house · Venus v2 measured (K2) · 2026-09</p>
+  </div>
+  <div class="prose">
+    <h3 class="sub-h">Idle power: the underestimated driver of deployment energy</h3>
+    <p>Base stations and edge nodes spend most of their time under light load. Venus v2 idles at 0.027W (single-Tile basis), two orders of magnitude below rivals; at the 99% load threshold total power is Venus ≈4.36W vs ACC100 ≥19.2W, and Venus is more efficient below 2.06 Gbps of throughput demand<button class="src" data-drill data-title="Idle power · Venus v2" data-value="0.027 W" data-sub="Single-Tile basis; RK3588 2.67W, ACC100 18.0W, RTX 4090 38.27W, AMD 9950X 46.33W, Xeon 6434 68.67W." data-source="ACELab Venus v2 measured · 2026-09 (K3)">◆</button>.</p>
+  </div>
+  <div class="wide xl"><div id="idle-chart" class="chart-frame"></div></div>
+</section>
+
+<!-- ═══ §3 Venus v2 ═══ -->
+<section id="sec-venus" class="band">
+  <div class="prose">
+    <p class="sec-no">§3 · Silicon</p>
+    <h2>Venus v2: from architecture to silicon</h2>
+    <p>A multi-mode SoC at 40nm, 300MHz, 10 cores and four power domains, peaking at 0.763W. Four operating modes cover sleep, standby, digital front-end and compute, waking stage by stage with load; MBIST and fault coverage deliver industrial-grade testability.</p>
+  </div>
+  <div class="wide">
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Data table, scroll horizontally"><table class="dt" id="spec-table">
+      <thead><tr><th>Metric</th><th>Value</th><th>Note</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="chart-src">Source · In-house · Venus v2 tape-out measurements (K4) · 2026-09</p>
+  </div>
+</section>
+
+<!-- ═══ §4 Position & ecosystem ═══ -->
+<section id="sec-eco" class="band">
+  <div class="prose">
+    <p class="sec-no">§4 · Position &amp; ecosystem</p>
+    <h2>An open fusion baseband for 6G AI-RAN</h2>
+    <p class="dek">Open RISC-V ISA + domain extensions + a same-source toolchain turn baseband from a black-box ASIC into evolvable infrastructure.</p>
+    <p>NeuroBaseband's open ecosystem lives on the ACE-Echo open platform: architecture documents, toolchain and evaluation environments are open, supporting one continuous path from academic research to customer integration. On track record, top-venue papers and repeated successful tape-outs close the loop of "said → built → measured".</p>
+    <p><a href="https://acelab-shu.github.io/ACE-Echo" target="_blank" rel="noopener">Visit the ACE-Echo open platform →</a></p>
+  </div>
+  <div class="wide">
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Data table, scroll horizontally"><table class="dt" id="proof-table">
+      <thead><tr><th>Dimension</th><th>Fact</th><th>Note</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="chart-src">Source · ACELab team deck p7 (K9) · 2026-09</p>
+  </div>
+</section>
+
+<!-- ═══ Sources ═══ -->
+<footer id="sec-sources">
+  <div class="prose">
+    <p class="sec-no">Sources &amp; method</p>
+    <h2>Method, discipline &amp; sources</h2>
+    <div class="note-box">
+      <p><b>Evidence grading.</b> In-house (silicon measurements and customer-integration data) &gt; industry public &gt; third-party &gt; compiled [marked]. Every key figure is date-anchored in the source register.</p>
+      <p><b>Categories, all dated.</b> <span class="src-cat company">In-house</span> <span class="src-cat industry">Industry public</span> <span class="src-cat broker">Third-party</span> <span class="src-cat kimi">Compiled/inferred</span></p>
+      <p><b>Basis discipline.</b> Cross-node comparisons always state the normalization (throughput ∝ linewidth, efficiency ∝ linewidth²); roadmap targets are stated separately from measured values.</p>
+    </div>
+  </div>
+  <div class="wide xl">
+    <div style="margin-top:26px">
+      <p class="chart-title">Source register · K1–K4 · K9</p>
+      <p class="chart-sub">EVERY FIGURE THIS REPORT RELIES ON, WITH ITS DATED PROVENANCE</p>
+    </div>
+    <div id="source-list"></div>
+  </div>
+  <div class="prose">
+    <p class="colophon">Interactive research edition · Compiled 2026-09-20 · ACELab · Advanced Communication and Computing Electronics Lab, Shanghai University<br>Not investment advice · <a href="/en/">Back to Home</a> · <a href="/reports/npu/en/">Companion report: Sensing NPU × KXP</a></p>
+  </div>
+</footer>
+
+</main>
+
+<div id="drill-card" role="dialog" aria-labelledby="drill-title" hidden></div>
+
+<script>window.RPT_SOURCE_IDS = ["K1", "K2", "K3", "K4", "K9"];</script>
+<script src="/reports/shared/js/data.js?v=20260920-1"></script>
+<script src="/reports/shared/js/data-en.js?v=20260920-1"></script>
+<script src="/reports/shared/js/utils.js?v=20260920-1"></script>
+<script src="/reports/shared/js/cover.js?v=20260920-1"></script>
+<script src="/reports/shared/js/charts.js?v=20260920-1"></script>
+<script src="/reports/shared/js/sources.js?v=20260920-1"></script>
+<script>
+// DOM tables from data layer (LDPC / Venus spec / proof)
+(function () {
+  const lb = document.querySelector("#ldpc-table tbody");
+  if (lb) {
+    window.RPT.ldpc.forEach(r => {
+      const tr = document.createElement("tr");
+      if (r.hero) tr.className = "hl";
+      tr.innerHTML = `<td><b>${r.name}</b></td><td class="num">${r.freq}</td><td class="num">${r.node}</td><td class="num">${r.tput}</td><td class="num">${r.energy}</td>`;
+      tr.setAttribute("data-drill", "");
+      tr.dataset.title = `LDPC decoding · ${r.name}`;
+      tr.dataset.value = `${r.tput} Mbps · ${r.energy} nJ/bit/iter`;
+      tr.dataset.sub = `CS4 · rate 340/1024 · block 25443 · single-core CPU throughput; ${r.freq} · ${r.node}. Throughput linear, energy quadratic process normalization.`;
+      tr.dataset.source = "ACELab Venus v2 measured · 2026-09 (K2)";
+      lb.appendChild(tr);
+    });
+    const asic = document.createElement("tr");
+    asic.innerHTML = `<td>ASIC ACC100 (reference floor)</td><td class="num">—</td><td class="num">28 nm</td><td class="num">—</td><td class="num">0.179</td>`;
+    asic.setAttribute("data-drill", "");
+    asic.dataset.title = "Reference floor · ASIC ACC100";
+    asic.dataset.value = "0.179 nJ/bit/iter";
+    asic.dataset.sub = "A fully dedicated ASIC remains the efficiency floor; Venus trails it by ~23×, with the remaining gap concentrated in cycle count, butterfly parallelism and cross-lane shuffle.";
+    asic.dataset.source = "ACELab Venus v2 measured · 2026-09 (K2)";
+    lb.appendChild(asic);
+  }
+
+  const sb = document.querySelector("#spec-table tbody");
+  if (sb) window.RPT.venus_spec.forEach(([k, v, n]) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><b>${k}</b></td><td class="num">${v}</td><td>${n}</td>`;
+    tr.setAttribute("data-drill", "");
+    tr.dataset.title = `Venus v2 · ${k}`;
+    tr.dataset.value = v;
+    tr.dataset.sub = n + ". Four operating modes wake stage by stage with load; MBIST and fault coverage deliver industrial-grade testability.";
+    tr.dataset.source = "ACELab Venus v2 tape-out measurements · 2026-09 (K4)";
+    sb.appendChild(tr);
+  });
+
+  const pb = document.querySelector("#proof-table tbody");
+  if (pb) window.RPT.proof.forEach(([k, v, n]) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><b>${k}</b></td><td class="num">${v}</td><td>${n}</td>`;
+    tr.setAttribute("data-drill", "");
+    tr.dataset.title = `Track record · ${k}`;
+    tr.dataset.value = v;
+    tr.dataset.sub = n;
+    tr.dataset.source = "ACELab team deck p7 · 2026-09 (K9)";
+    pb.appendChild(tr);
+  });
+})();
+</script>
+<script src="/reports/shared/js/main.js?v=20260920-1"></script>
+</body>
+</html>

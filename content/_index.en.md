@@ -46,48 +46,22 @@ sections:
     id: researches
     content:
       title: Key Research Directions
-      # Subtitle 概括了两个方向的共同愿景：AI与通信的融合，以及架构创新
-      subtitle: "Pioneering the convergence of AI and Communication through next-generation heterogeneous architectures."
-      
+      subtitle: "Two technical lines, one fusion-computing backbone: dataflow-driven, RISC-V programmable, shared near-memory, domain toolchain."
+
       items:
-        # 方向一：NeuroBaseband
-        - title: "NeuroBaseband"
-          # 强调：打破传统基带僵局，采用数据流驱动 RISC-V，实现 51x 加速 [cite: 253, 378, 380, 550]
-          text: "A fundamental re-imagination of baseband processors. By replacing legacy rigid hardware with a dataflow-driven RISC-V architecture, we eliminate control-flow inefficiencies, achieving a 51x speedup in 5G processing and enabling a sustainable, open path to 6G."
-          image: "featured.png" 
-          link: "/researches/NeuroBaseband/"
+        - title: "RISC-V Fusion Baseband"
+          text: "NeuroBaseband / Venus — a fusion chip architecture for 6G AI-RAN. Dataflow-driven RISC-V replaces rigid hardware paths, delivering 33.4× FFT energy efficiency over general-purpose platforms, silicon-proven on a 40nm SoC."
+          image: "report-neurobaseband.png"
+          link: "/reports/neurobaseband/en/"
 
-        # 方向二：Edge AI
-        - title: "Edge AI Inference Engine"
-          # 强调：解决边缘 AI 的不可能三角，异构计算，打破内存墙 [cite: 9, 24, 47, 56]
-          text: "Addressing the Edge AI Trilemma with a unified compute engine. Our heterogeneous architecture (1D+2D) integrates compute and memory to shatter the 'Memory Wall,' delivering high-throughput inference for CNNs and Transformers within stringent power envelopes."
-          image: "featured.png"
-          link: "/researches/Edge_AI/"
-
-        # # 方向一：AI 芯片
-        # - title: "AI Chips and Neural Network Processors"
-        #   text: "Energy-efficient Domain-Specific Architectures (DSA) featuring heterogeneous RISC-V + NPU designs and full-stack compilation support for edge intelligence."
-        #   # 请确保图片放在 assets/media/research/ 下，或者根据实际路径修改
-        #   image: "featured_ai_chip.png" 
-        #   # 链接到刚才创建的子页面路径
-        #   link: "/researches/ai-chips/"
-
-        # # 方向二：无线通信
-        # - title: "Wireless Communication Systems"
-        #   text: "Advanced baseband SoC design for 5G/B5G, V2X vehicular networks, and specialized industrial applications, focusing on reliability and low latency."
-        #   image: "featured_wireless.png"
-        #   link: "/researches/wireless-systems/"
-
-        # # 方向三：通信-AI 融合
-        # - title: "Communication-AI Fusion and ISAC "
-        #   text: "Architecting 6G native AI systems with Integrated Sensing and Communication (ISAC) and semantic transmission capabilities for autonomous agents."
-        #   image: "featured_fusion.png"
-        #   link: "/researches/comm-ai-fusion/"
+        - title: "Ultra-Low-Power Sensing NPU"
+          text: "Kuiloong / LPNPU edge semantic gating × KXP KV Extension Processor: at the edge, mW-level power decides whether to wake the main system; in the data center, Decode Attention moves next to the KV data, cutting cross-link traffic by roughly 3,000–4,000×."
+          image: "report-npu.png"
+          link: "/reports/npu/en/"
 
     design:
-      columns: 3 # 可选项: 2, 3, 4。 设置为 3 表示一次看 3 个，超出的部分通过滑动查看。
+      columns: 2
       fit_image: true
-      # 浅灰色背景，区分于上下的白色区块
       css_class: "bg-gray-50 dark:bg-gray-900"
   # - block: portfolio-lite
   #   content:
@@ -109,7 +83,7 @@ sections:
   #         filter: "uav"
   #   design:
   #     view: card        # card / article-grid / date-title-summary
-  #     columns: 3 
+  #     columns: 3
   #     fill_image: false
   #     show_summary: true
   #     show_date: true
@@ -131,7 +105,7 @@ sections:
         - name: Team Building
           filter: "Team Building"
     design:
-      columns: 3 
+      columns: 3
       fill_image: true
       show_summary: true
       show_date: true

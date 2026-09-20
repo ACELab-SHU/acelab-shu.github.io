@@ -13,11 +13,11 @@ main:
     identifier: research
     weight: 11
   - name: NeuroBaseband
-    url: /researches/NeuroBaseband/
+    url: /reports/neurobaseband/
     parent: research
     weight: 1
   - name: 边缘 AI 推理引擎
-    url: /researches/Edge_AI/
+    url: /reports/npu/
     parent: research
     weight: 2
   # - name: Communication-AI Fusion and Integrated Compute-Communication Architectures for 6G

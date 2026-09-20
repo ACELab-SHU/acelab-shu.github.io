@@ -44,18 +44,18 @@ sections:
     id: researches
     content:
       title: 重点研究方向
-      subtitle: "面向 AI 与通信深度融合，探索下一代异构计算与开放式通信架构。"
+      subtitle: "两条技术主线，一套融合计算底座：数据流驱动 · RISC-V 可编程 · 共享近存 · 领域工具链。"
       items:
-        - title: "NeuroBaseband"
-          text: "面向 6G 的新型基带处理器架构。通过数据流驱动的 RISC-V 体系替代传统固定硬件路径，降低控制流开销，提升 5G/6G 基带处理效率，并为开放、可持续的通信计算平台提供支撑。"
-          image: "featured.png"
-          link: "/researches/NeuroBaseband/"
-        - title: "边缘 AI 推理引擎"
-          text: "面向边缘智能的高效异构计算引擎。通过 1D 向量核心与 2D 脉动阵列共享片上存储，缓解存储墙瓶颈，在受限功耗下支持 CNN、Transformer 等模型的高吞吐推理。"
-          image: "featured.png"
-          link: "/researches/Edge_AI/"
+        - title: "高能效 RISC-V 融合基带"
+          text: "NeuroBaseband / Venus，面向 6G AI-RAN 的融合芯片架构。以数据流驱动的 RISC-V 体系替代传统固定硬件路径，FFT 能效较通用平台提升 33.4×，40nm SoC 完成实测。"
+          image: "report-neurobaseband.png"
+          link: "/reports/neurobaseband/"
+        - title: "超低功耗多模态感知 NPU"
+          text: "Kuiloong / LPNPU 端侧语义门控 × KXP KV 扩展处理器：端侧以 mW 级功耗决定是否唤醒主系统；数据中心侧把 Decode Attention 搬到 KV 数据旁边，跨链路流量下降约 3,000–4,000 倍。"
+          image: "report-npu.png"
+          link: "/reports/npu/"
     design:
-      columns: 3
+      columns: 2
       fit_image: true
       css_class: "bg-gray-50 dark:bg-gray-900"
 
