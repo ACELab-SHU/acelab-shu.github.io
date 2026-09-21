@@ -26,7 +26,6 @@ sections:
 
       office_hours:
         - "Monday - Friday: 9:00 AM - 5:00 PM"
-        - "Lab Meetings: Wednesday 3:00 PM"
       email: jiangzhiyuan@shu.edu.cn
       # phone: "+1 (555) 123-4567"
       social:
@@ -38,7 +37,7 @@ sections:
           url: https://github.com/ACELab-SHU
       prospective:
         title: Prospective Members
-        text: Interested in joining our lab? We're looking for motivated researchers.
+        text: We welcome students and researchers interested in wireless communications, intelligent computing, integrated circuits, and system architecture. Our lab recruits Ph.D. students, master's students (primarily professional master's students), postdoctoral fellows, and other researchers year-round.
         button:
           text: View Open Positions
           url: /opportunities

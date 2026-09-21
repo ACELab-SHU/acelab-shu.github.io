@@ -20,14 +20,13 @@ sections:
           - 12 号楼 B309
       office_hours:
         - "周一至周五：9:00-17:00"
-        - "组会时间：周三 15:00"
       email: jiangzhiyuan@shu.edu.cn
       social:
         - icon: brands/github
           url: https://github.com/ACELab-SHU
       prospective:
         title: 招生与招聘
-        text: 欢迎对无线通信、智能计算、集成电路与系统架构感兴趣的同学和研究者加入我们。
+        text: 欢迎对无线通信、智能计算、集成电路与系统架构感兴趣的同学和研究者加入我们。实验室常年招收博士、硕士（专硕为主）和博士后等研究人员。
         button:
           text: 查看加入方式
           url: /opportunities
