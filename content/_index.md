@@ -39,6 +39,7 @@ sections:
           description: >
             ACELab 面向无线通信、智能计算与集成电路系统开展交叉研究，
             关注从基础方法、体系结构到真实应用场景的贯通创新。
+            实验室常年招收博士、硕士（专硕为主）和博士后等研究人员。
 
   - block: research-overview
     id: researches

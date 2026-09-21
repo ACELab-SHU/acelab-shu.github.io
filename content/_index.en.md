@@ -41,7 +41,9 @@ sections:
           description: >
             ACELab focuses on wireless communication, intelligent computing,
             and integrated circuit systems, bridging fundamental research
-            and real-world applications.
+            and real-world applications. Our lab recruits Ph.D. students,
+            master's students (primarily professional master's students),
+            postdoctoral fellows, and other researchers year-round.
   - block: research-overview
     id: researches
     content:
