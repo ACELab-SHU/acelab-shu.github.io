@@ -10,12 +10,12 @@ last_name: Zhang
 weight: 99
 
 user_groups:
-  - Master Students
+  - Ph.D. Students
 
 superuser: false
 highlight_name: true
 
-role: M.S.
+role: Ph.D.
 
 organizations:
   - name: School of Communication and Information Engineering, Shanghai University
@@ -75,7 +75,7 @@ sections:
       sort_order: "type_year"
 ---
 
-Professional Master’s student in Electronic Information, enrolled in 2024.
+Ph.D. student researching FPGA-based digital signal processing and computer architecture.
 <br/>
 
 <br/>

@@ -9,8 +9,12 @@ last_name: Jiang
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "Ph.D."
+destination: "沐曦集成电路（上海）股份有限公司"
 user_groups:
-  - Ph.D. Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,25 +22,32 @@ highlight_name: true
 role: Ph.D.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "MetaX Integrated Circuits (Shanghai) Co., Ltd."
+    url: https://www.metax-tech.com/en/about/about.html
 
 # Social network links
 profiles:
   - icon: envelope
-    url: 'mailto:sjianglm97@shu.edu.cn'
+    url: "mailto:jianglm97@163.com"
     label: E-mail Me
-#   - icon: academicons/google-scholar
-#     url: https://scholar.google.com/citations?user=ePsR1BgAAAAJ
+  - icon: academicons/google-scholar
+    url: https://scholar.google.com/citations?user=M-oeTtkAAAAJ
+  - icon: academicons/researchgate
+    url: https://www.researchgate.net/profile/Limin-Jiang-6
+
 social:
+  - icon: academicons/google-scholar
+    url: https://scholar.google.com/citations?user=M-oeTtkAAAAJ
+  - icon: academicons/researchgate
+    url: https://www.researchgate.net/profile/Limin-Jiang-6
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:sjianglm97@shu.edu.cn'
+    link: 'mailto:jianglm97@163.com'
 
 interests:
-  - Integrated Circuit Design
-  # - Integrated Communication–Computation Architectures for 6G / AI-RAN
-  # - Domain-Specific Architecture (DSA) Co-Design of Hardware–Software and Compilation
+  - "Design-for-X and Silicon Lifecycle Management"
+  - "Netlist-to-GDSII Physical Design"
+  - "VLSI/ULSI System Design"
 
 # education:
 #   - area: Ph.D. in Information and Communication Engineering
@@ -84,22 +95,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Ph.D Candidate, expected to graduate in 2026.
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Limin Jiang received the B.E. degree and the Ph.D. degree from the School of Communication and Information Engineering, Shanghai University, in 2020 and 2026. His doctoral research focused on domain-specific architectures and wireless communication systems. His current interests include silicon lifecycle management.

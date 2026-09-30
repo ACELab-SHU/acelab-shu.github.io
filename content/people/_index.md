@@ -31,7 +31,7 @@ sections:
 
   - block: alumni-list
     content:
-      title: 校友
+      title: 毕业生
       subtitle: 毕业生在学术界与产业界持续发挥影响
       user_groups:
         - Alumni

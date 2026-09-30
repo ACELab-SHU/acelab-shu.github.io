@@ -9,8 +9,12 @@ last_name:  Wu
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "M.S."
+destination: "海康威视"
 user_groups:
-  - Master Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: M.S.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "海康威视"
 
 # Social network links
 profiles:
@@ -32,8 +35,9 @@ social:
     link: 'mailto:wubing0112@shu.edu.cn'
 
 interests:
-  - Neural Network Feature Compression and FPGA IP Design
-  # - Interference Mitigation and Software-Defined Receiver Design
+  - "Neural Network Feature Compression"
+  - "FPGA IP Design"
+
 # education:
 #   - area: M.S. in Information and Communication Engineering
 #     institution: Shanghai University
@@ -74,24 +78,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Professional Master’s student in Electronic Information, enrolled in 2023.
-
-
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Bing Wu received the M.S. degree from Shanghai University in 2026. Research interests include Neural Network Feature Compression, FPGA IP Design. Currently with 海康威视.

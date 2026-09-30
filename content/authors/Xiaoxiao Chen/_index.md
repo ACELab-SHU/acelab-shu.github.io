@@ -10,12 +10,12 @@ last_name: Chen
 weight: 99
 
 user_groups:
-  - Master Students
+  - Ph.D. Students
 
 superuser: false
 highlight_name: true
 
-role: M.S.
+role: Ph.D.
 
 organizations:
   - name: School of Communication and Information Engineering, Shanghai University
@@ -74,7 +74,7 @@ sections:
       sort_order: "type_year"
 ---
 
-Academic Master’s student in Communication and Information Systems, enrolled in 2024.
+Ph.D. student researching high-performance operators for wireless communications and compiler optimization for domain-specific architectures.
 <br/>
 
 <br/>

@@ -9,8 +9,12 @@ last_name: Chen
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "M.S."
+destination: "上海理想"
 user_groups:
-  - Master Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: M.S.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "上海理想"
 
 # Social network links
 profiles:
@@ -32,8 +35,8 @@ social:
     link: 'mailto:chenxinyu5523@shu.edu.cn'
 
 interests:
-  - AI Chips and Systems
-  # - Vector Processing Unit
+  - "AI Chips and Systems"
+
 # education:
 #   - area: M.S. in Information and Communication Engineering
 #     institution: Shanghai University
@@ -74,22 +77,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Professional Master’s student in Electronic Information, enrolled in 2023.
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Xinyu Chen received the M.S. degree from Shanghai University in 2026. Research interests include AI Chips and Systems. Currently with 上海理想.

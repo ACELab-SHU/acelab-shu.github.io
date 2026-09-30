@@ -9,8 +9,12 @@ last_name:  Li
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "M.S."
+destination: "高顿咨询"
 user_groups:
-  - Master Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: M.S.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "高顿咨询"
 
 # Social network links
 profiles:
@@ -32,8 +35,8 @@ social:
     link: 'mailto:lqy202212@shu.edu.cn'
 
 interests:
-  - Neural Network Model Compression
-  - AI Agent Design
+  - "Neural Network Model Compression"
+  - "AI Agent Design"
 
 # education:
 #   - area: M.S. in Information and Communication Engineering
@@ -75,21 +78,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Academic Master’s student in Communication and Information Systems, enrolled in 2023.
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Qiuying Li received the M.S. degree from Shanghai University in 2026. Research interests include Neural Network Model Compression, AI Agent Design. Currently with 高顿咨询.

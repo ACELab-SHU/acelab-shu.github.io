@@ -9,8 +9,12 @@ last_name: Jiang
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "M.S."
+destination: "垣信卫星"
 user_groups:
-  - Master Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: M.S.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "垣信卫星"
 
 # Social network links
 profiles:
@@ -32,8 +35,9 @@ social:
     link: 'mailto:j_snowcold@shu.edu.cn'
 
 interests:
-  - Wireless Communication Systems
-  - Wireless Signal Sensing
+  - "Wireless Communication Systems"
+  - "Wireless Signal Sensing"
+
 # education:
 #   - area: M.S. in Information and Communication Engineering
 #     institution: Shanghai University
@@ -74,21 +78,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Academic Master’s student in Communication and Information Systems, enrolled in 2023.
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Xuehan Jiang received the M.S. degree from Shanghai University in 2026. Research interests include Wireless Communication Systems, Wireless Signal Sensing. Currently with 垣信卫星.

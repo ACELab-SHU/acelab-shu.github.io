@@ -9,8 +9,12 @@ last_name: Zhao
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "M.S."
+destination: "商飞"
 user_groups:
-  - Master Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: M.S.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "商飞"
 
 # Social network links
 profiles:
@@ -32,8 +35,7 @@ social:
     link: 'mailto:zqq676820@shu.edu.cn'
 
 interests:
-  - FPGA-Based Digital Signal Processing
-  # - Computer Architecture
+  - "FPGA Digital Signal Processing"
 
 # education:
 #   - area: M.S. in Information and Communication Engineering
@@ -75,22 +77,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Professional Master’s student in Electronic Information, enrolled in 2023.
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Chengqi Zhao received the M.S. degree from Shanghai University in 2026. Research interests include FPGA Digital Signal Processing. Currently with 商飞.

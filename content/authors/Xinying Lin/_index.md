@@ -9,8 +9,12 @@ last_name: Lin
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-08"
+degree: "M.S."
+destination: "云合智网(上海)技术有限公司"
 user_groups:
-  - Master Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: M.S.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "云合智网(上海)技术有限公司"
 
 # Social network links
 profiles:
@@ -32,8 +35,8 @@ social:
     link: 'mailto:limznag@shu.edu.cn'
 
 interests:
-  - FPGA-Based Digital Signal Processing
-  # - Hardware–Software Co-Design and Compiler Optimization for Domain-Specific Architectures
+  - "FPGA Digital Signal Processing"
+
 # education:
 #   - area: M.S. in Information and Communication Engineering
 #     institution: Shanghai University
@@ -74,21 +77,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Academic Master’s student in Communication and Information Systems, enrolled in 2023.
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Xinying Lin received the M.S. degree from Shanghai University in 2026. Research interests include FPGA Digital Signal Processing. Currently with 云合智网(上海)技术有限公司.

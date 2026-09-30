@@ -9,8 +9,12 @@ last_name: Wang
 
 weight: 99
 
+graduation_year: 2026
+graduation_date: "2026-06"
+degree: "Ph.D."
+destination: "紫金山实验室"
 user_groups:
-  - Ph.D. Students
+  - Alumni
 
 superuser: false
 highlight_name: true
@@ -18,8 +22,7 @@ highlight_name: true
 role: Ph.D.
 
 organizations:
-  - name: School of Communication and Information Engineering, Shanghai University
-    url: https://scie.shu.edu.cn/
+  - name: "紫金山实验室"
 
 # Social network links
 profiles:
@@ -34,9 +37,8 @@ social:
     link: 'mailto:lance_wang@shu.edu.cn'
 
 interests:
-  - Wireless Communication Systems
-  - Channel Estimation
-  # - Domain-Specific Architecture (DSA) Co-Design of Hardware–Software and Compilation
+  - "Wireless Communication Systems"
+  - "Channel Estimation"
 
 # education:
 #   - area: Ph.D. in Information and Communication Engineering
@@ -84,22 +86,4 @@ sections:
       sort_order: "type_year"
 ---
 
-Ph.D Candidate, expected to graduate in 2026.
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
-
-<br/>
+Xianling Wang received the Ph.D. degree from Shanghai University in 2026. Research interests include Wireless Communication Systems, Channel Estimation. Currently with 紫金山实验室.
