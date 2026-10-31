@@ -27,6 +27,11 @@ sections:
               filename: team3.jpg      # 放在 assets/media/hero1.jpg
               position: center
               size: cover
+        - background:
+            image:
+              filename: autumn-2026.jpg
+              position: center
+              size: cover
     design:
       slide_height: "calc(100vh - 120px)"
       auto_play: true
