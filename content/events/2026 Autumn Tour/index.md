@@ -1,8 +1,8 @@
 ---
-title: ACELab秋游
+title: 2026秋游
 slug: 2026-autumn-tour
 
-event: ACELab秋游
+event: 2026秋游
 location: 青浦太阳岛度假区
 address:
   city: 上海

@@ -1,8 +1,8 @@
 ---
-title: ACELab Autumn Outing
+title: 2026 Autumn Outing
 slug: 2026-autumn-tour
 
-event: ACELab Autumn Outing
+event: 2026 Autumn Outing
 location: Sun Island Resort, Qingpu
 address:
   city: Shanghai
